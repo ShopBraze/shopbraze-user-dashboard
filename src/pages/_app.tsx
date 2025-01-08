@@ -1,9 +1,13 @@
+import dynamic from 'next/dynamic';
+
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import TopBarProgress from "react-topbar-progress-indicator";
 
 import "styles/globals.css";
+
+const Layout = dynamic(() => import("global-components/layout/layout"), { ssr: false });
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -34,8 +38,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      {changingRoute && <TopBarProgress />}
-      <Component {...pageProps} />
+      <Layout>
+        {changingRoute && <TopBarProgress />}
+        <Component {...pageProps} />
+      </Layout>
     </>
   )
 }
