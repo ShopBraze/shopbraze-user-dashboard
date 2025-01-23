@@ -100,7 +100,7 @@ export const SidebarNavigationConstants = [
       {
         id: 401,
         name: "Catalogue",
-        path: '/products/catalogue'
+        path: '/products/catalogue/list'
       },
       {
         id: 402,

@@ -1,12 +1,16 @@
-import { useRouter } from 'next/router'
-import React from 'react'
+import { TabNavigationListConstant } from 'constants/index.const'
+import TabsContainerLayout from 'global-components/tabs-container-layout/tabs-container-layout'
+import ProductsIndexContainer from 'views/products/products-index-container'
 
 type Props = {}
 
 const Catalogue = (props: Props) => {
-  const router = useRouter()
+  const tabsData = TabNavigationListConstant?.products?.catalogue
   return (
-    <div>Catalogue</div>
+    <TabsContainerLayout tabsData={tabsData}>
+      <ProductsIndexContainer />
+    </TabsContainerLayout>
+
   )
 }
 

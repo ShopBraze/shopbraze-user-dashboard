@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import TopBarProgress from "react-topbar-progress-indicator";
 
 import "styles/globals.css";
+import 'rsuite/dist/rsuite-no-reset.min.css';
 
 const Layout = dynamic(() => import("global-components/layout/layout"), { ssr: false });
 
