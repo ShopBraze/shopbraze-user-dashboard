@@ -1,0 +1,60 @@
+/* For Uploader Component */
+
+.rs-uploader-trigger-btn {
+  height: 100px !important;
+  width: 100px !important;
+  border-color: #008060 !important;
+}
+
+.rs-uploader-file-item-icon-loading,
+.rs-uploader-file-item-status,
+.rs-uploader-file-item-picture,
+.rs-uploader-file-item-preview {
+  height: 100px !important;
+  width: 100px !important;
+}
+
+.rs-uploader-file-item-icon-loading {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.rs-picker:not(.rs-picker-disabled):hover {
+  border-color: #008060;
+}
+
+.rs-picker-toggle-active,
+.rs-picker.rs-picker-focused {
+  border-color: #008060 !important;
+  box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.25);
+}
+
+/* For single Selcet List */
+
+.rs-picker-list-item:hover {
+  background-color: #b2fae8 !important;
+}
+
+.rs-picker-select-menu-item {
+  color: rgb(70, 68, 68) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+}
+
+.rs-picker-select-menu-item-active,
+.rs-picker-select-menu-item:hover,
+.rs-picker-select-menu-item-focus {
+  color: #064b3b !important;
+  font-weight: 600 !important;
+}
+
+.rs-picker-select-menu-item-focus {
+  background-color: #e5fff7 !important;
+  font-weight: 700 !important;
+}
+
+.rs-picker-toggle-value {
+  color: rgb(70, 68, 68) !important;
+  font-weight: 600 !important;
+}

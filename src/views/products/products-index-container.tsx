@@ -12,7 +12,6 @@ const ProductsIndexContainer = (props: Props) => {
   const router = useRouter()
   const { tabName } = router.query;
 
-  console.log(tabName)
   return (
     <div className="pt-5">
       {tabName === "list" && <AllCatalogues />}
