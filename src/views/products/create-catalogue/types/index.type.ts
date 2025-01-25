@@ -1,14 +1,15 @@
 
 type CustomerSkuType = {
-  size: string;
+  size: string,
   sku_id: string;
   length: number;
   breadth: number;
   height: number;
+  cost_price: number;
   selling_price: number;
   mrp: number;
   quantity: number;
-  weight: string;
+  weight: number;
   volume: number;
   is_active: boolean;
   is_custom_sku_size: boolean;
