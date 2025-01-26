@@ -32,7 +32,7 @@ const ProductAttributes = ({ control, setValue, watch }: ProductAttributesProps)
         {
           watch("catalogue_data.product_attributes")?.map((attribute, index) => {
             return (
-              <div className="p-4 rounded-md bg-[#fff] space-y-3" key={index}>
+              <div className="p-4 rounded-md bg-[#fff] space-y-4" key={index}>
                 <div className="flex justify-between items-center">
                   <p className="text-base font-bold">Attribute {index + 1}</p>
                   <Button onClick={() => { handleRemoveAttribute(index) }}>
@@ -40,7 +40,7 @@ const ProductAttributes = ({ control, setValue, watch }: ProductAttributesProps)
                   </Button>
                 </div>
 
-                <div className="space-y-5">
+                <div className="space-y-3">
                   <SingleSelect control={control}
                     name={`catalogue_data.product_attributes.${index}.key`}
                     label={<p className="text-sm font-medium">Product Attribute</p>}
@@ -53,13 +53,19 @@ const ProductAttributes = ({ control, setValue, watch }: ProductAttributesProps)
                     containerClasName="space-y-1"
                     inputClassName="w-full"
                     searchable={true}
+                    rules={{
+                      required: 'Key is a required field',
+                    }}
                   />
                   <TextInput
                     name={`catalogue_data.product_attributes.${index}.value`}
                     control={control}
                     label={<p className="text-sm font-medium">Attribute Value<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
                     containerClasName="space-y-1"
-                    placeholder="Enter Attribute Value"
+                    placeholder="Enter Attribute Value!"
+                    rules={{
+                      required: 'Please enter a value for attribute!',
+                    }}
                   />
                 </div>
               </div>

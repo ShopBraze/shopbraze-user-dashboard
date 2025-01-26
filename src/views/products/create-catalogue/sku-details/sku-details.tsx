@@ -62,6 +62,9 @@ const SkuDetails = ({ control, watch, setValue }: SkuDetailsProps) => {
                       containerClasName="space-y-1"
                       inputClassName="w-full"
                       searchable={true}
+                      rules={{
+                        required: 'Please select size of sku!',
+                      }}
                     />
 
                     <NumberInput
@@ -72,8 +75,15 @@ const SkuDetails = ({ control, watch, setValue }: SkuDetailsProps) => {
                       placeholder="0"
                       containerClasName="space-y-1"
                       min={0}
-                      max={1000000}
+                      max={1000001}
                       defaultValue={0}
+                      rules={{
+                        required: 'Please enter selling price!',
+                        validate: {
+                          range: (value) =>
+                            value >= 1 && value <= 1000001 || 'Selling price  must be between 1 and 1000001',
+                        },
+                      }}
                     />
                     <NumberInput
                       control={control}
@@ -83,7 +93,7 @@ const SkuDetails = ({ control, watch, setValue }: SkuDetailsProps) => {
                       placeholder="0"
                       containerClasName="space-y-1"
                       min={0}
-                      max={1000000}
+                      max={1000001}
                       defaultValue={0}
                     />
 
@@ -93,6 +103,13 @@ const SkuDetails = ({ control, watch, setValue }: SkuDetailsProps) => {
                       label={<p className="text-sm font-medium">Weight (kg)<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
                       placeholder="Enter Weight"
                       containerClasName="space-y-1"
+                      rules={{
+                        required: 'Please enter weight!',
+                        validate: {
+                          range: (value) =>
+                            value >= 0.05 && value <= 30 || 'Weight can only be in between 0.05kg to 30kg',
+                        },
+                      }}
                     />
 
                     <NumberInput
@@ -105,6 +122,13 @@ const SkuDetails = ({ control, watch, setValue }: SkuDetailsProps) => {
                       min={0}
                       max={200}
                       defaultValue={0}
+                      rules={{
+                        required: 'Please enter breadth!',
+                        validate: {
+                          range: (value) =>
+                            value >= 1 && value <= 200 || 'Breadth can only be in between 1cm and 200cm',
+                        },
+                      }}
                     />
                     <NumberInput
                       control={control}
@@ -127,6 +151,13 @@ const SkuDetails = ({ control, watch, setValue }: SkuDetailsProps) => {
                       label={<p className="text-sm font-medium">SKU Code<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
                       placeholder="Enter a unique SKU code"
                       containerClasName="space-y-1"
+                      rules={{
+                        required: 'Please enter sku id of the sku!',
+                        minLength: {
+                          value: 2,
+                          message: 'Name of product should be at least 2 character long',
+                        },
+                      }}
                     />
                     <NumberInput
                       control={control}
@@ -136,8 +167,15 @@ const SkuDetails = ({ control, watch, setValue }: SkuDetailsProps) => {
                       placeholder="0"
                       containerClasName="space-y-1"
                       min={0}
-                      max={1000000}
+                      max={1000001}
                       defaultValue={0}
+                      rules={{
+                        required: 'Please enter MRP!',
+                        validate: {
+                          range: (value) =>
+                            value >= 1 && value <= 1000001 || 'MRP must be between 1 and 1000001',
+                        },
+                      }}
                     />
                     <NumberInput
                       control={control}
@@ -147,8 +185,15 @@ const SkuDetails = ({ control, watch, setValue }: SkuDetailsProps) => {
                       placeholder="0"
                       containerClasName="space-y-1"
                       min={0}
-                      max={1000000}
+                      max={1000001}
                       defaultValue={0}
+                      rules={{
+                        required: 'Please enter Quantity!',
+                        validate: {
+                          range: (value) =>
+                            value >= 0 && value <= 1000001 || 'Quantity must be between 1 and 1000001',
+                        },
+                      }}
                     />
                     <NumberInput
                       control={control}
@@ -158,8 +203,15 @@ const SkuDetails = ({ control, watch, setValue }: SkuDetailsProps) => {
                       placeholder="0"
                       containerClasName="space-y-1"
                       min={0}
-                      max={1000000}
+                      max={200}
                       defaultValue={0}
+                      rules={{
+                        required: 'Please enter breadth!',
+                        validate: {
+                          range: (value) =>
+                            value >= 1 && value <= 200 || 'Length must be between 1cm and 200cm',
+                        },
+                      }}
                     />
                     <NumberInput
                       control={control}
@@ -169,8 +221,15 @@ const SkuDetails = ({ control, watch, setValue }: SkuDetailsProps) => {
                       placeholder="0"
                       containerClasName="space-y-1"
                       min={0}
-                      max={1000000}
+                      max={200}
                       defaultValue={0}
+                      rules={{
+                        required: 'Please enter height!',
+                        validate: {
+                          range: (value) =>
+                            value >= 1 && value <= 200 || 'Height must be between 1cm and 200cm',
+                        },
+                      }}
                     />
                   </div>
                 </div>

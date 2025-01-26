@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Control, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { CatalogueDataType } from '../types/index.type';
-
 
 type UseSkuDetailsProps = {
   control: Control<{
@@ -16,17 +15,17 @@ type UseSkuDetailsProps = {
 }
 
 const defaultSkuDetail = {
-  size: "",
-  sku_id: "",
-  length: 15,
-  breadth: 10,
-  height: 10,
+  size: "",  //required
+  sku_id: "",  //required
+  length: 15, //required
+  breadth: 10, //required
+  height: 10, //required
   cost_price: 0,
-  selling_price: 120,
-  mrp: 140,
-  quantity: 100,
-  weight: 0.4,
-  volume: 0.5,
+  selling_price: 120,  //required
+  mrp: 140,  //required
+  quantity: 100, //required
+  weight: 0.4,  //required
+  volume: 0.5,   //required
   is_active: false,
   is_custom_sku_size: false,
 }

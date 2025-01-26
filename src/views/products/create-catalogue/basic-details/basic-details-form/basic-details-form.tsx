@@ -15,15 +15,22 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
 
 
   return (
-    <div className="space-y-6 p-4 rounded-md bg-[#fff]">
+    <div className="space-y-3 p-4 rounded-md bg-[#fff]">
       <div className=' grid grid-cols-2 gap-4'>
-        <div className="space-y-6">
+        <div className="space-y-3">
           <TextInput
             name="catalogue_data.name"
             control={control}
             label={<p className="text-sm font-medium">Name<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             containerClasName="space-y-1"
             placeholder="Enter unique product name"
+            rules={{
+              required: 'Please enter product name!',
+              minLength: {
+                value: 5,
+                message: 'Name of product should be at least 5 character long',
+              },
+            }}
           />
           <SingleSelect control={control}
             name="catalogue_data.product_type"
@@ -55,9 +62,12 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
             containerClasName="space-y-1"
             inputClassName="w-full"
             searchable={true}
+            rules={{
+              required: 'Please select size type!',
+            }}
           />
         </div>
-        <div className="space-y-6">
+        <div className="space-y-3">
           <SingleSelect control={control}
             name="catalogue_data.pickup_point"
             label={<p className="text-sm font-medium">Pickup Point <span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
@@ -69,6 +79,9 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
             containerClasName="space-y-1"
             inputClassName="w-full"
             searchable={true}
+            rules={{
+              required: 'Please select your pick-up point!',
+            }}
           />
           <SingleSelect control={control}
             name="catalogue_data.return_condition"
@@ -81,6 +94,9 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
             containerClasName="space-y-1"
             inputClassName="w-full"
             searchable={true}
+            rules={{
+              required: 'Please select return/exchange condition',
+            }}
           />
           <TextInput
             name="catalogue_data.product_code"
@@ -88,6 +104,9 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
             label={<p className="text-sm font-medium">Product Code <span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             containerClasName="space-y-1"
             placeholder="Enter product code eg. PK1286"
+            rules={{
+              required: 'Please enter product code',
+            }}
           />
           <SingleSelect control={control}
             name="catalogue_data.gst_number"

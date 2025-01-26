@@ -1,6 +1,8 @@
 import React from 'react'
-import { Control, Controller } from 'react-hook-form'
+import { Control, Controller, RegisterOptions } from 'react-hook-form'
 import { InputPicker } from 'rsuite'
+
+type Rules = RegisterOptions;
 
 type SingleSelectProps = {
   control: Control<any, any>
@@ -10,26 +12,42 @@ type SingleSelectProps = {
   inputClassName?: string
   placeholder?: string
   options: any[]
+  error?: {
+    message?: string
+  }
+  rules?: Rules
+  disabled?: boolean
   [key: string]: any
 }
 
-const SingleSelect = ({ control, name, label, containerClasName, inputClassName, placeholder, options, ...props }: SingleSelectProps) => {
+const SingleSelect = ({ control, name, label, containerClasName, inputClassName, placeholder, options, error, rules, disabled, ...props }: SingleSelectProps) => {
   return (
     <div className={`${containerClasName}`}>
       {label && label}
       <Controller
         name={name}
         control={control}
-        render={({ field }) => (
-          <InputPicker
-            {...field}
-            data={options}
-            className={`w-full ${inputClassName}`}
-            searchable
-            onChange={(value) => field.onChange(value)}
-            placeholder={placeholder}
-            {...props}
-          />
+        rules={{
+          ...rules
+        }}
+        render={({ field, fieldState }) => (
+          <div className='w-full'>
+            <InputPicker
+              {...field}
+              data={options}
+              className={`w-full ${inputClassName}`}
+              searchable
+              onChange={(value) => field.onChange(value)}
+              placeholder={placeholder}
+              {...props}
+            />
+            <div className="pl-1 pt-1">
+              <p className="text-error-500 text-xs font-semibold min-h-4">
+                {fieldState.error && fieldState.error.message}
+              </p>
+            </div>
+          </div>
+
         )}
       />
     </div>
