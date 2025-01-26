@@ -24,7 +24,7 @@ type BasicDetailsProps = {
 const BasicDetails = ({ control, watch, setValue }: BasicDetailsProps) => {
   return (
     <div className='space-y-4'>
-      <AssetsUploadContainer setValue={setValue} />
+      <AssetsUploadContainer setValue={setValue} watch={watch} />
       <BasicDetailsForm control={control} />
       <ProductAttributes watch={watch} control={control} setValue={setValue} />
     </div>

@@ -18,10 +18,11 @@ type TextInputProps = {
   }
   rules?: Rules
   disabled?: boolean
+  onChange?: Function
   [key: string]: any
 }
 
-const TextInput = ({ control, name, label, containerClasName, inputClassName, placeholder, disabled, rules, ...props }: TextInputProps) => {
+const TextInput = ({ control, name, label, containerClasName, inputClassName, placeholder, disabled, rules, onChange, ...props }: TextInputProps) => {
   return (
     <div className={`${containerClasName}`}>
       {label && label}
@@ -36,7 +37,10 @@ const TextInput = ({ control, name, label, containerClasName, inputClassName, pl
             <Input
               id={field.name}
               value={field.value}
-              onChange={value => field.onChange(value)}
+              onChange={(value) => {
+                field.onChange(value)
+                if (onChange) onChange()
+              }}
               disabled={disabled}
               placeholder={placeholder}
               className={`text-sm font-medium focus:!outline-none focus:ring-0 focus:!border-gray-400 hover:!border-gray-400 placeholder:text-gray-400 placeholder:font-semibold ${inputClassName}`}

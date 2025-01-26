@@ -19,10 +19,11 @@ type NumberInputProps = {
   }
   rules?: Rules
   disabled?: boolean
+  onChange?: Function
   [key: string]: any
 }
 
-const NumberInput = ({ control, name, label, containerClasName, inputClassName, placeholder, scrollable, min, max, defaultValue, error, rules, disabled, ...props }: NumberInputProps) => {
+const NumberInput = ({ control, name, label, containerClasName, inputClassName, placeholder, scrollable, min, max, defaultValue, error, rules, disabled, onChange, ...props }: NumberInputProps) => {
   return (
     <div className={`${containerClasName}`}>
       {label && label}
@@ -37,7 +38,10 @@ const NumberInput = ({ control, name, label, containerClasName, inputClassName, 
             <InputNumber
               id={field.name}
               value={field.value}
-              onChange={value => field.onChange(value)}
+              onChange={(value) => {
+                field.onChange(value)
+                if (onChange) onChange()
+              }}
               placeholder={placeholder}
               disabled={disabled}
               className={`text-sm font-medium focus:!outline-none focus:ring-0 focus:!border-gray-400 hover:!border-gray-400 placeholder:text-gray-400 placeholder:font-semibold ${inputClassName}`}

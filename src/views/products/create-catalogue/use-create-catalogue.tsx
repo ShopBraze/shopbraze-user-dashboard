@@ -71,15 +71,12 @@ const useCreateCatalogue = (props: Props) => {
   const handleActiveStep = async (stepNumber: number) => {
     if (stepNumber < activeStep) setActiveStep(stepNumber)
     else if (activeStep === 1) {
-      const isStepOneValid = await trigger(['catalogue_data.name', 'catalogue_data.pickup_point', 'catalogue_data.return_condition', 'catalogue_data.product_code', ...productAttributeFields] as any)
+      const isStepOneValid = await trigger(['catalogue_data.name', 'catalogue_data.pickup_point', 'catalogue_data.size_type', 'catalogue_data.return_condition', 'catalogue_data.product_code', ...productAttributeFields] as any)
       if (isStepOneValid) setActiveStep(stepNumber)
     }
     else if (activeStep === 2) {
       const isStepTwoValid = await (trigger([...customerSkuFields] as any))
       if (isStepTwoValid) setActiveStep(stepNumber)
-    }
-    else if (activeStep === 3) {
-
     }
   }
 
@@ -93,7 +90,8 @@ const useCreateCatalogue = (props: Props) => {
     control,
     watch,
     setValue,
-    handleCreateCatalogue
+    handleCreateCatalogue,
+    trigger
   }
 }
 

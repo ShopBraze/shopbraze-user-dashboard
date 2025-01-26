@@ -1,7 +1,7 @@
 import UploadIcon from "assets/icons/upload-cloud-arrow-icon.svg"
 import Image from "next/image"
 import { useState } from "react"
-import { UseFormSetValue } from "react-hook-form"
+import { UseFormSetValue, UseFormWatch } from "react-hook-form"
 import { Uploader } from 'rsuite'
 import { FileType } from "rsuite/esm/Uploader"
 import { CatalogueDataType } from "../../types/index.type"
@@ -11,9 +11,13 @@ type AssetsUploadContainerProps = {
     catalogue_data: CatalogueDataType;
     files: FileType[];
   }>
+  watch: UseFormWatch<{
+    catalogue_data: CatalogueDataType;
+    files: FileType[];
+  }>
 }
 
-const AssetsUploadContainer = ({ setValue }: AssetsUploadContainerProps) => {
+const AssetsUploadContainer = ({ setValue, watch }: AssetsUploadContainerProps) => {
 
   const handleChange = (fileList: FileType[]) => {
     setValue("files", fileList)
@@ -48,7 +52,15 @@ const AssetsUploadContainer = ({ setValue }: AssetsUploadContainerProps) => {
       {/* For Images */}
       <div className="space-y-1">
         <p className="text-sm font-semibold text-gray-900">Upload Images</p>
-        <Uploader multiple listType="picture" action={''} shouldUpload={() => false} accept="image/*" onChange={handleChange}>
+        <Uploader
+          multiple
+          listType="picture"
+          action={''}
+          shouldUpload={() => false}
+          accept="image/*"
+          onChange={handleChange}
+          fileList={watch('files')}
+        >
           <div>
             <Image src={UploadIcon} alt="upload.svg" />
           </div>

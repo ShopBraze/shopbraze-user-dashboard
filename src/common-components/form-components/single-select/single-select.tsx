@@ -17,10 +17,11 @@ type SingleSelectProps = {
   }
   rules?: Rules
   disabled?: boolean
+  onChange?: Function
   [key: string]: any
 }
 
-const SingleSelect = ({ control, name, label, containerClasName, inputClassName, placeholder, options, error, rules, disabled, ...props }: SingleSelectProps) => {
+const SingleSelect = ({ control, name, label, containerClasName, inputClassName, placeholder, options, error, rules, disabled, onChange, ...props }: SingleSelectProps) => {
   return (
     <div className={`${containerClasName}`}>
       {label && label}
@@ -37,7 +38,10 @@ const SingleSelect = ({ control, name, label, containerClasName, inputClassName,
               data={options}
               className={`w-full ${inputClassName}`}
               searchable
-              onChange={(value) => field.onChange(value)}
+              onChange={(value) => {
+                field.onChange(value)
+                if (onChange) onChange()
+              }}
               placeholder={placeholder}
               {...props}
             />

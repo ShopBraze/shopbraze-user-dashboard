@@ -16,10 +16,11 @@ type TextAreaInputProps = {
   }
   rules?: Rules
   disabled?: boolean
+  onChange?: Function
   [key: string]: any
 }
 
-const TextAreaInput = ({ control, name, rows = 5, label, containerClasName, inputClassName, placeholder, error, rules, disabled, ...props }: TextAreaInputProps) => {
+const TextAreaInput = ({ control, name, rows = 5, label, containerClasName, inputClassName, placeholder, error, rules, disabled, onChange, ...props }: TextAreaInputProps) => {
   return (
     <div className={`${containerClasName}`}>
       {label && label}
@@ -37,7 +38,10 @@ const TextAreaInput = ({ control, name, rows = 5, label, containerClasName, inpu
               id={field.name}
               value={field.value}
               disabled={disabled}
-              onChange={value => field.onChange(value)}
+              onChange={(value) => {
+                field.onChange(value)
+                if (onChange) onChange()
+              }}
               placeholder={placeholder}
               className={`text-sm font-medium focus:!outline-none focus:ring-0 focus:!border-gray-400 hover:!border-gray-400 placeholder:text-gray-400 placeholder:font-semibold ${inputClassName}`}
               {...props}
