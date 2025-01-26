@@ -4,6 +4,7 @@ import { Table, Pagination, Checkbox } from 'rsuite';
 import CopyIcon from "assets/icons/copy-icon.svg"
 import Button from 'common-components/button/button';
 import Image from 'next/image';
+import { FileType } from 'rsuite/esm/Uploader';
 
 
 const data = [
@@ -49,16 +50,18 @@ const data = [
   },
 ];
 
-
 type AddCollectionProps = {
   control: Control<{
     catalogue_data: CatalogueDataType;
+    files: FileType[];
   }, any>
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueDataType;
+    files: FileType[];
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueDataType;
+    files: FileType[];
   }>
 }
 

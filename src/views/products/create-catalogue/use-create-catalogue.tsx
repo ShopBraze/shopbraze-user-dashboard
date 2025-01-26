@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { CatalogueDataType, CustomerSkuType, ProductAttributeType } from './types/index.type'
 import { useToaster } from 'rsuite';
+import { FileType } from "rsuite/esm/Uploader"
+import { convertFileListToFormData } from 'utils/convert-file-list-to-formdata';
 
 
 const defaultSkuDetail = {
@@ -26,7 +28,7 @@ const useCreateCatalogue = (props: Props) => {
   const toaster = useToaster()
 
   const [activeStep, setActiveStep] = useState(1)
-  const { control, watch, setValue, getValues, trigger } = useForm({
+  const { control, watch, setValue, getValues, trigger, handleSubmit } = useForm({
     defaultValues: {
       catalogue_data: {
         name: "", // required
@@ -42,7 +44,8 @@ const useCreateCatalogue = (props: Props) => {
         customer_skus: [defaultSkuDetail] as CustomerSkuType[],
         product_attributes: [] as ProductAttributeType[],
         collections_to_add: [] as string[]
-      } as CatalogueDataType
+      } as CatalogueDataType,
+      files: [] as FileType[]
     },
     mode: 'onChange'
   })
@@ -80,15 +83,17 @@ const useCreateCatalogue = (props: Props) => {
     }
   }
 
-
-  console.log(watch('catalogue_data.customer_skus'))
+  const handleCreateCatalogue = handleSubmit((data) => {
+    console.log(data, "payload")
+  })
 
   return {
     activeStep,
     handleActiveStep,
     control,
     watch,
-    setValue
+    setValue,
+    handleCreateCatalogue
   }
 }
 

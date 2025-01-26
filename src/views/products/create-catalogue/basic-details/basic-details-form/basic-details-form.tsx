@@ -3,11 +3,13 @@ import { CatalogueDataType } from "../../types/index.type";
 import TextInput from "common-components/form-components/text-input/text-input";
 import TextAreaInput from "common-components/form-components/text-area-input/text-area-input";
 import SingleSelect from "common-components/form-components/single-select/single-select";
+import { FileType } from "rsuite/esm/Uploader";
 
 
 type BasicDetailsFormProps = {
   control: Control<{
     catalogue_data: CatalogueDataType;
+    files: FileType[];
   }, any>
 }
 

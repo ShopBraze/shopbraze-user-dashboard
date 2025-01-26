@@ -9,16 +9,20 @@ import useSkuDetails from './use-sku-details'
 import { InputNumber } from 'rsuite'
 import NumberInput from 'common-components/form-components/number-input/number-input'
 import TextInput from 'common-components/form-components/text-input/text-input'
+import { FileType } from 'rsuite/esm/Uploader'
 
 type SkuDetailsProps = {
   control: Control<{
     catalogue_data: CatalogueDataType;
+    files: FileType[];
   }, any>
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueDataType;
+    files: FileType[];
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueDataType;
+    files: FileType[];
   }>
 }
 

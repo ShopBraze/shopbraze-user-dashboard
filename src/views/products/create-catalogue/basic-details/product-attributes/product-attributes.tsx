@@ -6,16 +6,20 @@ import CloseIcon from "assets/icons/cross-icon.svg"
 import Image from "next/image";
 import SingleSelect from "common-components/form-components/single-select/single-select";
 import TextInput from "common-components/form-components/text-input/text-input";
+import { FileType } from "rsuite/esm/Uploader";
 
 type ProductAttributesProps = {
   control: Control<{
     catalogue_data: CatalogueDataType;
+    files: FileType[];
   }, any>
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueDataType;
+    files: FileType[];
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueDataType;
+    files: FileType[];
   }>
 }
 
