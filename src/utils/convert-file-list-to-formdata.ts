@@ -7,10 +7,7 @@ export const convertFileListToFormData = (fileList: FileType[]) => {
     const { blobFile, name, fileKey } = file;
 
     if (blobFile) {
-      formData.append('images', blobFile, name);
-      if (fileKey !== undefined) {
-        formData.append('fileKeys[]', fileKey.toString());
-      }
+      formData.append('files', blobFile, name);
     }
   });
 

@@ -22,16 +22,15 @@ type ProductAttributeType = {
 
 
 type CatalogueDataType = {
-  name: string;
+  title: string;
   product_type: string;
   color: string;
   size_type: string;
   pickup_point: string;
   return_condition: string;
-  product_code: string;
   gst_number: string;
   description: string;
-  seller_sku_id: string;
+  product_code: string;
   customer_skus: CustomerSkuType[];
   product_attributes: ProductAttributeType[];
   collections_to_add: string[]

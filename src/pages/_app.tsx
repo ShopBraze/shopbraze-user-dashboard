@@ -8,6 +8,9 @@ import TopBarProgress from "react-topbar-progress-indicator";
 import 'rsuite/dist/rsuite-no-reset.min.css';
 import "styles/rsuite-override-module.css"
 import "styles/globals.css";
+import { Provider } from 'react-redux';
+import store from 'state/store';
+import { Toaster } from 'react-hot-toast';
 
 const Layout = dynamic(() => import("global-components/layout/layout"), { ssr: false });
 
@@ -39,11 +42,18 @@ export default function App({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <>
+    <Provider store={store}>
       <Layout>
         {changingRoute && <TopBarProgress />}
         <Component {...pageProps} />
       </Layout>
-    </>
+      <Toaster toastOptions={{
+        style: {
+          background: '#333',
+          color: '#fff',
+        },
+      }}
+      />
+    </Provider>
   )
 }

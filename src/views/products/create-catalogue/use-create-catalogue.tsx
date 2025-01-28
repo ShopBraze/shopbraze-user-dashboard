@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { CatalogueDataType, CustomerSkuType, ProductAttributeType } from './types/index.type'
-import { useToaster } from 'rsuite';
 import { FileType } from "rsuite/esm/Uploader"
 import { convertFileListToFormData } from 'utils/convert-file-list-to-formdata';
+import { usePostCatalogueMutation } from 'services/catalogues/index.query';
+import toast from 'react-hot-toast';
 
 
 const defaultSkuDetail = {
@@ -25,13 +26,15 @@ const defaultSkuDetail = {
 type Props = {}
 
 const useCreateCatalogue = (props: Props) => {
-  const toaster = useToaster()
+
+  const [postCatalogue, { isLoading: isCreating }] = usePostCatalogueMutation()
 
   const [activeStep, setActiveStep] = useState(1)
   const { control, watch, setValue, getValues, trigger, handleSubmit } = useForm({
     defaultValues: {
       catalogue_data: {
-        name: "", // required
+        title: "", // required
+        description: '',
         product_type: "",
         color: "",
         size_type: "",
@@ -39,8 +42,6 @@ const useCreateCatalogue = (props: Props) => {
         return_condition: "", // required
         product_code: "",  //required
         gst_number: '',
-        description: '',
-        seller_sku_id: "",
         customer_skus: [defaultSkuDetail] as CustomerSkuType[],
         product_attributes: [] as ProductAttributeType[],
         collections_to_add: [] as string[]
@@ -71,7 +72,7 @@ const useCreateCatalogue = (props: Props) => {
   const handleActiveStep = async (stepNumber: number) => {
     if (stepNumber < activeStep) setActiveStep(stepNumber)
     else if (activeStep === 1) {
-      const isStepOneValid = await trigger(['catalogue_data.name', 'catalogue_data.pickup_point', 'catalogue_data.size_type', 'catalogue_data.return_condition', 'catalogue_data.product_code', ...productAttributeFields] as any)
+      const isStepOneValid = await trigger(['catalogue_data.title', 'catalogue_data.pickup_point', 'catalogue_data.size_type', 'catalogue_data.return_condition', 'catalogue_data.seller_sku_id', ...productAttributeFields] as any)
       if (isStepOneValid) setActiveStep(stepNumber)
     }
     else if (activeStep === 2) {
@@ -81,7 +82,22 @@ const useCreateCatalogue = (props: Props) => {
   }
 
   const handleCreateCatalogue = handleSubmit((data) => {
-    console.log(data, "payload")
+    const { catalogue_data, files } = data
+    const formDataPayload = new FormData();
+    formDataPayload.append("catalogue_data", JSON.stringify(catalogue_data));
+    for (let i = 0; i < files.length; i++) {
+      const { blobFile, name, fileKey } = files[i];
+      if (blobFile)
+        formDataPayload.append("files", blobFile);
+    }
+    postCatalogue(formDataPayload)
+      .unwrap()
+      .then(() => {
+        toast.success('Catalogue created successfully')
+      })
+      .catch(() => {
+        toast.error("Couldn't create the catalogue")
+      })
   })
 
   return {
@@ -91,7 +107,8 @@ const useCreateCatalogue = (props: Props) => {
     watch,
     setValue,
     handleCreateCatalogue,
-    trigger
+    trigger,
+    isCreating
   }
 }
 

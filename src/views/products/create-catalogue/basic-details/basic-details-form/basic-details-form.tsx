@@ -21,7 +21,7 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
       <div className=' grid grid-cols-2 gap-4'>
         <div className="space-y-3">
           <TextInput
-            name="catalogue_data.name"
+            name="catalogue_data.title"
             control={control}
             label={<p className="text-sm font-medium">Name<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             containerClasName="space-y-1"

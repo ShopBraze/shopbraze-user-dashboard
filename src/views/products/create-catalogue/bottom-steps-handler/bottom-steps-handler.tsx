@@ -8,9 +8,10 @@ type BottomStepsHandlerProps = {
   activeStep: number
   handleActiveStep: (stepNumber: number) => void
   handleCreateCatalogue: Function
+  isCreating?: boolean
 }
 
-const BottomStepsHandler = ({ activeStep, handleActiveStep, handleCreateCatalogue }: BottomStepsHandlerProps) => {
+const BottomStepsHandler = ({ activeStep, handleActiveStep, handleCreateCatalogue, isCreating }: BottomStepsHandlerProps) => {
   return (
     <div className='p-4 rounded-md bg-[#fff] flex justify-end gap-4 items-center'>
       <Button className='text-primary-700 border border-primary-400 gap-2 py-2 px-[18px] text-sm font-semibold'
@@ -22,7 +23,7 @@ const BottomStepsHandler = ({ activeStep, handleActiveStep, handleCreateCatalogu
       </Button>
       {
         activeStep == 3 ?
-          <Button variant='primary' className='py-2 gap-2 text-sm font-semibold' onClick={() => { handleCreateCatalogue() }}>
+          <Button variant='primary' className='w-[82px] py-2 gap-2 text-sm font-semibold' onClick={() => { handleCreateCatalogue() }} isLoading={isCreating}>
             Create
           </Button>
           : <Button variant='primary' className='py-2 gap-2 text-sm font-semibold' onClick={() => { handleActiveStep(activeStep + 1) }} >

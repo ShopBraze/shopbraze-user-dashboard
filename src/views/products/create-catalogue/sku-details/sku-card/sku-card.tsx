@@ -32,6 +32,7 @@ type SkuCardProps = {
 
 const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }: SkuCardProps) => {
 
+  const size = watch(`catalogue_data.customer_skus.${index}.size`)
   const height = watch(`catalogue_data.customer_skus.${index}.height`);
   const length = watch(`catalogue_data.customer_skus.${index}.length`);
   const breadth = watch(`catalogue_data.customer_skus.${index}.breadth`);
@@ -42,6 +43,10 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
       setValue(`catalogue_data.customer_skus.${index}.volume`, volume);
     }
   }, [height, length, breadth, index, setValue]);
+
+  useEffect(() => {
+    setValue(`catalogue_data.customer_skus.${index}.sku_id`, `${watch('catalogue_data.product_code')}_${watch(`catalogue_data.customer_skus.${index}.size`)}`)
+  }, [watch('catalogue_data.product_code'), size])
 
   return (
     <div className="p-4 rounded-md bg-[#fff] space-y-3" >
