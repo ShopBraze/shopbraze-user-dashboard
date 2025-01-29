@@ -58,8 +58,8 @@ const AssetsUploadContainer = ({ setValue, watch }: AssetsUploadContainerProps) 
           action={''}
           shouldUpload={() => false}
           accept="image/*"
-          onChange={handleChange}
-          fileList={watch('files')}
+        // onChange={handleChange}
+        // fileList={watch('files')}
         >
           <div>
             <Image src={UploadIcon} alt="upload.svg" />
@@ -70,7 +70,15 @@ const AssetsUploadContainer = ({ setValue, watch }: AssetsUploadContainerProps) 
       {/* For Videos */}
       <div className="space-y-1">
         <p className="text-sm font-semibold text-gray-900">Upload Videos</p>
-        <Uploader multiple listType="picture" action={''} shouldUpload={() => false} maxPreviewFileSize={5242880} accept="video/*">
+        <Uploader multiple
+          listType="picture"
+          action={''}
+          shouldUpload={() => false}
+          maxPreviewFileSize={5242880}
+          accept="video/*"
+          onChange={handleChange}
+          fileList={watch('files')}
+        >
           <div>
             <Image src={UploadIcon} alt="upload.svg" />
           </div>

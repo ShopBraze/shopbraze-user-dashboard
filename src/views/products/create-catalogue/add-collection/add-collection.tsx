@@ -5,6 +5,8 @@ import CopyIcon from "assets/icons/copy-icon.svg"
 import Button from 'common-components/button/button';
 import Image from 'next/image';
 import { FileType } from 'rsuite/esm/Uploader';
+import { useGetAllCollectionsQuery } from 'services/collections/index.query';
+import useAddCollection from './use-add-collection';
 
 
 const data = [
@@ -66,20 +68,21 @@ type AddCollectionProps = {
 }
 
 const AddCollection = ({ control, watch, setValue }: AddCollectionProps) => {
+  const { transformedCollectionsData, handleCheckBox } = useAddCollection({ setValue, watch })
   const { Column, HeaderCell, Cell } = Table;
 
   return (
     <div className='p-4 bg-[#fff] rounded-md'>
       <Table
         height={500}
-        data={data}
+        data={transformedCollectionsData}
         rowHeight={80}
         headerHeight={60}
       >
         <Column width={120} resizable fixed>
           <HeaderCell className='text-base font-semibold text-gray-600'>Select</HeaderCell>
           <Cell className='font-medium text-gray-800'>
-            {rowData => (<Checkbox checked={rowData?.selected} color='green' />)}
+            {rowData => (<Checkbox checked={rowData?.selected} color='green' onChange={(value, checked) => { handleCheckBox(checked, rowData?.collection_short_id) }} />)}
           </Cell>
         </Column>
 

@@ -8,3 +8,5 @@ const endpoints = {
   collections: "collections"
 
 }
+
+export default endpoints

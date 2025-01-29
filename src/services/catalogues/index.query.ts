@@ -1,4 +1,5 @@
 import baseApi from "services/base-api";
+import endpoints from "services/endpoints";
 
 export const catalogueApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
