@@ -4,7 +4,7 @@ import useButton from "./use-button"
 type ButtonProps = {
   onClick?: Function
   children: React.ReactNode | string
-  variant?: 'primary' | 'secondary' | 'tertiary'
+  variant?: 'primary' | 'primary-outline' | 'secondary' | 'tertiary'
   isLoading?: boolean
   loaderColor?: string
   ref?: any

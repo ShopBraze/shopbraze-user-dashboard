@@ -1,13 +1,14 @@
 import baseApi from "services/base-api";
 import endpoints from "services/endpoints";
+import { CatalogueTransformer } from "./transformers/index.transformer";
 
 export const catalogueApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllCatalogues: builder.query<any, any>({
+    getAllCatalogues: builder.query<Catalogue[], void>({
       query: () => ({
         url: endpoints.catalogues
       }),
-      // transformErrorResponse:(response)=>transformCatalogues(response),
+      transformResponse: (response) => CatalogueTransformer(response),
       providesTags: ['catalogues']
     }),
     postCatalogue: builder.mutation<any, any>({

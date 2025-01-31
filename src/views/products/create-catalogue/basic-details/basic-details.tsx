@@ -9,15 +9,24 @@ import { FileType } from 'rsuite/esm/Uploader'
 type BasicDetailsProps = {
   control: Control<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }, any>
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
 }
 

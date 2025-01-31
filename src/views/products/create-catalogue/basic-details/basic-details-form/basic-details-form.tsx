@@ -9,7 +9,10 @@ import { FileType } from "rsuite/esm/Uploader";
 type BasicDetailsFormProps = {
   control: Control<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }, any>
 }
 

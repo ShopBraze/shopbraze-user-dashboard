@@ -14,19 +14,31 @@ import SkuCard from './sku-card/sku-card'
 type SkuDetailsProps = {
   control: Control<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }, any>
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
   trigger: UseFormTrigger<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
 }
 

@@ -5,6 +5,7 @@ import { FileType } from "rsuite/esm/Uploader"
 import { convertFileListToFormData } from 'utils/convert-file-list-to-formdata';
 import { usePostCatalogueMutation } from 'services/catalogues/index.query';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 
 const defaultSkuDetail = {
@@ -26,7 +27,7 @@ const defaultSkuDetail = {
 type Props = {}
 
 const useCreateCatalogue = (props: Props) => {
-
+  const router = useRouter()
   const [postCatalogue, { isLoading: isCreating }] = usePostCatalogueMutation()
 
   const [activeStep, setActiveStep] = useState(1)
@@ -46,7 +47,10 @@ const useCreateCatalogue = (props: Props) => {
         product_attributes: [] as ProductAttributeType[],
         collections_to_add: [] as string[]
       } as CatalogueDataType,
-      files: [] as FileType[]
+      files: {
+        images: [] as FileType[],
+        videos: [] as FileType[]
+      }
     },
     mode: 'onChange'
   })
@@ -85,18 +89,25 @@ const useCreateCatalogue = (props: Props) => {
     const { catalogue_data, files } = data
     const formDataPayload = new FormData();
     formDataPayload.append("catalogue_data", JSON.stringify(catalogue_data));
-    for (let i = 0; i < files.length; i++) {
-      const { blobFile, name, fileKey } = files[i];
-      if (blobFile)
-        formDataPayload.append("files", blobFile);
-    }
+    files.images.forEach((file) => {
+      if (file.blobFile) {
+        formDataPayload.append("images", file.blobFile, file.name);
+      }
+    });
+
+    files.videos.forEach((file) => {
+      if (file.blobFile) {
+        formDataPayload.append("videos", file.blobFile, file.name);
+      }
+    });
     postCatalogue(formDataPayload)
       .unwrap()
       .then(() => {
         toast.success('Catalogue created successfully')
+        router.push('/products/catalogue/list')
       })
-      .catch(() => {
-        toast.error("Couldn't create the catalogue")
+      .catch((error) => {
+        toast.error(error?.message || "Couldn't create the catalogue", { duration: 6000 })
       })
   })
 

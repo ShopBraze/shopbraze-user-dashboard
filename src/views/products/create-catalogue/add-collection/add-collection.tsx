@@ -55,15 +55,24 @@ const data = [
 type AddCollectionProps = {
   control: Control<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }, any>
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
 }
 
@@ -82,7 +91,7 @@ const AddCollection = ({ control, watch, setValue }: AddCollectionProps) => {
         <Column width={120} resizable fixed>
           <HeaderCell className='text-base font-semibold text-gray-600'>Select</HeaderCell>
           <Cell className='font-medium text-gray-800'>
-            {rowData => (<Checkbox checked={rowData?.selected} color='green' onChange={(value, checked) => { handleCheckBox(checked, rowData?.collection_short_id) }} />)}
+            {rowData => (<Checkbox checked={watch('catalogue_data.collections_to_add')?.includes(rowData?.collection_short_id)} color='green' onChange={(value, checked) => { handleCheckBox(checked, rowData?.collection_short_id) }} />)}
           </Cell>
         </Column>
 

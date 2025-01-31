@@ -9,42 +9,29 @@ import { CatalogueDataType } from "../../types/index.type"
 type AssetsUploadContainerProps = {
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
 }
 
 const AssetsUploadContainer = ({ setValue, watch }: AssetsUploadContainerProps) => {
 
-  const handleChange = (fileList: FileType[]) => {
-    setValue("files", fileList)
+  const handleImagesChange = (fileList: FileType[]) => {
+    setValue("files.images", fileList)
   };
 
-
-  // const media = [
-  //   {
-  //     "src_url": "https://s3.ap-south-1.amazonaws.com/nushop-catalogue/6539e1d902d8dc3ec1847a09/cat_img/Mens_Jacket_692UDLRO0T_2025-01-24_1.png",
-  //     "type": "image",
-  //     "index": 0,
-  //   },
-  //   {
-  //     "src_url": "https://s3.ap-south-1.amazonaws.com/nushop-catalogue/6539e1d902d8dc3ec1847a09/cat_img/Mens_Jacket_NSH37HWEIQ_2025-01-24_2.png",
-  //     "type": "image",
-  //     "index": 1,
-  //   },
-  //   {
-  //     "src_url": "https://s3.ap-south-1.amazonaws.com/nushop-catalogue/6539e1d902d8dc3ec1847a09/cat_img/Mens_Jacket_68135PS0FM_2025-01-24_3.png",
-  //     "type": "image",
-  //     "index": 2,
-  //   }
-  // ].map((item, index) => ({
-  //   name: `Image ${index + 1}`,
-  //   // fileKey: item._id,
-  //   url: item.src_url
-  // }));
+  const handleVideosChange = (fileList: FileType[]) => {
+    setValue("files.videos", fileList)
+  };
 
   return (
     <div className='p-2 rounded-md bg-[#fff] space-y-4'>
@@ -58,8 +45,8 @@ const AssetsUploadContainer = ({ setValue, watch }: AssetsUploadContainerProps) 
           action={''}
           shouldUpload={() => false}
           accept="image/*"
-        // onChange={handleChange}
-        // fileList={watch('files')}
+          onChange={handleImagesChange}
+          fileList={watch('files.images')}
         >
           <div>
             <Image src={UploadIcon} alt="upload.svg" />
@@ -76,8 +63,8 @@ const AssetsUploadContainer = ({ setValue, watch }: AssetsUploadContainerProps) 
           shouldUpload={() => false}
           maxPreviewFileSize={5242880}
           accept="video/*"
-          onChange={handleChange}
-          fileList={watch('files')}
+          onChange={handleVideosChange}
+          fileList={watch('files.videos')}
         >
           <div>
             <Image src={UploadIcon} alt="upload.svg" />

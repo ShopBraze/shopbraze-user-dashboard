@@ -7,11 +7,17 @@ import { CatalogueDataType } from '../types/index.type';
 type UseAddCollectionProps = {
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueDataType;
-    files: FileType[];
+    files: {
+      images: FileType[],
+      videos: FileType[]
+    };
   }>
 }
 
@@ -36,6 +42,7 @@ const useAddCollection = ({ setValue, watch }: UseAddCollectionProps) => {
     else collectionsToAdd = [...collectionsToAdd, collection_short_id]
     setValue('catalogue_data.collections_to_add', Array.from(new Set(collectionsToAdd)))
   }
+
 
   return {
     transformedCollectionsData,
