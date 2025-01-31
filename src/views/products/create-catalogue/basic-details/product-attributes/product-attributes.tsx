@@ -1,6 +1,6 @@
 import Button from "common-components/button/button"
 import { Control, UseFormSetValue, UseFormWatch } from "react-hook-form";
-import { CatalogueDataType } from "../../types/index.type";
+import { CatalogueFormDataType } from "../../types/index.type";
 import useProductAttributes from "./use-product-attributes";
 import CloseIcon from "assets/icons/cross-icon.svg"
 import Image from "next/image";
@@ -10,21 +10,21 @@ import { FileType } from "rsuite/esm/Uploader";
 
 type ProductAttributesProps = {
   control: Control<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }, any>
   setValue: UseFormSetValue<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }>
   watch: UseFormWatch<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]

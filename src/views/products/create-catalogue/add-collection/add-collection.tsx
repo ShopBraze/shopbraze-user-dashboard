@@ -1,74 +1,29 @@
 import { Control, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import { CatalogueDataType } from '../types/index.type';
-import { Table, Pagination, Checkbox } from 'rsuite';
+import { CatalogueFormDataType } from '../types/index.type';
+import { Table, Checkbox } from 'rsuite';
 import CopyIcon from "assets/icons/copy-icon.svg"
 import Button from 'common-components/button/button';
 import Image from 'next/image';
 import { FileType } from 'rsuite/esm/Uploader';
-import { useGetAllCollectionsQuery } from 'services/collections/index.query';
 import useAddCollection from './use-add-collection';
-
-
-const data = [
-  {
-    collection_short_id: "Qmflg",
-    collection_type: "catalogues_selection",
-    collection_name: "NECKLACE",
-    is_visible: "True",
-    is_active: "True",
-    url: "abc.com",
-  },
-  {
-    collection_short_id: "Rmhlj",
-    collection_type: "catalogues_selection",
-    collection_name: "BRACELET",
-    is_visible: "False",
-    is_active: "True",
-    url: "xyz.com",
-  },
-  {
-    collection_short_id: "Tqjsk",
-    collection_type: "catalogues_selection",
-    collection_name: "RING",
-    is_visible: "True",
-    is_active: "False",
-    url: "jewelry.com",
-  },
-  {
-    collection_short_id: "Ymckl",
-    collection_type: "catalogues_selection",
-    collection_name: "EARRING",
-    is_visible: "False",
-    is_active: "False",
-    url: "earring.com",
-  },
-  {
-    collection_short_id: "Zmplx",
-    collection_type: "catalogues_selection",
-    collection_name: "PENDANT",
-    is_visible: "True",
-    is_active: "True",
-    url: "pendant.com",
-  },
-];
 
 type AddCollectionProps = {
   control: Control<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }, any>
   setValue: UseFormSetValue<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }>
   watch: UseFormWatch<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]

@@ -1,5 +1,5 @@
 
-type CustomerSkuType = {
+type CustomerSkuFormType = {
   size: string,
   sku_id: string;
   length: number;
@@ -15,13 +15,13 @@ type CustomerSkuType = {
   is_custom_sku_size: boolean;
 }
 
-type ProductAttributeType = {
+type ProductAttributeFormType = {
   key: string;
   value: string;
 }
 
 
-type CatalogueDataType = {
+type CatalogueFormDataType = {
   title: string;
   product_type: string;
   color: string;
@@ -31,9 +31,9 @@ type CatalogueDataType = {
   gst_number: string;
   description: string;
   product_code: string;
-  customer_skus: CustomerSkuType[];
-  product_attributes: ProductAttributeType[];
+  customer_skus: CustomerSkuFormType[];
+  product_attributes: ProductAttributeFormType[];
   collections_to_add: string[]
 }
 
-export type { CustomerSkuType, ProductAttributeType, CatalogueDataType }
+export type { CustomerSkuFormType, ProductAttributeFormType, CatalogueFormDataType }

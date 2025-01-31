@@ -3,7 +3,7 @@ import SuccessCheckIcon from "assets/icons/success-check.svg"
 import Image from 'next/image'
 import SingleSelect from 'common-components/form-components/single-select/single-select'
 import { Control, Controller, UseFormSetValue, UseFormTrigger, UseFormWatch } from 'react-hook-form'
-import { CatalogueDataType } from '../types/index.type'
+import { CatalogueFormDataType } from '../types/index.type'
 import useSkuDetails from './use-sku-details'
 import { InputNumber } from 'rsuite'
 import NumberInput from 'common-components/form-components/number-input/number-input'
@@ -13,28 +13,28 @@ import SkuCard from './sku-card/sku-card'
 
 type SkuDetailsProps = {
   control: Control<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }, any>
   setValue: UseFormSetValue<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }>
   watch: UseFormWatch<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }>
   trigger: UseFormTrigger<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]

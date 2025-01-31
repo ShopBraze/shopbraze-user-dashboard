@@ -2,18 +2,18 @@ import React from 'react'
 import { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { FileType } from 'rsuite/esm/Uploader';
 import { useGetAllCollectionsQuery } from 'services/collections/index.query'
-import { CatalogueDataType } from '../types/index.type';
+import { CatalogueFormDataType } from '../types/index.type';
 
 type UseAddCollectionProps = {
   setValue: UseFormSetValue<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }>
   watch: UseFormWatch<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]

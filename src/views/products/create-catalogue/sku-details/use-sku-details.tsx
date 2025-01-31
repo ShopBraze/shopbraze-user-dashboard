@@ -1,25 +1,25 @@
 import { useState } from 'react'
 import { Control, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import { CatalogueDataType } from '../types/index.type';
+import { CatalogueFormDataType } from '../types/index.type';
 import { FileType } from 'rsuite/esm/Uploader';
 
 type UseSkuDetailsProps = {
   control: Control<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }, any>
   setValue: UseFormSetValue<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }>
   watch: UseFormWatch<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]

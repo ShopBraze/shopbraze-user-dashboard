@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
-import { CatalogueDataType, CustomerSkuType, ProductAttributeType } from './types/index.type'
+import { CatalogueFormDataType, CustomerSkuFormType, ProductAttributeFormType } from './types/index.type'
 import { FileType } from "rsuite/esm/Uploader"
 import { convertFileListToFormData } from 'utils/convert-file-list-to-formdata';
 import { usePostCatalogueMutation } from 'services/catalogues/index.query';
@@ -43,10 +43,10 @@ const useCreateCatalogue = (props: Props) => {
         return_condition: "", // required
         product_code: "",  //required
         gst_number: '',
-        customer_skus: [defaultSkuDetail] as CustomerSkuType[],
-        product_attributes: [] as ProductAttributeType[],
+        customer_skus: [defaultSkuDetail] as CustomerSkuFormType[],
+        product_attributes: [] as ProductAttributeFormType[],
         collections_to_add: [] as string[]
-      } as CatalogueDataType,
+      } as CatalogueFormDataType,
       files: {
         images: [] as FileType[],
         videos: [] as FileType[]

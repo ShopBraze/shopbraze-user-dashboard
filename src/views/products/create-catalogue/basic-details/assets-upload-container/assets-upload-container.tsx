@@ -4,18 +4,18 @@ import { useState } from "react"
 import { UseFormSetValue, UseFormWatch } from "react-hook-form"
 import { Uploader } from 'rsuite'
 import { FileType } from "rsuite/esm/Uploader"
-import { CatalogueDataType } from "../../types/index.type"
+import { CatalogueFormDataType } from "../../types/index.type"
 
 type AssetsUploadContainerProps = {
   setValue: UseFormSetValue<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }>
   watch: UseFormWatch<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]

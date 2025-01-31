@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import CloseIcon from "assets/icons/cross-icon.svg"
 import { FileType } from 'rsuite/esm/Uploader';
-import { CatalogueDataType } from '../../types/index.type';
+import { CatalogueFormDataType } from '../../types/index.type';
 import Button from 'common-components/button/button';
 import SingleSelect from 'common-components/form-components/single-select/single-select'
 import { Control, Controller, UseFormSetValue, UseFormTrigger, UseFormWatch } from 'react-hook-form'
@@ -11,28 +11,28 @@ import TextInput from 'common-components/form-components/text-input/text-input';
 
 type SkuCardProps = {
   control: Control<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }, any>
   setValue: UseFormSetValue<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }>
   watch: UseFormWatch<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
     };
   }>
   trigger: UseFormTrigger<{
-    catalogue_data: CatalogueDataType;
+    catalogue_data: CatalogueFormDataType;
     files: {
       images: FileType[],
       videos: FileType[]
