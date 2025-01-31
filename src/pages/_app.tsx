@@ -1,9 +1,18 @@
+import dynamic from 'next/dynamic';
+
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import TopBarProgress from "react-topbar-progress-indicator";
 
+import 'rsuite/dist/rsuite-no-reset.min.css';
+import "styles/rsuite-override-module.css"
 import "styles/globals.css";
+import { Provider } from 'react-redux';
+import store from 'state/store';
+import { Toaster } from 'react-hot-toast';
+
+const Layout = dynamic(() => import("global-components/layout/layout"), { ssr: false });
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -33,9 +42,18 @@ export default function App({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <>
-      {changingRoute && <TopBarProgress />}
-      <Component {...pageProps} />
-    </>
+    <Provider store={store}>
+      <Layout>
+        {changingRoute && <TopBarProgress />}
+        <Component {...pageProps} />
+      </Layout>
+      <Toaster toastOptions={{
+        style: {
+          background: '#333',
+          color: '#fff',
+        },
+      }}
+      />
+    </Provider>
   )
 }

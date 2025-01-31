@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   },
   reactStrictMode: process.env.NODE_ENV === 'production',
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: ["res.cloudinary.com", "shopbraze-store.s3.ap-south-1.amazonaws.com"],
   },
 };
 
