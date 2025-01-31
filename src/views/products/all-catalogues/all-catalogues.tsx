@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { Table } from 'rsuite'
 import RatingIcon from "assets/icons/catalogue-listing/rating-icon.svg"
 import LinkIcon from "assets/icons/catalogue-listing/link-icon.svg"
-import EditPencilIcon from "assets/icons/catalogue-listing/edit-pencil.svg"
 import WhatsappIcon from "assets/icons/catalogue-listing/whatsapp-icon.svg"
 import DeleteBinIcon from "assets/icons/catalogue-listing/delete-bin-red-icon.svg"
 import RupeeIcon from "assets/icons/catalogue-listing/rupee-icon-rounded.svg"
@@ -10,6 +9,7 @@ import DeliveIcon from "assets/icons/catalogue-listing/delive-icon.svg"
 import { useGetAllCataloguesQuery } from 'services/catalogues/index.query'
 import Button from 'common-components/button/button'
 import CatalogueLoader from './catalogue-loader/catalogue-loader'
+import EditCatalogue from './components/edit-catalogue/edit-catalogue'
 
 
 type Props = {}
@@ -80,15 +80,15 @@ const AllCatalogues = (props: Props) => {
                 <Cell height={180} className='py-5 px-2'>
                   {(data: Catalogue) => (
                     <div className="space-y-2.5">
-                      <Button variant='primary' className='w-full py-[5px] gap-2 rounded'>
-                        <Image src={EditPencilIcon} alt="edi-pencil.svg" className='h-4 w-4' />
-                        <p className="text-[#fff] font-semibold">Edit Catalogue Details</p>
-                      </Button>
+                      <EditCatalogue catalogueData={data} />
                       <div className="flex gap-3">
-                        <Button variant='primary-outline' className='w-full py-[5px] gap-2 rounded'>
-                          <Image src={RupeeIcon} alt="edi-pencil.svg" className='h-4 w-4' />
-                          <p className="text-primary-700 font-semibold">Edit Price</p>
-                        </Button>
+                        <EditCatalogue catalogueData={data} editStep={2}>
+                          <Button variant='primary-outline' className='w-full py-[5px] gap-2 rounded'>
+                            <Image src={RupeeIcon} alt="edi-pencil.svg" className='h-4 w-4' />
+                            <p className="text-primary-700 font-semibold">Edit Price</p>
+                          </Button>
+                        </EditCatalogue>
+
                         <Button variant='primary-outline' className='w-full py-[5px] gap-2 rounded'>
                           <Image src={WhatsappIcon} alt="edit-pencil.svg" className='h-4 w-4' />
                           <p className="text-primary-700 font-semibold">Share</p>

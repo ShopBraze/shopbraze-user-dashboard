@@ -16,6 +16,7 @@ type CustomerSku = {
 }
 
 type Catalogue = {
+  id: string
   title: string;
   description: string;
   product_type?: string;

@@ -1,29 +1,20 @@
 import React from 'react'
 import { Control, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import { FileType } from 'rsuite/esm/Uploader';
 import { CatalogueFormDataType } from '../../types/index.type';
+import { FileType } from 'rsuite/esm/Uploader';
 
 type UseProductAttributesProps = {
   control: Control<{
     catalogue_data: CatalogueFormDataType;
-    files: {
-      images: FileType[],
-      videos: FileType[]
-    };
+    files: any
   }, any>
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueFormDataType;
-    files: {
-      images: FileType[],
-      videos: FileType[]
-    };
+    files: any
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueFormDataType;
-    files: {
-      images: FileType[],
-      videos: FileType[]
-    };
+    files: any
   }>
 }
 

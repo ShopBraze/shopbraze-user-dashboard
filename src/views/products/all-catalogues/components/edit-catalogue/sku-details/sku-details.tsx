@@ -1,40 +1,32 @@
 import Button from 'common-components/button/button'
 import SuccessCheckIcon from "assets/icons/success-check.svg"
 import Image from 'next/image'
+import SingleSelect from 'common-components/form-components/single-select/single-select'
 import { Control, Controller, UseFormSetValue, UseFormTrigger, UseFormWatch } from 'react-hook-form'
 import { CatalogueFormDataType } from '../types/index.type'
 import useSkuDetails from './use-sku-details'
+import { InputNumber } from 'rsuite'
+import NumberInput from 'common-components/form-components/number-input/number-input'
+import TextInput from 'common-components/form-components/text-input/text-input'
 import { FileType } from 'rsuite/esm/Uploader'
 import SkuCard from './sku-card/sku-card'
 
 type SkuDetailsProps = {
   control: Control<{
     catalogue_data: CatalogueFormDataType;
-    files: {
-      images: FileType[],
-      videos: FileType[]
-    };
+    files: any
   }, any>
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueFormDataType;
-    files: {
-      images: FileType[],
-      videos: FileType[]
-    };
+    files: any
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueFormDataType;
-    files: {
-      images: FileType[],
-      videos: FileType[]
-    };
+    files: any
   }>
   trigger: UseFormTrigger<{
     catalogue_data: CatalogueFormDataType;
-    files: {
-      images: FileType[],
-      videos: FileType[]
-    };
+    files: any
   }>
 }
 

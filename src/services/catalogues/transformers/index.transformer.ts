@@ -5,7 +5,8 @@ export const CatalogueTransformer = (response: any) => {
       const item = response?.data?.[i];
       const catalogue = {} as Catalogue
 
-      catalogue.title = item?.title;
+      catalogue.id = item?._id,
+        catalogue.title = item?.title;
       catalogue.description = item?.description;
       catalogue.color = item?.color;
       catalogue.customer_skus = item?.customer_skus;

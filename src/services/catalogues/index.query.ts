@@ -16,7 +16,15 @@ export const catalogueApi = baseApi.injectEndpoints({
         method: "POST",
         url: endpoints.catalogues,
         body: body,
-        // params:""
+      }),
+      invalidatesTags: ['catalogues']
+    }),
+    updateCatalogue: builder.mutation<any, any>({
+      query: ({ body, catalogueId }) => ({
+        method: "PUT",
+        url: `${endpoints.catalogues}/${catalogueId}`,
+        body: body,
+        // params: { catalogueId }
       }),
       invalidatesTags: ['catalogues']
     })
@@ -25,4 +33,4 @@ export const catalogueApi = baseApi.injectEndpoints({
 
 
 
-export const { useGetAllCataloguesQuery, usePostCatalogueMutation } = catalogueApi
+export const { useGetAllCataloguesQuery, usePostCatalogueMutation, useUpdateCatalogueMutation } = catalogueApi
