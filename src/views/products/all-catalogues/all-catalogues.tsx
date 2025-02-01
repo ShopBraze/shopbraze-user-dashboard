@@ -10,6 +10,7 @@ import { useGetAllCataloguesQuery } from 'services/catalogues/index.query'
 import Button from 'common-components/button/button'
 import CatalogueLoader from './catalogue-loader/catalogue-loader'
 import EditCatalogue from './components/edit-catalogue/edit-catalogue'
+import SkuInventory from './components/sku-inventory/sku-inventory'
 
 
 type Props = {}
@@ -71,7 +72,7 @@ const AllCatalogues = (props: Props) => {
               <Column flexGrow={0.35}>
                 <HeaderCell className='text-base font-semibold text-gray-600'>SKU Inventory</HeaderCell>
                 <Cell height={180} className='py-5 px-2'>
-
+                  {(data: Catalogue) => <SkuInventory catalogueData={data} />}
                 </Cell>
               </Column>
 
