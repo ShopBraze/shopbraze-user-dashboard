@@ -9,7 +9,7 @@ const DashboardContainer = ({ children }: DashboardContainerProps) => {
   return (
     <>
       <Sidebar />
-      <div className="pl-[60px] flex w-full flex-col">
+      <div className="pl-[60px] flex w-full flex-col min-w-[1200px]">
         <Navbar />
         <main className="w-full py-4 px-3 bg-[#ecebeb] min-h-screen">
           {children}
