@@ -102,8 +102,6 @@ const useEditCatalogue = ({ editStep, catalogueData, handleClose }: UseEditCatal
     }
   }
 
-  console.log(watch('files'))
-
   const handleUpdateCatalogue = handleSubmit((data) => {
     const { catalogue_data, files } = data
 

@@ -3,13 +3,14 @@ import { Table } from 'rsuite'
 import RatingIcon from "assets/icons/catalogue-listing/rating-icon.svg"
 import LinkIcon from "assets/icons/catalogue-listing/link-icon.svg"
 import WhatsappIcon from "assets/icons/catalogue-listing/whatsapp-icon.svg"
-import DeleteBinIcon from "assets/icons/catalogue-listing/delete-bin-red-icon.svg"
 import RupeeIcon from "assets/icons/catalogue-listing/rupee-icon-rounded.svg"
 import DeliveIcon from "assets/icons/catalogue-listing/delive-icon.svg"
 import { useGetAllCataloguesQuery } from 'services/catalogues/index.query'
 import Button from 'common-components/button/button'
 import CatalogueLoader from './catalogue-loader/catalogue-loader'
 import EditCatalogue from './components/edit-catalogue/edit-catalogue'
+import SkuInventory from './components/sku-inventory/sku-inventory'
+import DeleteCatalogue from './components/delete-catalogue/delete-catalogue'
 
 
 type Props = {}
@@ -71,7 +72,7 @@ const AllCatalogues = (props: Props) => {
               <Column flexGrow={0.35}>
                 <HeaderCell className='text-base font-semibold text-gray-600'>SKU Inventory</HeaderCell>
                 <Cell height={180} className='py-5 px-2'>
-
+                  {(data: Catalogue) => <SkuInventory catalogueData={data} />}
                 </Cell>
               </Column>
 
@@ -99,10 +100,7 @@ const AllCatalogues = (props: Props) => {
                           <Image src={DeliveIcon} alt="edi-pencil.svg" className='h-4 w-4' />
                           <p className="text-error-500 font-semibold">Delive</p>
                         </Button>
-                        <Button className='w-full py-[5px] gap-2 rounded'>
-                          <Image src={DeleteBinIcon} alt="edi-pencil.svg" className='h-4 w-4' />
-                          <p className="text-error-500 font-semibold">Delete</p>
-                        </Button>
+                        <DeleteCatalogue catalogueData={data} />
                       </div>
                     </div>
                   )}

@@ -27,10 +27,25 @@ export const catalogueApi = baseApi.injectEndpoints({
         // params: { catalogueId }
       }),
       invalidatesTags: ['catalogues']
+    }),
+    deleteCatalogue: builder.mutation<any, any>({
+      query: (catalogueId) => ({
+        method: "DELETE",
+        url: `${endpoints.catalogues}/${catalogueId}`,
+      }),
+      invalidatesTags: ['catalogues']
+    }),
+    updateCatalogueSkuData: builder.mutation<any, any>({
+      query: ({ body, catalogueShortId }) => ({
+        method: "PUT",
+        url: `${endpoints.catalogues}/update-sku/${catalogueShortId}`,
+        body: body,
+      }),
+      invalidatesTags: ['catalogues']
     })
   })
 })
 
 
 
-export const { useGetAllCataloguesQuery, usePostCatalogueMutation, useUpdateCatalogueMutation } = catalogueApi
+export const { useGetAllCataloguesQuery, usePostCatalogueMutation, useDeleteCatalogueMutation, useUpdateCatalogueMutation, useUpdateCatalogueSkuDataMutation } = catalogueApi

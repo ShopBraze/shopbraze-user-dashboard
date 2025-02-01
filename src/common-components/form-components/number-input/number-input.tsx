@@ -1,5 +1,5 @@
 import { Control, Controller, RegisterOptions } from "react-hook-form";
-import { Input, InputNumber, InputPicker } from "rsuite";
+import { InputNumber } from "rsuite";
 
 type Rules = RegisterOptions;
 
@@ -39,7 +39,8 @@ const NumberInput = ({ control, name, label, containerClasName, inputClassName, 
               id={field.name}
               value={field.value}
               onChange={(value) => {
-                field.onChange(value)
+                const numValue = value ? Number(value) : 0;
+                field.onChange(numValue)
                 if (onChange) onChange()
               }}
               placeholder={placeholder}
