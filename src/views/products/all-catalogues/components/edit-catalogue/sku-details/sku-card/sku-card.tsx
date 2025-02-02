@@ -69,6 +69,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
               { label: "S", value: "S" },
               { label: "L", value: "L" },
               { label: "M", value: "M" },
+              { label: "XL", value: "XL" }
             ]}
             placeholder="Choose one..."
             containerClasName="space-y-1"
@@ -106,6 +107,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
               trigger([
                 `catalogue_data.customer_skus.${index}.mrp`,
                 `catalogue_data.customer_skus.${index}.selling_price`,
+                `catalogue_data.customer_skus.${index}.cost_price`
               ]);
             }}
           />
@@ -119,6 +121,22 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             min={0}
             max={1000001}
             defaultValue={0}
+            rules={{
+              validate: {
+                lessThanSellingPrice: (value) => {
+                  const sellingPrice = watch(
+                    `catalogue_data.customer_skus.${index}.selling_price`
+                  );
+                  return Number(value) < Number(sellingPrice) || 'Cost price cannot be greater than Selling Price!';
+                },
+              },
+            }}
+            onChange={() => {
+              trigger([
+                `catalogue_data.customer_skus.${index}.cost_price`,
+                `catalogue_data.customer_skus.${index}.selling_price`,
+              ]);
+            }}
           />
 
           <TextInput

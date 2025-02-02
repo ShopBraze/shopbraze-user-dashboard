@@ -4,8 +4,11 @@ const endpoints = {
   // Catalogue
   catalogues: "catalogues",
 
-  //Collections
-  collections: "collections"
+  // Collections
+  collections: "collections",
+
+  // Bulk-Upload
+  bulk_upload_catalogues: "bulk-upload/catalogues"
 
 }
 
