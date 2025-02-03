@@ -60,8 +60,8 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
             name="catalogue_data.size_type"
             label={<p className="text-sm font-medium">Size Type (Size/Variant) <span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             options={[
-              { label: "Size", value: "size" },
-              { label: "Variant", value: "variant" },
+              { label: "Size", value: "Size" },
+              { label: "Variant", value: "Variant" },
             ]}
             placeholder="Choose one..."
             containerClasName="space-y-1"
@@ -77,8 +77,8 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
             name="catalogue_data.pickup_point"
             label={<p className="text-sm font-medium">Pickup Point <span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             options={[
-              { label: "FatehPur, Uttar Pradesh", value: "18181" },
-              { label: "Patna , Bihar", value: "82114" },
+              { label: "FatehPur, Uttar Pradesh", value: "1" },
+              { label: "Patna , Bihar", value: "2" },
             ]}
             placeholder="Choose one..."
             containerClasName="space-y-1"
