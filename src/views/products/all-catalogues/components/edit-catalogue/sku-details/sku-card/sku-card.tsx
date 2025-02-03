@@ -69,7 +69,8 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
               { label: "S", value: "S" },
               { label: "L", value: "L" },
               { label: "M", value: "M" },
-              { label: "XL", value: "XL" }
+              { label: "XL", value: "XL" },
+              { label: "XXL", value: "XXL" }
             ]}
             placeholder="Choose one..."
             containerClasName="space-y-1"

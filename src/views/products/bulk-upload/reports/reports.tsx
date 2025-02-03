@@ -12,7 +12,7 @@ const Reports = (props: Props) => {
   console.log(reports, "reports")
   return (
     <Table
-      height={400}
+      autoHeight
       data={reports}
       rowHeight={120}
       headerHeight={80}
