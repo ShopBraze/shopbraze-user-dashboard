@@ -67,6 +67,7 @@ const useCreateCatalogue = (props: Props) => {
     `catalogue_data.customer_skus.${index}.height`,
     `catalogue_data.customer_skus.${index}.selling_price`,
     `catalogue_data.customer_skus.${index}.mrp`,
+    `catalogue_data.customer_skus.${index}.cost_price`,
     `catalogue_data.customer_skus.${index}.quantity`,
     `catalogue_data.customer_skus.${index}.weight`,
     `catalogue_data.customer_skus.${index}.volume`,

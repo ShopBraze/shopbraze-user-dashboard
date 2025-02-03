@@ -30,6 +30,21 @@
   box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.25);
 }
 
+/* .rs-uploader,
+.rs-uploader-picture {
+  height: 100% !important;
+  width: 100% !important;
+}
+.rs-uploader-trigger,
+.rs-uploader-trigger-customize {
+  height: 100% !important;
+  width: 100% !important;
+}
+.rs-uploader-trigger-btn {
+  height: 100% !important;
+  width: 100% !important;
+} */
+
 /* For single Selcet List */
 
 .rs-picker-list-item:hover {
@@ -57,4 +72,9 @@
 .rs-picker-toggle-value {
   color: rgb(70, 68, 68) !important;
   font-weight: 600 !important;
+}
+
+/* For Radio Input */
+.rs-radio-label {
+  font-weight: 500 !important;
 }

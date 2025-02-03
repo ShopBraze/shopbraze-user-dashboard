@@ -83,6 +83,7 @@ const useEditCatalogue = ({ editStep, catalogueData, handleClose }: UseEditCatal
     `catalogue_data.customer_skus.${index}.breadth`,
     `catalogue_data.customer_skus.${index}.height`,
     `catalogue_data.customer_skus.${index}.selling_price`,
+    `catalogue_data.customer_skus.${index}.cost_price`,
     `catalogue_data.customer_skus.${index}.mrp`,
     `catalogue_data.customer_skus.${index}.quantity`,
     `catalogue_data.customer_skus.${index}.weight`,
