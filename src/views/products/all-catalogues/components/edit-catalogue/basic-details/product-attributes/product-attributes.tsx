@@ -49,8 +49,8 @@ const ProductAttributes = ({ control, setValue, watch }: ProductAttributesProps)
                     name={`catalogue_data.product_attributes.${index}.key`}
                     label={<p className="text-sm font-medium">Product Attribute</p>}
                     options={[
-                      { label: "Product Type", value: "ProductType" },
-                      { label: "Standard Size", value: "BryStandard Size" },
+                      { label: "Product Type", value: "Product Type" },
+                      { label: "Standard Size", value: "Standard Size" },
                       { label: "Warranty Duration", value: "Warranty Duration" },
                     ]}
                     placeholder="Choose one..."

@@ -9,6 +9,7 @@ export const bulkUploadApi = baseApi.injectEndpoints({
         url: endpoints.bulk_upload_catalogues,
         body: body,
       }),
+      invalidatesTags: ['catalogues', 'reports']
     })
   })
 })
