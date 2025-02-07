@@ -11,29 +11,33 @@ import CatalogueLoader from './catalogue-loader/catalogue-loader'
 import EditCatalogue from './components/edit-catalogue/edit-catalogue'
 import SkuInventory from './components/sku-inventory/sku-inventory'
 import DeleteCatalogue from './components/delete-catalogue/delete-catalogue'
+import ChevronRightIcon from "assets/icons/chevron-right.svg"
+import ChevronLeftIcon from "assets/icons/chevron-left.svg"
+import ReactPaginate from 'react-paginate'
+import useAllCatalogues from './use-all-catalogues'
 
 
 type Props = {}
 
 const AllCatalogues = (props: Props) => {
-  const { data: cataloguesData, isLoading } = useGetAllCataloguesQuery()
-
+  const { isFetching, cataloguesData, handlePageClick, pageCount } = useAllCatalogues()
   const { Column, HeaderCell, Cell } = Table;
+
   return (
     <>
       {
-        isLoading ?
+        isFetching ?
           <CatalogueLoader />
           :
           (<div className='p-4 bg-[#fff] rounded-md'>
             <Table
               autoHeight
               data={cataloguesData}
-              rowHeight={180}
+              rowHeight={200}
               headerHeight={60}
             >
-              <Column resizable fixed flexGrow={0.45}>
-                <HeaderCell className='text-base font-semibold text-gray-600'>Catalogues <span className="font-bold">{cataloguesData?.length}</span></HeaderCell>
+              <Column resizable width={560} verticalAlign='center'>
+                <HeaderCell className='text-base font-semibold text-gray-600'>Catalogues <span className="font-bold pl-1.5"> {cataloguesData?.length}</span></HeaderCell>
                 <Cell height={180} className='py-1 px-2'>
                   {
                     (data: Catalogue) => (
@@ -48,7 +52,7 @@ const AllCatalogues = (props: Props) => {
                               <Image src={LinkIcon} alt="link.svg" className='h-3.5 w-3.5' />
                               <p className="text-navy-blue-800 text-sm font-semibold">Link</p>
                             </div>
-                            <p className="text-sm font-bold">{data?.title}</p>
+                            <p className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis max-w-[60%]">{data?.title}</p>
                           </div>
                           <div className="flex gap-4">
                             <p className="text-sm text-gray-700 font-medium">Color: <span className=" text-[#000]">{data?.color || "NA"}</span></p>
@@ -69,14 +73,14 @@ const AllCatalogues = (props: Props) => {
                 </Cell>
               </Column>
 
-              <Column flexGrow={0.35}>
+              <Column width={480} verticalAlign='center'>
                 <HeaderCell className='text-base font-semibold text-gray-600'>SKU Inventory</HeaderCell>
                 <Cell height={180} className='py-5 px-2'>
                   {(data: Catalogue) => <SkuInventory catalogueData={data} />}
                 </Cell>
               </Column>
 
-              <Column resizable flexGrow={0.20}>
+              <Column resizable width={360} verticalAlign='center' align='center'>
                 <HeaderCell className='text-base font-semibold text-gray-600'>Actions</HeaderCell>
                 <Cell height={180} className='py-5 px-2'>
                   {(data: Catalogue) => (
@@ -110,6 +114,30 @@ const AllCatalogues = (props: Props) => {
           </div>
           )
       }
+
+      <div className="mt-8 flex justify-end">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel={
+            <div className="border border-[#E1E4EA] p-[7.5px]">
+              <Image src={ChevronRightIcon} alt="Next.svg" />
+            </div>
+          }
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel={
+            <div className="border border-[#E1E4EA] p-[7.5px]">
+              <Image src={ChevronLeftIcon} alt="Left.svg" />
+            </div>
+          }
+          renderOnZeroPageCount={null}
+          containerClassName="flex"
+          pageClassName="border border-[#E1E4EA] p-[7.5px] px-[17.5px] flex justify-center items-center"
+          activeClassName="bg-primary-300 text-[#fff]"
+        />
+      </div>
+
     </>
   )
 }

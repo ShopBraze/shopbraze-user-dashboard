@@ -4,9 +4,9 @@ import { CatalogueTransformer } from "./transformers/index.transformer";
 
 export const catalogueApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllCatalogues: builder.query<Catalogue[], void>({
-      query: () => ({
-        url: endpoints.catalogues
+    getAllCatalogues: builder.query<{ currentPage: number, totalPages: number, cataloguesData: Catalogue[] }, { page: number, limit: number }>({
+      query: ({ page = 1, limit = 10 }) => ({
+        url: `${endpoints.catalogues}?page=${page}&limit=${limit}`
       }),
       transformResponse: (response) => CatalogueTransformer(response),
       providesTags: ['catalogues']

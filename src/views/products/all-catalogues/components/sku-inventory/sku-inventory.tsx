@@ -10,7 +10,7 @@ const SkuInventory = ({ catalogueData }: SkuInventoryProps) => {
   const { watch, control, handleUpdateSkuData, showUpdateButton, isUpdatingSkuData } = useSkuInventory({ catalogueData })
   return (
     <div className="space-y-2">
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         {
           watch('sku_data')?.map((item, index) => {
             return (
@@ -21,7 +21,7 @@ const SkuInventory = ({ catalogueData }: SkuInventoryProps) => {
                 scrollable={false}
                 placeholder="0"
                 containerClasName="flex flex-col gap-y-1 items-center"
-                inputClassName="max-w-[72px]"
+                inputClassName="max-w-[76px]"
                 min={0}
                 max={1000001}
                 defaultValue={0}

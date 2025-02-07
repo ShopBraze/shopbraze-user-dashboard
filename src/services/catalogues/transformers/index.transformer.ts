@@ -1,8 +1,8 @@
 export const CatalogueTransformer = (response: any) => {
   const cataloguesData = [] as Catalogue[]
-  if (response && response?.data?.length > 0) {
-    for (let i = 0; i < response?.data?.length; i++) {
-      const item = response?.data?.[i];
+  if (response && response?.data?.catalogues?.length > 0) {
+    for (let i = 0; i < response?.data?.catalogues?.length; i++) {
+      const item = response?.data?.catalogues?.[i];
       const catalogue = {} as Catalogue
 
       catalogue.id = item?._id,
@@ -23,7 +23,12 @@ export const CatalogueTransformer = (response: any) => {
       catalogue.return_condition = item?.return_condition
 
       cataloguesData.push(catalogue)
+
     }
   }
-  return cataloguesData
+  return {
+    cataloguesData,
+    currentPage: Number(response?.data?.currentPage) || 0,
+    totalPages: Number(response?.data?.totalPages) || 0
+  }
 }
