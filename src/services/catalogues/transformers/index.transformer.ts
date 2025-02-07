@@ -29,6 +29,7 @@ export const CatalogueTransformer = (response: any) => {
   return {
     cataloguesData,
     currentPage: Number(response?.data?.currentPage) || 0,
-    totalPages: Number(response?.data?.totalPages) || 0
+    totalPages: Number(response?.data?.totalPages) || 0,
+    totalItems: Number(response?.data?.totalItems) || 0
   }
 }

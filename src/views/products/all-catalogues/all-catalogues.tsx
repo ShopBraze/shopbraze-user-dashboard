@@ -20,7 +20,7 @@ import useAllCatalogues from './use-all-catalogues'
 type Props = {}
 
 const AllCatalogues = (props: Props) => {
-  const { isFetching, cataloguesData, handlePageClick, pageCount } = useAllCatalogues()
+  const { isFetching, cataloguesData, totalItems, handlePageClick, pageCount } = useAllCatalogues()
   const { Column, HeaderCell, Cell } = Table;
 
   return (
@@ -37,7 +37,7 @@ const AllCatalogues = (props: Props) => {
               headerHeight={60}
             >
               <Column resizable width={560} verticalAlign='center'>
-                <HeaderCell className='text-base font-semibold text-gray-600'>Catalogues <span className="font-bold pl-1.5"> {cataloguesData?.length}</span></HeaderCell>
+                <HeaderCell className='text-base font-semibold text-gray-600'>Catalogues <span className="font-bold pl-1.5"> {totalItems}</span></HeaderCell>
                 <Cell height={180} className='py-1 px-2'>
                   {
                     (data: Catalogue) => (

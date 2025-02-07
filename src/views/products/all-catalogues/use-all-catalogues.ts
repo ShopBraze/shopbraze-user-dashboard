@@ -7,7 +7,7 @@ import { useGetAllCataloguesQuery } from "services/catalogues/index.query";
 const useAllCatalogues = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, isFetching } = useGetAllCataloguesQuery({ page: currentPage, limit: 10 })
-  const { cataloguesData, totalPages } = data || {}
+  const { cataloguesData, totalPages, totalItems } = data || {}
 
   const pageCount = totalPages || 0
 
@@ -17,6 +17,7 @@ const useAllCatalogues = () => {
   return {
     isFetching,
     cataloguesData,
+    totalItems,
     handlePageClick,
     pageCount,
   }
