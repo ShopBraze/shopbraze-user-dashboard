@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { FileType } from 'rsuite/esm/Uploader';
 import { useGetAllCollectionsQuery } from 'services/collections/index.query'
@@ -16,13 +16,15 @@ type UseAddCollectionProps = {
 }
 
 const useAddCollection = ({ setValue, watch }: UseAddCollectionProps) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data } = useGetAllCollectionsQuery({ page: currentPage, limit: 10 })
 
-  const { data: collectionsData } = useGetAllCollectionsQuery()
+  const { collectionsData, totalPages, totalItems } = data || {}
 
-  const transformedCollectionsData = (collectionsData?.data || [])?.map((item: any) => ({
-    collection_short_id: item.short_id,
-    collection_type: item.type,
-    collection_name: item.name.toUpperCase(),
+  const transformedCollectionsData = (collectionsData || [])?.map((item: Collection) => ({
+    collection_short_id: item?.short_id,
+    collection_type: item?.type,
+    collection_name: item?.name?.toUpperCase(),
     is_visible: item.is_visible ? 'True' : 'False',
     is_active: item.is_active ? 'True' : 'False',
     url: `${item.name.toLowerCase()}.com`,
