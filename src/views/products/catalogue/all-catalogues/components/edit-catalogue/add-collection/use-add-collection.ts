@@ -7,17 +7,11 @@ import { CatalogueFormDataType } from '../types/index.type';
 type UseAddCollectionProps = {
   setValue: UseFormSetValue<{
     catalogue_data: CatalogueFormDataType;
-    files: {
-      images: FileType[],
-      videos: FileType[]
-    };
+    files: any
   }>
   watch: UseFormWatch<{
     catalogue_data: CatalogueFormDataType;
-    files: {
-      images: FileType[],
-      videos: FileType[]
-    };
+    files: any
   }>
 }
 
@@ -27,10 +21,10 @@ const useAddCollection = ({ setValue, watch }: UseAddCollectionProps) => {
 
   const transformedCollectionsData = (collectionsData?.data || [])?.map((item: any) => ({
     collection_short_id: item.short_id,
-    collection_type: item.type === 'Bulk_Upload' ? 'catalogues_selection' : 'other_type',
+    collection_type: item.type,
     collection_name: item.name.toUpperCase(),
-    is_visible: item.visible ? 'True' : 'False',
-    is_active: item.active ? 'True' : 'False',
+    is_visible: item.is_visible ? 'True' : 'False',
+    is_active: item.is_active ? 'True' : 'False',
     url: `${item.name.toLowerCase()}.com`,
   }));
 

@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import AllCatalogues from "./all-catalogues/all-catalogues";
-import GroupCatalogue from "./group-catalogue/group-catalogue";
-import CreateCatalogue from "./create-catalogue/create-catalogue";
-import BulkUpload from "./bulk-upload/bulk-upload";
-import GenerateImageVideoLink from "./generate-image-video-link/generate-image-video-link";
+import AllCatalogues from "./catalogue/all-catalogues/all-catalogues";
+import GroupCatalogue from "./catalogue/group-catalogue/group-catalogue";
+import CreateCatalogue from "./catalogue/create-catalogue/create-catalogue";
+import BulkUpload from "./catalogue/bulk-upload/bulk-upload";
+import GenerateImageVideoLink from "./catalogue/generate-image-video-link/generate-image-video-link";
 
 type Props = {}
 
