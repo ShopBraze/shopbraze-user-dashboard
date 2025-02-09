@@ -9,6 +9,7 @@ export const collectionApi = baseApi.injectEndpoints({
         url: `${endpoints.collections}?page=${page}&limit=${limit}`
       }),
       transformResponse: (response) => CollectionsTransformer(response),
+      providesTags: ['collections']
     }),
     postCollection: builder.mutation<any, any>({
       query: (body) => ({
@@ -16,6 +17,7 @@ export const collectionApi = baseApi.injectEndpoints({
         url: endpoints.collections,
         body: body,
       }),
+      invalidatesTags: ['collections', 'catalogues']
     })
   })
 })
