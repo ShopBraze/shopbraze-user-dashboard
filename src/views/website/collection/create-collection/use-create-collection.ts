@@ -1,7 +1,8 @@
 
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { FileType } from "rsuite/esm/Uploader"
 import toast from 'react-hot-toast'
 import { usePostCollectionMutation } from 'services/collections/index.query'
 
@@ -13,32 +14,39 @@ const useCreateCollection = () => {
 
   const [activeSubTab, setActiveSubTab] = useState("Bulk Upload")
 
-  const { control, watch, handleSubmit } = useForm({
+  const { control, watch, handleSubmit, setValue } = useForm({
     defaultValues: {
-      collection_title: ""
+      collection_title: "",
+      selectedProducts: [] as Catalogue[],
+      selectedProductsShortIds: [] as string[],
+      collection_csv_file: [] as FileType[]
     }
   })
 
-  const [selectedProducts, setSelectedProducts] = useState<Catalogue[]>([])
-  const [selectedProductsShortIds, setSelectedProductShortIds] = useState<string[]>([])
+  // For Bulk Upload Collections
+  const handleFileUpload = (fileList: FileType[]) => {
+    console.log(fileList)
+  };
+
+  // For Select Products Collections
 
   const handleSelectedProducts = (product: Catalogue, action: "Add" | "Remove") => {
     if (action === "Add") {
-      setSelectedProducts((prev) => ([...prev, product]))
-      setSelectedProductShortIds((prev) => ([...prev, product?.product_short_id]))
+      setValue('selectedProducts', [...watch('selectedProducts'), product])
+      setValue('selectedProductsShortIds', [...watch('selectedProductsShortIds'), product?.product_short_id])
     }
     else if (action === "Remove") {
-      setSelectedProducts((prev) => (prev?.filter((item) => item?.id !== product?.id)))
-      setSelectedProductShortIds((prev) => (prev?.filter((shortId) => shortId !== product?.product_short_id)))
+      setValue('selectedProducts', watch('selectedProducts').filter((item) => item?.id !== product?.id))
+      setValue('selectedProductsShortIds', watch('selectedProductsShortIds').filter((shortId) => shortId !== product?.product_short_id))
     }
   }
 
   const handleCreateCollection = handleSubmit((data: any) => {
     if (!watch('collection_title')) return toast.error("Collection Title is required")
-    if (selectedProducts?.length > 0 && activeSubTab === "Select Products") {
+    if (data?.selectedProducts?.length > 0 && activeSubTab === "Select Products") {
       const payload = {
         name: data?.collection_title,
-        product_short_ids: selectedProductsShortIds,
+        product_short_ids: data?.selectedProductsShortIds,
         type: "catalogues_selection"
       }
       postCollection(payload).unwrap()
@@ -58,10 +66,9 @@ const useCreateCollection = () => {
     watch,
     activeSubTab,
     setActiveSubTab,
-    selectedProducts,
     handleSelectedProducts,
-    selectedProductsShortIds,
     handleCreateCollection,
+    handleFileUpload,
     isCreating
   }
 }

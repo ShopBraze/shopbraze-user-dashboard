@@ -8,7 +8,7 @@ import Button from 'common-components/button/button'
 type Props = {}
 
 const CreateCollection = (props: Props) => {
-  const { watch, control, activeSubTab, setActiveSubTab, selectedProducts, handleSelectedProducts, selectedProductsShortIds, handleCreateCollection, isCreating } = useCreateCollection()
+  const { control, activeSubTab, setActiveSubTab, handleSelectedProducts, handleCreateCollection, isCreating, watch, handleFileUpload } = useCreateCollection()
   return (
     <div className='p-4 bg-[#fff] rounded-md'>
 
@@ -33,16 +33,15 @@ const CreateCollection = (props: Props) => {
           <h3 className=' whitespace-nowrap text-lg font-bold'>{activeSubTab === "Bulk Upload" ? "Bulk CSV Upload" : "Select Products"}</h3>
           <div className='w-full bg-gray-200 h-[1px]' />
         </div>
-        {activeSubTab === "Bulk Upload" && <BulkUploadCollections />}
+
+        {activeSubTab === "Bulk Upload" &&
+          <BulkUploadCollections handleFileUpload={handleFileUpload} watch={watch} />}
+
         {activeSubTab === "Select Products" &&
-          <SelectProducts
-            selectedProducts={selectedProducts}
-            handleSelectedProducts={handleSelectedProducts}
-            selectedProductsShortIds={selectedProductsShortIds}
-          />}
+          <SelectProducts handleSelectedProducts={handleSelectedProducts} watch={watch} />}
 
         <div className="pt-6 flex justify-end">
-          <Button variant="primary" isLoading={isCreating} disabled={selectedProducts?.length === 0} onClick={handleCreateCollection}>
+          <Button variant="primary" isLoading={isCreating} disabled={watch('selectedProducts')?.length === 0} onClick={handleCreateCollection}>
             Create
           </Button>
         </div>

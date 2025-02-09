@@ -7,22 +7,27 @@ import PlusIcon from "assets/icons/action-icons/plus-white.svg"
 import TickIcon from "assets/icons/action-icons/tick-gray.svg"
 import Button from "common-components/button/button"
 import { Loader } from "rsuite"
+import { UseFormWatch } from "react-hook-form"
+import { FileType } from "rsuite/esm/Uploader"
 
 
 type SelectProductsProps = {
-  selectedProducts: Catalogue[]
   handleSelectedProducts: (product: Catalogue, action: "Add" | "Remove") => void
-  selectedProductsShortIds: string[]
+  watch: UseFormWatch<{
+    collection_title: string;
+    selectedProducts: Catalogue[];
+    selectedProductsShortIds: string[];
+    collection_csv_file: FileType[];
+  }>
 }
 
-const SelectProducts = ({ selectedProducts, handleSelectedProducts, selectedProductsShortIds }: SelectProductsProps) => {
+const SelectProducts = ({ handleSelectedProducts, watch }: SelectProductsProps) => {
   const { cataloguesData, isFetchingCatalogues, totalPages, totalItems, handlePageClick } = useSelectProducts({})
 
   return (
     <div className="space-y-10">
 
       {/* Select Products */}
-
       {
         isFetchingCatalogues ? <div className='h-[60vh] flex justify-center items-center'>
           <Loader size="md" />
@@ -38,7 +43,7 @@ const SelectProducts = ({ selectedProducts, handleSelectedProducts, selectedProd
                       <Image src={item?.media?.images?.[0]?.url ?? ''} alt={`${item?.title}.png`} height={116} width={116} className="h-[116px] w-[116px] rounded-md" />
                       <p className="text-gray-600 text-[13px] font-medium max-w-[116px] overflow-hidden whitespace-nowrap text-ellipsis">{item?.title}</p>
                       {
-                        selectedProductsShortIds?.includes(item?.product_short_id) ?
+                        watch('selectedProductsShortIds')?.includes(item?.product_short_id) ?
                           <Button variant="secondary" disabled className="!py-1 !px-2 gap-1 text-gray-500 items-center text-[13px] !rounded" >
                             <Image src={TickIcon} alt="plus.svg" className="h-3 w-3" />
                             Added
@@ -83,12 +88,12 @@ const SelectProducts = ({ selectedProducts, handleSelectedProducts, selectedProd
       {/* Selected Products */}
 
       {
-        selectedProducts?.length > 0 ?
+        watch('selectedProducts')?.length > 0 ?
           <div className="space-y-6">
-            <p className="text-gray-800 text-sm">Selected <span className="font-bold">({selectedProducts?.length})</span></p>
+            <p className="text-gray-800 text-sm">Selected <span className="font-bold">({watch('selectedProducts')?.length})</span></p>
             <div className="flex gap-x-3 gap-y-8 flex-wrap">
               {
-                selectedProducts?.map((item: Catalogue) => {
+                watch('selectedProducts')?.map((item: Catalogue) => {
                   return (
                     <div className="flex flex-col gap-y-1.5 items-center">
                       <Image src={item?.media?.images?.[0]?.url ?? ''} alt={`${item?.title}.png`} height={116} width={116} className="h-[116px] w-[116px] rounded-md" />

@@ -3,7 +3,12 @@
 .rs-uploader-trigger-btn {
   height: 100px !important;
   width: 100px !important;
-  border-color: #008060 !important;
+  border: 1px dashed #008060 !important;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .rs-uploader-file-item-icon-loading,
@@ -13,7 +18,27 @@
   height: 100px !important;
   width: 100px !important;
 }
+.rs-uploader-trigger-customize {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.rs-uploader-file-items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
+.rs-uploader-file-item-content > video {
+  height: 100px !important;
+  width: 100px !important;
+}
+.rs-uploader-file-item-text {
+  padding: 1px;
+  border: 1px solid rgb(213, 210, 210);
+  border-radius: 4px;
+  font-size: 13px;
+}
 .rs-uploader-file-item-icon-loading {
   display: flex !important;
   justify-content: center;
@@ -29,21 +54,6 @@
   border-color: #008060 !important;
   box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.25);
 }
-
-/* .rs-uploader,
-.rs-uploader-picture {
-  height: 100% !important;
-  width: 100% !important;
-}
-.rs-uploader-trigger,
-.rs-uploader-trigger-customize {
-  height: 100% !important;
-  width: 100% !important;
-}
-.rs-uploader-trigger-btn {
-  height: 100% !important;
-  width: 100% !important;
-} */
 
 /* For single Selcet List */
 
