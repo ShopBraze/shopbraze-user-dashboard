@@ -1,4 +1,5 @@
 type Collection = {
+  id: string
   createdAt: string
   is_active: boolean
   is_visible: boolean

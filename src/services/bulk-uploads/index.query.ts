@@ -10,10 +10,18 @@ export const bulkUploadApi = baseApi.injectEndpoints({
         body: body,
       }),
       invalidatesTags: ['catalogues', 'reports']
+    }),
+    postBulkUploadCollections: builder.mutation<any, any>({
+      query: (body) => ({
+        method: "POST",
+        url: endpoints.bulk_upload_collections,
+        body: body,
+      }),
+      invalidatesTags: ['collections', 'catalogues']
     })
   })
 })
 
 
 
-export const { usePostBulkUploadCataloguesMutation } = bulkUploadApi
+export const { usePostBulkUploadCataloguesMutation, usePostBulkUploadCollectionsMutation } = bulkUploadApi

@@ -66,6 +66,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             label={<p className="text-sm font-medium">Size <span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             options={[
               { label: "Free Size", value: "Free Size" },
+              { label: "XS", value: "XS" },
               { label: "S", value: "S" },
               { label: "L", value: "L" },
               { label: "M", value: "M" },
