@@ -28,7 +28,7 @@ const ManageCollection = ({ actionType, collectionData }: ManageCollectionProps)
 
       <SubTabNavigation
         tabs={actionType === "Create" ? ["Bulk Upload", "Select Products"] : ["Select Products"]}
-        // defaultTab=""
+        defaultTab="Select Products"
         onTabChange={(tab) => setActiveSubTab(tab)}
       />
       <div className="mt-4">
