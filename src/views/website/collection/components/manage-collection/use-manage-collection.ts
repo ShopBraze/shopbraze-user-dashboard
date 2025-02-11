@@ -40,7 +40,6 @@ const useManageCollection = ({ collectionData }: Props) => {
 
   // For Bulk Upload Collections
   const handleFileUpload = (fileList: FileType[]) => {
-    console.log(fileList)
     setValue('collection_csv_file', fileList)
   };
 
@@ -104,7 +103,7 @@ const useManageCollection = ({ collectionData }: Props) => {
     updateCollectionDetails(payload).unwrap()
       .then((data) => {
         toast.success("Details Updated successfully")
-        // router.push('/website/collection/collection-list')
+        router.push('/website/collection/collection-list')
       })
       .catch((error) => {
         toast.error("Something went wrong")
