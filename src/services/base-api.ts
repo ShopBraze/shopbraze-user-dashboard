@@ -9,7 +9,7 @@ const baseApi = createApi({
     // }
   }),
   endpoints: () => ({}),
-  tagTypes: ['catalogues', 'reports']
+  tagTypes: ['catalogues', 'collections', 'reports']
 })
 
 export default baseApi

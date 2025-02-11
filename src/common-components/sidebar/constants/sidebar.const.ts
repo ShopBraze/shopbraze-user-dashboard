@@ -184,7 +184,7 @@ export const SidebarNavigationConstants = [
       {
         id: 706,
         name: "Collection",
-        path: "/website/collection"
+        path: "/website/collection/collection-list"
       },
       {
         id: 707,
