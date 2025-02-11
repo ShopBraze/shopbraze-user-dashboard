@@ -47,7 +47,7 @@ export const collectionApi = baseApi.injectEndpoints({
         url: `${endpoints.collections}/${collection_id}`,
         body: body,
       }),
-      invalidatesTags: ['collections', 'catalogues']
+      invalidatesTags: ['collections', 'catalogues', 'collection_by_id']
     }),
   })
 })
