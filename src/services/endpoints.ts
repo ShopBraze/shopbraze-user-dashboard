@@ -6,6 +6,7 @@ const endpoints = {
 
   // Collections
   collections: "collections",
+  collection_toggle_visibility: "collections/toggle-visibility",
 
   // Bulk-Upload
   bulk_upload_catalogues: "bulk-upload/catalogues",

@@ -1,27 +1,27 @@
 import React, { useState } from 'react'
 import { Loader, Table } from 'rsuite';
 import { useGetAllCollectionsQuery } from 'services/collections/index.query';
-import EditPencilIcon from "assets/icons/action-icons/edit-pencil-primary.svg"
 import LinkIcon from "assets/icons/action-icons/link-primary.svg"
 import CopyIcon from "assets/icons/action-icons/copy-icon-primary.svg"
-import LiveEyeIcon from "assets/icons/action-icons/visible-eye.svg"
 import Button from 'common-components/button/button';
 import Image from 'next/image';
 import DeleteCollection from './delete-collection/delete-collection';
+import ToggleCollectionVisibility from './toggle-visibility/toggle-visibility';
+import EditCollection from './edit-collection/edit-collection';
 
 type Props = {}
 
 const CollectionList = (props: Props) => {
   const { Column, HeaderCell, Cell } = Table;
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isFetching } = useGetAllCollectionsQuery({ page: currentPage, limit: 10 })
+  const { data, isLoading } = useGetAllCollectionsQuery({ page: currentPage, limit: 10 })
 
   const { collectionsData, totalPages, totalItems } = data || {}
 
   return (
     <div>
       {
-        isFetching ?
+        isLoading ?
           <div className='h-[80vh] flex justify-center items-center'>
             <Loader size="md" />
           </div>
@@ -73,18 +73,14 @@ const CollectionList = (props: Props) => {
                 {(item: Collection) => {
                   return (
                     <div className="w-full flex items-center justify-around">
-                      <Button>
-                        <Image src={EditPencilIcon} alt="edit-pencil.svg" className='h-4 w-4' />
-                      </Button>
+                      <EditCollection collectionData={item} />
                       <Button>
                         <Image src={LinkIcon} alt="link-icon.svg" />
                       </Button>
                       <Button>
                         <Image src={CopyIcon} alt="copy-icon.svg" />
                       </Button>
-                      <Button>
-                        <Image src={LiveEyeIcon} alt="live-icon.svg" />
-                      </Button>
+                      <ToggleCollectionVisibility collectionData={item} />
                       <DeleteCollection collectionData={item} />
                     </div>
                   )

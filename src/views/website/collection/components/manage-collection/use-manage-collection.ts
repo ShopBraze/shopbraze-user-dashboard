@@ -1,29 +1,42 @@
 
 import { useRouter } from 'next/router'
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FileType } from "rsuite/esm/Uploader"
 import toast from 'react-hot-toast'
-import { usePostCollectionMutation } from 'services/collections/index.query'
+import { useGetCollectionDetailsByIdQuery, usePostCollectionMutation, useUpdateCollectionDetailsMutation } from 'services/collections/index.query'
 import { usePostBulkUploadCollectionsMutation } from 'services/bulk-uploads/index.query'
 
+type Props = {
+  collectionData?: Collection
+}
 
-const useCreateCollection = () => {
+const useManageCollection = ({ collectionData }: Props) => {
   const router = useRouter()
+
+  const { data: { products: collectionPoducts } = {} } = useGetCollectionDetailsByIdQuery(collectionData?.id, { skip: !collectionData?.id })
 
   const [postCollection, { isLoading: isCreating }] = usePostCollectionMutation()
   const [postBulkUploadCollections, { isLoading: isBulkCreating }] = usePostBulkUploadCollectionsMutation()
+  const [updateCollectionDetails, { isLoading: isUpdating }] = useUpdateCollectionDetailsMutation()
 
-  const [activeSubTab, setActiveSubTab] = useState("Bulk Upload")
+  const [activeSubTab, setActiveSubTab] = useState("Select Products")
 
   const { control, watch, handleSubmit, setValue } = useForm({
     defaultValues: {
-      collection_title: "",
+      collection_title: collectionData?.name ?? "",
       selectedProducts: [] as Catalogue[],
       selectedProductsShortIds: [] as string[],
       collection_csv_file: [] as FileType[]
     }
   })
+
+  useEffect(() => {
+    if (collectionData && collectionPoducts) {
+      setValue('selectedProducts', collectionPoducts)
+      setValue('selectedProductsShortIds', collectionPoducts?.map((item) => item?.product_short_id))
+    }
+  }, [collectionPoducts])
 
   // For Bulk Upload Collections
   const handleFileUpload = (fileList: FileType[]) => {
@@ -79,6 +92,26 @@ const useCreateCollection = () => {
     }
   })
 
+  const handleupdateCollection = handleSubmit((data: any) => {
+    const payload = {
+      body: {
+        name: data?.collection_title,
+        product_short_ids: data?.selectedProductsShortIds,
+        type: "catalogues_selection"
+      },
+      collection_id: collectionData?.id
+    }
+    updateCollectionDetails(payload).unwrap()
+      .then((data) => {
+        toast.success("Details Updated successfully")
+        // router.push('/website/collection/collection-list')
+      })
+      .catch((error) => {
+        toast.error("Something went wrong")
+        console.log(error)
+      })
+  })
+
   return {
     control,
     watch,
@@ -86,10 +119,12 @@ const useCreateCollection = () => {
     setActiveSubTab,
     handleSelectedProducts,
     handleCreateCollection,
+    handleupdateCollection,
     handleFileUpload,
     isCreating,
-    isBulkCreating
+    isBulkCreating,
+    isUpdating
   }
 }
 
-export default useCreateCollection
+export default useManageCollection
