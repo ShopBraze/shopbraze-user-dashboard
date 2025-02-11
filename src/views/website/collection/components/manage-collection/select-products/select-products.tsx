@@ -22,7 +22,7 @@ type SelectProductsProps = {
 }
 
 const SelectProducts = ({ handleSelectedProducts, watch }: SelectProductsProps) => {
-  const { cataloguesData, isFetchingCatalogues, totalPages, totalItems, handlePageClick } = useSelectProducts({})
+  const { cataloguesData, isFetchingCatalogues, totalPages, totalItems, handlePageClick, currentPage } = useSelectProducts({})
 
   return (
     <div className="space-y-10">
@@ -71,6 +71,7 @@ const SelectProducts = ({ handleSelectedProducts, watch }: SelectProductsProps) 
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={5}
                 pageCount={totalPages || 0}
+                forcePage={currentPage - 1}
                 previousLabel={
                   <div className="border border-[#E1E4EA] p-[4px]">
                     <Image src={ChevronLeftIcon} alt="Left.svg" />
