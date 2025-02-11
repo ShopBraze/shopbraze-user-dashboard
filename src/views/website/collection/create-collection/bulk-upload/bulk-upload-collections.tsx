@@ -17,10 +17,9 @@ type BulkUploadCollectionsProps = {
 }
 
 const BulkUploadCollections = ({ handleFileUpload, watch }: BulkUploadCollectionsProps) => {
-  console.log(watch('collection_csv_file'), "from bulk upload")
   return (
     <div className="pt-10">
-      <div className={`w-full flex justify-center ${watch('collection_csv_file')?.length > 0 ? "opactity-50" : ""}`}>
+      <div className={`w-full flex justify-center`}>
         <Uploader
           multiple={false}
           disabled={watch('collection_csv_file')?.length > 0 ? true : false}

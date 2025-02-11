@@ -18,10 +18,17 @@ export const collectionApi = baseApi.injectEndpoints({
         body: body,
       }),
       invalidatesTags: ['collections', 'catalogues']
-    })
+    }),
+    deleteCollection: builder.mutation<any, any>({
+      query: (collectionId) => ({
+        method: "DELETE",
+        url: `${endpoints.collections}/${collectionId}`,
+      }),
+      invalidatesTags: ['collections', 'catalogues']
+    }),
   })
 })
 
 
 
-export const { useGetAllCollectionsQuery, usePostCollectionMutation } = collectionApi
+export const { useGetAllCollectionsQuery, usePostCollectionMutation, useDeleteCollectionMutation } = collectionApi

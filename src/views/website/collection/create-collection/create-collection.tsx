@@ -8,7 +8,8 @@ import Button from 'common-components/button/button'
 type Props = {}
 
 const CreateCollection = (props: Props) => {
-  const { control, activeSubTab, setActiveSubTab, handleSelectedProducts, handleCreateCollection, isCreating, watch, handleFileUpload } = useCreateCollection()
+  const { control, activeSubTab, setActiveSubTab, handleSelectedProducts, handleCreateCollection, isCreating, isBulkCreating, watch, handleFileUpload } = useCreateCollection()
+
   return (
     <div className='p-4 bg-[#fff] rounded-md'>
 
@@ -41,7 +42,10 @@ const CreateCollection = (props: Props) => {
           <SelectProducts handleSelectedProducts={handleSelectedProducts} watch={watch} />}
 
         <div className="pt-6 flex justify-end">
-          <Button variant="primary" isLoading={isCreating} disabled={watch('selectedProducts')?.length === 0} onClick={handleCreateCollection}>
+          <Button variant="primary"
+            isLoading={isCreating || isBulkCreating}
+            disabled={activeSubTab === "Select Products" ? (watch('selectedProducts')?.length === 0 ? true : false) : watch('collection_csv_file')?.length > 0 ? false : true}
+            onClick={handleCreateCollection}>
             Create
           </Button>
         </div>

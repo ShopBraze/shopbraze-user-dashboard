@@ -11,6 +11,11 @@
   align-items: center;
 }
 
+.rs-uploader-trigger-disabled > .rs-uploader-trigger-btn {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .rs-uploader-file-item-icon-loading,
 .rs-uploader-file-item-status,
 .rs-uploader-file-item-picture,

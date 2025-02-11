@@ -5,12 +5,14 @@ import { useForm } from 'react-hook-form'
 import { FileType } from "rsuite/esm/Uploader"
 import toast from 'react-hot-toast'
 import { usePostCollectionMutation } from 'services/collections/index.query'
+import { usePostBulkUploadCollectionsMutation } from 'services/bulk-uploads/index.query'
 
 
 const useCreateCollection = () => {
   const router = useRouter()
 
   const [postCollection, { isLoading: isCreating }] = usePostCollectionMutation()
+  const [postBulkUploadCollections, { isLoading: isBulkCreating }] = usePostBulkUploadCollectionsMutation()
 
   const [activeSubTab, setActiveSubTab] = useState("Bulk Upload")
 
@@ -26,6 +28,7 @@ const useCreateCollection = () => {
   // For Bulk Upload Collections
   const handleFileUpload = (fileList: FileType[]) => {
     console.log(fileList)
+    setValue('collection_csv_file', fileList)
   };
 
   // For Select Products Collections
@@ -59,6 +62,21 @@ const useCreateCollection = () => {
           console.log(error)
         })
     }
+
+    else if (activeSubTab === "Bulk Upload" && watch('collection_csv_file')?.length > 0) {
+      const payload = new FormData()
+      payload.append('file', watch('collection_csv_file')?.[0]?.blobFile!)
+      payload.append('name', watch('collection_title'))
+      postBulkUploadCollections(payload).unwrap()
+        .then((data) => {
+          toast.success("Collection created successfully")
+          router.push('/website/collection/collection-list')
+        })
+        .catch((error) => {
+          toast.error("Something went wrong")
+          console.log(error)
+        })
+    }
   })
 
   return {
@@ -69,7 +87,8 @@ const useCreateCollection = () => {
     handleSelectedProducts,
     handleCreateCollection,
     handleFileUpload,
-    isCreating
+    isCreating,
+    isBulkCreating
   }
 }
 

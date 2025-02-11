@@ -5,7 +5,8 @@ export const CollectionsTransformer = (response: any) => {
       const item = response?.data?.collections?.[i];
       const collection = {} as Collection
 
-      collection.createdAt = item?.createdAt,
+      collection.id = item?._id,
+        collection.createdAt = item?.createdAt,
         collection.is_active = item?.is_active,
         collection.is_visible = item?.is_visible,
         collection.name = item?.name,
