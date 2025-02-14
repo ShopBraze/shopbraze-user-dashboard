@@ -22,10 +22,19 @@ export const websiteConfigApi = baseApi.injectEndpoints({
         url: `${endpoints.website_preset}`
       }),
       transformResponse: (response) => WebsitePresetTransformer(response),
+      providesTags: ['website_presets']
+    }),
+    updateWebsitePresets: builder.mutation<any, any>({
+      query: (body) => ({
+        method: "PUT",
+        url: `${endpoints.website_preset}`,
+        body: body,
+      }),
+      invalidatesTags: ['website_presets']
     }),
   })
 })
 
 
 
-export const { useGetThemeConstantsQuery, useGetThemeSettingsQuery, useGetWebsitePresetsQuery } = websiteConfigApi
+export const { useGetThemeConstantsQuery, useGetThemeSettingsQuery, useGetWebsitePresetsQuery, useUpdateWebsitePresetsMutation } = websiteConfigApi
