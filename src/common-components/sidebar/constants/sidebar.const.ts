@@ -174,7 +174,7 @@ export const SidebarNavigationConstants = [
       {
         id: 704,
         name: "Global Theme",
-        path: "/website/global-theme"
+        path: "/website/global-theme/website-presets"
       },
       {
         id: 705,

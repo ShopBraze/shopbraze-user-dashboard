@@ -40,6 +40,18 @@ export const TabNavigationListConstant = {
         name: "create-collection",
         path: "website/collection/create-collection"
       }
+    ],
+    globalTheme: [
+      {
+        title: "Website Presets",
+        name: "website-presets",
+        path: "website/global-theme/website-presets"
+      },
+      {
+        title: "Advance Configuration",
+        name: "advance-configuration",
+        path: "website/global-theme/advance-configuration"
+      },
     ]
   }
 }
