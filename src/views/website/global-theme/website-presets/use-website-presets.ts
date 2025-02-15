@@ -5,7 +5,7 @@ import { useGetThemeConstantsQuery, useGetWebsitePresetsQuery, useUpdateWebsiteP
 
 const useWebsitePreset = () => {
   const { data: themeConstantData } = useGetThemeConstantsQuery()
-  const { data: websitePresetData } = useGetWebsitePresetsQuery()
+  const { data: websitePresetData, isLoading: isGettingPresetData } = useGetWebsitePresetsQuery()
 
   const [updateWebsitePresets, { isLoading }] = useUpdateWebsitePresetsMutation()
 
@@ -47,7 +47,8 @@ const useWebsitePreset = () => {
     handleSelectedTheme,
     handleSaleEventVisibility,
     handleSaveWebsitePresets,
-    isLoading
+    isLoading,
+    isGettingPresetData
   }
 }
 

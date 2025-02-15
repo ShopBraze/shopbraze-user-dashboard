@@ -9,6 +9,7 @@ import Button from "common-components/button/button"
 import { Loader } from "rsuite"
 import { UseFormWatch } from "react-hook-form"
 import { FileType } from "rsuite/esm/Uploader"
+import ComponentLoader from "common-components/loaders/component-loader"
 
 
 type SelectProductsProps = {
@@ -29,9 +30,8 @@ const SelectProducts = ({ handleSelectedProducts, watch }: SelectProductsProps) 
 
       {/* Select Products */}
       {
-        isFetchingCatalogues ? <div className='h-[60vh] flex justify-center items-center'>
-          <Loader size="md" />
-        </div>
+        isFetchingCatalogues ?
+          <ComponentLoader containerClassName="h-[60vh]" />
           :
           <div className="space-y-6">
             <p className="text-gray-800 text-sm">Available <span className="font-bold">({totalItems})</span></p>
