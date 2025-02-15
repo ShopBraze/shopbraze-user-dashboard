@@ -8,6 +8,7 @@ import Image from 'next/image';
 import DeleteCollection from './delete-collection/delete-collection';
 import ToggleCollectionVisibility from './toggle-visibility/toggle-visibility';
 import EditCollection from './edit-collection/edit-collection';
+import ComponentLoader from 'common-components/loaders/component-loader';
 
 type Props = {}
 
@@ -22,9 +23,7 @@ const CollectionList = (props: Props) => {
     <div>
       {
         isLoading ?
-          <div className='h-[80vh] flex justify-center items-center'>
-            <Loader size="md" />
-          </div>
+          <ComponentLoader />
           :
           <Table
             height={500}

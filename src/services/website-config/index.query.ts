@@ -16,6 +16,22 @@ export const websiteConfigApi = baseApi.injectEndpoints({
         url: `${endpoints.theme_settings}`
       }),
       transformResponse: (response) => ThemeSettingsTransformer(response),
+      providesTags: ['theme_settings']
+    }),
+    updateThemeSettings: builder.mutation<any, any>({
+      query: (body) => ({
+        method: "PUT",
+        url: `${endpoints.theme_settings}`,
+        body: body,
+      }),
+      invalidatesTags: ['theme_settings']
+    }),
+    resetThemeSettings: builder.mutation<any, any>({
+      query: () => ({
+        method: "POST",
+        url: `${endpoints.reset_theme_settings}`,
+      }),
+      invalidatesTags: ['theme_settings']
     }),
     getWebsitePresets: builder.query<WebsitePreset, void>({
       query: () => ({
@@ -37,4 +53,4 @@ export const websiteConfigApi = baseApi.injectEndpoints({
 
 
 
-export const { useGetThemeConstantsQuery, useGetThemeSettingsQuery, useGetWebsitePresetsQuery, useUpdateWebsitePresetsMutation } = websiteConfigApi
+export const { useGetThemeConstantsQuery, useGetThemeSettingsQuery, useUpdateThemeSettingsMutation, useResetThemeSettingsMutation, useGetWebsitePresetsQuery, useUpdateWebsitePresetsMutation } = websiteConfigApi

@@ -18,10 +18,11 @@ type SingleSelectProps = {
   rules?: Rules
   disabled?: boolean
   onChange?: Function
+  cleanable?: boolean
   [key: string]: any
 }
 
-const SingleSelect = ({ control, name, label, containerClasName, inputClassName, placeholder, options, error, rules, disabled, onChange, ...props }: SingleSelectProps) => {
+const SingleSelect = ({ control, name, label, containerClasName, inputClassName, placeholder, options, error, rules, disabled, onChange, cleanable, ...props }: SingleSelectProps) => {
   return (
     <div className={`${containerClasName}`}>
       {label && label}
@@ -43,6 +44,7 @@ const SingleSelect = ({ control, name, label, containerClasName, inputClassName,
                 if (onChange) onChange()
               }}
               placeholder={placeholder}
+              cleanable={cleanable}
               {...props}
             />
             <div className="pl-1 pt-1">

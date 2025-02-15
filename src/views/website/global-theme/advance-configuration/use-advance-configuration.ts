@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useGetThemeSettingsQuery } from "services/website-config/index.query";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useGetThemeConstantsQuery, useGetThemeSettingsQuery, useResetThemeSettingsMutation, useUpdateThemeSettingsMutation } from "services/website-config/index.query";
 import { hexToRgb } from "utils/color-converter";
 
 
@@ -30,33 +32,89 @@ export const AvailableAccentColorList = [
 
 const useAdvanceConfiguration = () => {
   const { data: themeSettingsData } = useGetThemeSettingsQuery()
+  const { data: themeConstantData } = useGetThemeConstantsQuery()
 
-  const [selectedPrimaryColor, setSelectedPrimaryColor] = useState<{ red: number, green: number, blue: number }>()
+  const [updateThemeSettings, { isLoading: isUpdating }] = useUpdateThemeSettingsMutation()
+  const [resetThemeSettings, { isLoading: isReseting }] = useResetThemeSettingsMutation()
+
   const [showFullScreenIframe, setShowFullScreenIframe] = useState(false);
-
-  const handleSelectedPrimaryColor = (color: { red: number, green: number, blue: number }) => {
-    setSelectedPrimaryColor(color)
-  }
   const handleToggleFullScreen = () => {
     setShowFullScreenIframe(!showFullScreenIframe)
   }
 
+  const { watch, setValue, handleSubmit, control } = useForm({
+    defaultValues: {
+      selectedPrimaryColor: {} as { red: number, green: number, blue: number },
+      selectedFontFamily: {
+        title1: { name: "", weight: "" },
+        title2: { name: "", weight: "" },
+        title3: { name: "", weight: "" },
+        heading: { name: "", weight: "" },
+        body: { name: "", weight: "" }
+      }
+    }
+  })
+
+  const handleSelectedPrimaryColor = (color: { red: number, green: number, blue: number }) => {
+    setValue('selectedPrimaryColor', color)
+  }
+
+  const fontFamilyOptions = themeConstantData?.font_data?.map((item) => ({ label: item?.family_name, value: item?.family_name })) || []
+  const getFontWeightOptions = (familyName: string) => {
+    return themeConstantData?.font_data?.find((item) => item?.family_name === familyName)?.available_font_weights?.map((weight) => ({ label: String(weight), value: String(weight) })) || []
+  }
+
   useEffect(() => {
     if (themeSettingsData) {
-      setSelectedPrimaryColor(themeSettingsData?.primary_color)
+      setValue('selectedPrimaryColor', themeSettingsData?.primary_color)
+      setValue('selectedFontFamily', themeSettingsData?.font_family)
     }
   }, [themeSettingsData])
 
   const handleCustomColorChange = (e: any) => {
-    setSelectedPrimaryColor(hexToRgb(e.target.value));
+    setValue('selectedPrimaryColor', hexToRgb(e.target.value))
   }
 
+  const handleSave = handleSubmit((data: any) => {
+    updateThemeSettings({
+      primary_color: data.selectedPrimaryColor,
+      font_family: data.selectedFontFamily
+    })
+      .unwrap()
+      .then(() => {
+        toast.success("Theme Reset Successfully")
+      })
+      .catch(() => {
+        toast.error("Something went wrong!")
+      })
+  })
+
+  const handlResetToDefault = handleSubmit((data: any) => {
+    resetThemeSettings({})
+      .unwrap()
+      .then(() => {
+        toast.success("Theme Reset Successfully")
+      })
+      .catch(() => {
+        toast.error("Something went wrong!")
+      })
+  })
+
   return {
-    selectedPrimaryColor,
+    watch,
+    control,
+    setValue,
     handleSelectedPrimaryColor,
     handleCustomColorChange,
     showFullScreenIframe,
-    handleToggleFullScreen
+    handleToggleFullScreen,
+    themeSettingsData,
+    handleSave,
+    handlResetToDefault,
+    fontFamilyOptions,
+    getFontWeightOptions,
+    isUpdating,
+    isReseting
   }
 }
 

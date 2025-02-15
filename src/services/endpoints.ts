@@ -18,6 +18,7 @@ const endpoints = {
   // Global Theme
   theme_constants: "website-page/theme-constants",
   theme_settings: "website-page/theme-settings",
+  reset_theme_settings: "website-page/reset-theme-settings",
   website_preset: "website-page/website-preset"
 
 }
