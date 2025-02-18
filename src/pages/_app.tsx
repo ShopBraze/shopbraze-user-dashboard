@@ -11,6 +11,7 @@ import "styles/globals.css";
 import { Provider } from 'react-redux';
 import store from 'state/store';
 import { Toaster } from 'react-hot-toast';
+import AuthProvider from 'provider/auth-provider';
 
 const Layout = dynamic(() => import("global-components/layout/layout"), { ssr: false });
 
@@ -43,10 +44,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
-      <Layout>
-        {changingRoute && <TopBarProgress />}
-        <Component {...pageProps} />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          {changingRoute && <TopBarProgress />}
+          <Component {...pageProps} />
+        </Layout>
+      </AuthProvider>
       <Toaster toastOptions={{
         style: {
           background: '#333',

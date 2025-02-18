@@ -7,7 +7,7 @@ import ShippingIcon from "assets/icons/sidebar/shipping-icon"
 import WebsiteIcon from "assets/icons/sidebar/website-icon"
 import SettingsIcon from "assets/icons/sidebar/settings-icon"
 
-export const SidebarNavigationConstants = [
+export const SellerSidebarNavigationConstants = [
   {
     id: 1,
     name: "Summary",
@@ -292,4 +292,35 @@ export const SidebarNavigationConstants = [
       },
     ]
   }
+]
+
+export const AdminSidebarNavigationConstants = [
+  {
+    id: 1,
+    name: "Sellers",
+    path: '/sellers',
+    icon: OrdersIcon,
+    subNavItems: [
+      {
+        id: 101,
+        name: 'Pre Onboarding Sellers',
+        path: '/sellers/pre-onboarding-sellers',
+      },
+      {
+        id: 102,
+        name: 'Sellers List',
+        path: '/sellers/sellers-list',
+      },
+      {
+        id: 103,
+        name: 'Create New Seller',
+        path: '/sellers/create-new-sellers',
+      },
+      {
+        id: 104,
+        name: 'Rate Card Templates',
+        path: '/sellers/rate-card-templates',
+      },
+    ]
+  },
 ]

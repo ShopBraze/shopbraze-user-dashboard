@@ -1,11 +1,11 @@
 import Image from "next/image";
 import ShopBrazeLogo from "assets/website-logo/logo.svg";
 import SingleNavItem from "./single-nav-item/single-nav-item";
-import { SidebarNavigationConstants } from "./constants/sidebar.const";
+import { SellerSidebarNavigationConstants, AdminSidebarNavigationConstants } from "./constants/sidebar.const";
 import useSidebar from "./use-sidebar";
 
 const Sidebar = () => {
-  const { openedNavItemId, handleOpenedNavItemId } = useSidebar()
+  const { openedNavItemId, handleOpenedNavItemId, isAdminView } = useSidebar()
   return (
     <aside className="fixed top-0 left-0 h-screen overflow-y-scroll overflow-x-hidden bg-white z-20 transition-all duration-300 ease-in-out group hover:w-[265px] w-[60px] bg-[#fff]"
       onMouseLeave={() => { handleOpenedNavItemId(null) }}
@@ -21,7 +21,7 @@ const Sidebar = () => {
 
         {/* Navigation Items */}
         <div>
-          {SidebarNavigationConstants.map((navItem) => (
+          {(isAdminView ? AdminSidebarNavigationConstants : SellerSidebarNavigationConstants).map((navItem) => (
             <SingleNavItem
               navItem={navItem}
               key={navItem.id}

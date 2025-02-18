@@ -1,6 +1,10 @@
 
 const endpoints = {
 
+  // Authentication & User
+  login: "user/auth/login",
+  get_user: "user/auth/user",
+
   // Catalogue
   catalogues: "catalogues",
 
