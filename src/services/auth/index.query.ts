@@ -10,9 +10,10 @@ export const authApi = baseApi.injectEndpoints({
         body: body,
       }),
     }),
-    getUserData: builder.query<any, void>({
-      query: () => ({
-        url: `${endpoints.get_user}`
+    getUserData: builder.query<any, { viewAsSellerId?: string }>({
+      query: ({ viewAsSellerId }) => ({
+        url: `${endpoints.get_user}`,
+        headers: viewAsSellerId ? { "X-View-As": viewAsSellerId } : {}
       }),
     }),
   })
@@ -20,4 +21,4 @@ export const authApi = baseApi.injectEndpoints({
 
 
 
-export const { usePostLoginUserMutation, useGetUserDataQuery } = authApi
+export const { usePostLoginUserMutation, useGetUserDataQuery, useLazyGetUserDataQuery } = authApi

@@ -1,17 +1,14 @@
 import Button from 'common-components/button/button'
 import { useAuth } from 'provider/auth-provider'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { Input } from 'rsuite'
-import { usePostLoginUserMutation } from 'services/auth/index.query'
-import { setAuthUser, setCurrentView } from 'state/auth/auth'
+
 
 type Props = {}
 
 const Login = (props: Props) => {
   const { login } = useAuth()
   const [contactNumber, setContactNumber] = useState("")
-
 
   return (
     <div className='bg-primary-200 h-full w-full'>

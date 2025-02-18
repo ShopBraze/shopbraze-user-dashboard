@@ -28,7 +28,7 @@ const AuthProvider = ({ children }: Props) => {
   const dispatch = useDispatch()
   const { isAppViewChanging } = useSelector((state: any) => state.appData)
 
-  const { data, isLoading, isSuccess, isError } = useGetUserDataQuery()
+  const { data, isLoading, isSuccess, isError } = useGetUserDataQuery({})
   const [postLoginUser] = usePostLoginUserMutation()
 
   useEffect(() => {
