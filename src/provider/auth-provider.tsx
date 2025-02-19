@@ -5,6 +5,7 @@ import { Loader } from 'rsuite'
 import { useGetUserDataQuery, usePostLoginUserMutation } from 'services/auth/index.query'
 import { setAppViewChanging } from 'state/app-data/app-data'
 import { setAuthUser, setCurrentView } from 'state/auth/auth'
+import { setUserProfile } from 'state/user-profile/user-profile'
 
 type Props = {
   children: any
@@ -34,8 +35,9 @@ const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     if (isSuccess) {
       const authData = data?.data
-      dispatch(setCurrentView(authData?.type === "system" ? "admin" : authData?.type))
+      dispatch(setCurrentView(authData?.type === "system" ? "admin" : "seller"))
       dispatch(setAuthUser(authData))
+      dispatch(setUserProfile(authData))
     }
   }, [data, isSuccess])
 
@@ -44,8 +46,9 @@ const AuthProvider = ({ children }: Props) => {
     postLoginUser({ contact_number: contactNumber }).unwrap()
       .then((data) => {
         const authData = data?.data
-        dispatch(setCurrentView(authData?.type === "system" ? "admin" : authData?.type))
+        dispatch(setCurrentView(authData?.type === "system" ? "admin" : "seller"))
         dispatch(setAuthUser(authData))
+        dispatch(setUserProfile(authData))
         dispatch(setAppViewChanging(false))
       }).catch((error) => {
         toast.error("Something Went Wrong")
