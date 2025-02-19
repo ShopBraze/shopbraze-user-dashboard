@@ -1,11 +1,13 @@
 import Image from "next/image";
 import ShopBrazeLogo from "assets/website-logo/logo.svg";
 import SingleNavItem from "./single-nav-item/single-nav-item";
-import { SidebarNavigationConstants } from "./constants/sidebar.const";
+import { SellerSidebarNavigationConstants, AdminSidebarNavigationConstants } from "./constants/sidebar.const";
 import useSidebar from "./use-sidebar";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
-  const { openedNavItemId, handleOpenedNavItemId } = useSidebar()
+  const { userProfile } = useSelector((state: any) => state.userProfile)
+  const { openedNavItemId, handleOpenedNavItemId, isAdminView } = useSidebar()
   return (
     <aside className="fixed top-0 left-0 h-screen overflow-y-scroll overflow-x-hidden bg-white z-20 transition-all duration-300 ease-in-out group hover:w-[265px] w-[60px] bg-[#fff]"
       onMouseLeave={() => { handleOpenedNavItemId(null) }}
@@ -15,13 +17,13 @@ const Sidebar = () => {
         <div className="flex items-center gap-3 pl-4">
           <Image src={ShopBrazeLogo} alt="shopbraze.png" className="h-10 w-10 " />
           <p className="text-base font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Radheshyam User
+            {userProfile?.first_name}
           </p>
         </div>
 
         {/* Navigation Items */}
         <div>
-          {SidebarNavigationConstants.map((navItem) => (
+          {(isAdminView ? AdminSidebarNavigationConstants : SellerSidebarNavigationConstants).map((navItem) => (
             <SingleNavItem
               navItem={navItem}
               key={navItem.id}

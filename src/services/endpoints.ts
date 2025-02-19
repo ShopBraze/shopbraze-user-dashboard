@@ -1,6 +1,10 @@
 
 const endpoints = {
 
+  // Authentication & User
+  login: "user/auth/login",
+  get_user: "user/auth/user",
+
   // Catalogue
   catalogues: "catalogues",
 
@@ -19,7 +23,14 @@ const endpoints = {
   theme_constants: "website-page/theme-constants",
   theme_settings: "website-page/theme-settings",
   reset_theme_settings: "website-page/reset-theme-settings",
-  website_preset: "website-page/website-preset"
+  website_preset: "website-page/website-preset",
+
+
+
+  // Admin Api
+
+  sellers_list: "user/sellers/list"
+
 
 }
 
