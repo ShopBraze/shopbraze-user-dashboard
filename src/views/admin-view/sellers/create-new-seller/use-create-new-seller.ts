@@ -59,9 +59,10 @@ const useCreateNewSeller = () => {
       is_gst: false,
       gst_number: '',
     },
+    mode: 'onChange'
   });
 
-  const [activeStep, setActiveStep] = useState(2)
+  const [activeStep, setActiveStep] = useState(3)
 
   const billingAddressRequiredFields = [
     'billing_address.addr_tag_3pl',
@@ -111,12 +112,17 @@ const useCreateNewSeller = () => {
     }
   }
 
+  const handleVerifyAndSave = handleSubmit((data) => {
+    console.log(data)
+  })
+
   return {
     control,
     watch,
     setValue,
     activeStep,
-    handleActiveStep
+    handleActiveStep,
+    handleVerifyAndSave
   }
 }
 

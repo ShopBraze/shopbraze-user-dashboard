@@ -64,6 +64,10 @@ const PickupAndReturnAddress = ({ control, watch, setValue }: PickupAndReturnAdd
                     placeholder="Ex. H.No: 1, Street 112"
                     rules={{
                       required: 'Please add landmark!',
+                      minLength: {
+                        value: 20,
+                        message: 'Address Line 1 should be at least 20 character long',
+                      },
                     }}
                   />
                   <TextInput
@@ -114,24 +118,75 @@ const PickupAndReturnAddress = ({ control, watch, setValue }: PickupAndReturnAdd
           <div className='h-[0.5px] bg-gray-200 w-full' />
         </div>
 
+        <div className="flex items-center gap-2">
+          <p className="text-sm font-medium">Same Return Address</p>
+          <Toggle checked={watch('is_same_return_address')} color="green" onChange={(checked) => { setValue('is_same_return_address', checked) }} />
+        </div>
 
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <p className="text-sm font-medium">Same Return Address</p>
-            <Toggle checked={watch('is_same_return_address')} color="green" onChange={(checked) => { setValue('is_same_return_address', checked) }} />
-          </div>
-          {
-            !watch('is_same_return_address') &&
+        {
+          !watch('is_same_return_address') &&
+          <div className="grid grid-cols-2 gap-y-2 gap-x-5">
             <TextInput
-              name="billing_address.gst_number"
+              name={`return_address.name`}
               control={control}
-              placeholder="Ex: 09DCTYS6778XPR"
+              label={<p className="text-sm font-medium">Reciever Name<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
+              containerClassName="space-y-1"
+              placeholder="Ex: Radheshyam"
               rules={{
-                required: 'Gst Number is required!',
+                required: 'Please add Name',
               }}
             />
-          }
-        </div>
+            <MobileNumberInput
+              control={control}
+              name={`return_address.contact_number`}
+              label={<p className="text-sm font-medium">Contact Number<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
+              placeholder="Ex: 7352669258"
+              rules={{
+                required: "Contact number is required",
+              }}
+            />
+            <TextInput
+              name="return_address.email"
+              control={control}
+              label={<p className="text-sm font-medium">Email</p>}
+              containerClassName="space-y-1"
+              placeholder="Ex: radheshyamnitj@gmail.com"
+            />
+            <TextInput
+              name="return_address.address"
+              control={control}
+              label={<p className="text-sm font-medium">Address<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
+              sme="space-y-1"
+              placeholder="Ex: Street 114 , Patna"
+              rules={{
+                required: 'Please enter address!',
+                minLength: {
+                  value: 20,
+                  message: 'Address should be at least 20 character long',
+                },
+              }}
+            />
+            <NumberInputV2
+              name="return_address.pincode"
+              control={control}
+              label={<p className="text-sm font-medium">Pincode<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
+              containerClassName="space-y-1"
+              placeholder="Ex: 132023"
+              minLength={6}
+              maxLength={6}
+              rules={{
+                required: 'Please add pincode!',
+              }}
+            />
+
+            <div className="space-y-1">
+              <p className="text-sm font-medium">Town/City, State<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>
+              <div className="rounded-md p-[7px] bg-[#f7f7fa] border border-gray-200 hover:border-gray-400 text-sm text-gray-600 font-medium ">
+                {watch('return_address.city') ? `${watch('return_address.city')}/${watch('return_address.state')}` : 'Town/City, State'}
+              </div>
+            </div>
+          </div>
+        }
       </div>
     </div>
   )

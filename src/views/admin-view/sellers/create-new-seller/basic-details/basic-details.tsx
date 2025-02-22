@@ -24,6 +24,10 @@ const BasicDetails = ({ control }: BasicDetailsProps) => {
             placeholder="Enter display name"
             rules={{
               required: 'Please enter display name!',
+              minLength: {
+                value: 4,
+                message: 'Display Name should be at least 5 character long',
+              },
             }}
           />
           <SingleSelect control={control}

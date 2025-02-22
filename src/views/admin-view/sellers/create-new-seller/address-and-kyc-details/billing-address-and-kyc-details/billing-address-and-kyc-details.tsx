@@ -37,6 +37,7 @@ const BillingAddressAndKycDetails = ({ control, watch, setValue }: BillingAddres
             placeholder="Ex: Nixova"
             rules={{
               required: 'Please add your company name!',
+
             }}
           />
           <MobileNumberInput
@@ -63,6 +64,10 @@ const BillingAddressAndKycDetails = ({ control, watch, setValue }: BillingAddres
             placeholder="Ex: Street 114 , Patna"
             rules={{
               required: 'Please enter address!',
+              minLength: {
+                value: 20,
+                message: 'Address should be at least 20 character long',
+              },
             }}
           />
           <NumberInputV2
