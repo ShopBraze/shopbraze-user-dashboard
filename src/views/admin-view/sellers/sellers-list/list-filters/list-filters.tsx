@@ -10,7 +10,7 @@ const ListFilters = (props: Props) => {
         name="companyName"
         control={control}
         label={<p className="text-sm font-medium">Name<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
-        containerClasName="space-y-1"
+        containerClassName="space-y-1"
         placeholder="Enter unique product name"
       /> */}
 

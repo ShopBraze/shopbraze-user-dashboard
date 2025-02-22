@@ -7,7 +7,7 @@ type NumberInputProps = {
   control: Control<any, any>
   name: string
   label?: React.ReactNode | string
-  containerClasName?: string
+  containerClassName?: string
   inputClassName?: string
   placeholder?: string
   scrollable?: boolean
@@ -23,9 +23,9 @@ type NumberInputProps = {
   [key: string]: any
 }
 
-const NumberInput = ({ control, name, label, containerClasName, inputClassName, placeholder, scrollable, min, max, defaultValue, error, rules, disabled, onChange, ...props }: NumberInputProps) => {
+const NumberInput = ({ control, name, label, containerClassName, inputClassName, placeholder, scrollable, min, max, defaultValue, error, rules, disabled, onChange, ...props }: NumberInputProps) => {
   return (
-    <div className={`${containerClasName}`}>
+    <div className={`${containerClassName}`}>
       {label && label}
       <Controller
         name={name}

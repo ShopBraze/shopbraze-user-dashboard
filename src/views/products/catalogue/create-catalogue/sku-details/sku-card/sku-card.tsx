@@ -86,7 +86,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
               { label: "XXL", value: "XXL" }
             ]}
             placeholder="Choose one..."
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             inputClassName="w-full"
             searchable={true}
             rules={{
@@ -100,7 +100,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             label={<p className="text-sm font-medium">Selling Price<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             scrollable={false}
             placeholder="0"
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             min={0}
             max={1000001}
             defaultValue={0}
@@ -131,7 +131,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             label={<p className="text-sm font-medium">Cost Price</p>}
             scrollable={false}
             placeholder="0"
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             min={0}
             max={1000001}
             defaultValue={0}
@@ -158,7 +158,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             name={`catalogue_data.customer_skus.${index}.weight`}
             label={<p className="text-sm font-medium">Weight (kg)<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             placeholder="Enter Weight"
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             rules={{
               required: 'Please enter weight!',
               validate: {
@@ -174,7 +174,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             label={<p className="text-sm font-medium">Breadth (cm) <span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             scrollable={false}
             placeholder="0"
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             min={0}
             max={200}
             defaultValue={0}
@@ -192,7 +192,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             label={<p className="text-sm font-medium">Volume (cm3) <span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             scrollable={false}
             placeholder="0"
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             min={0}
             max={200}
             defaultValue={0}
@@ -208,7 +208,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             name={`catalogue_data.customer_skus.${index}.sku_id`}
             label={<p className="text-sm font-medium">SKU Code<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             placeholder="Enter a unique SKU code"
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             rules={{
               required: 'Please enter sku id of the sku!',
               minLength: {
@@ -223,7 +223,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             label={<p className="text-sm font-medium">MRP<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             scrollable={false}
             placeholder="0"
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             min={0}
             max={1000001}
             defaultValue={0}
@@ -253,7 +253,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             label={<p className="text-sm font-medium">Quantity<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             scrollable={false}
             placeholder="0"
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             min={0}
             max={1000001}
             defaultValue={0}
@@ -271,7 +271,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             label={<p className="text-sm font-medium">Length (cm)<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             scrollable={false}
             placeholder="0"
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             min={0}
             max={200}
             defaultValue={0}
@@ -289,7 +289,7 @@ const SkuCard = ({ control, watch, setValue, handleRemoveSkus, trigger, index }:
             label={<p className="text-sm font-medium">Height (cm)<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
             scrollable={false}
             placeholder="0"
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             min={0}
             max={200}
             defaultValue={0}

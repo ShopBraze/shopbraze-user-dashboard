@@ -54,7 +54,7 @@ const ProductAttributes = ({ control, setValue, watch }: ProductAttributesProps)
                       { label: "Warranty Duration", value: "Warranty Duration" },
                     ]}
                     placeholder="Choose one..."
-                    containerClasName="space-y-1"
+                    containerClassName="space-y-1"
                     inputClassName="w-full"
                     searchable={true}
                     rules={{
@@ -65,7 +65,7 @@ const ProductAttributes = ({ control, setValue, watch }: ProductAttributesProps)
                     name={`catalogue_data.product_attributes.${index}.value`}
                     control={control}
                     label={<p className="text-sm font-medium">Attribute Value<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
-                    containerClasName="space-y-1"
+                    containerClassName="space-y-1"
                     placeholder="Enter Attribute Value!"
                     rules={{
                       required: 'Please enter a value for attribute!',

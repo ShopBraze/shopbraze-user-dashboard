@@ -8,7 +8,7 @@ type TextAreaInputProps = {
   rows?: number
   name: string
   label?: React.ReactNode | string
-  containerClasName?: string
+  containerClassName?: string
   inputClassName?: string
   placeholder?: string
   error?: {
@@ -20,9 +20,9 @@ type TextAreaInputProps = {
   [key: string]: any
 }
 
-const TextAreaInput = ({ control, name, rows = 5, label, containerClasName, inputClassName, placeholder, error, rules, disabled, onChange, ...props }: TextAreaInputProps) => {
+const TextAreaInput = ({ control, name, rows = 5, label, containerClassName, inputClassName, placeholder, error, rules, disabled, onChange, ...props }: TextAreaInputProps) => {
   return (
-    <div className={`${containerClasName}`}>
+    <div className={`${containerClassName}`}>
       {label && label}
       <Controller
         name={name}
