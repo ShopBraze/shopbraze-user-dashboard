@@ -1,3 +1,5 @@
+import { FileType } from "rsuite/esm/Uploader"
+
 type BillingAddressType = {
   company_name: string,
   contact_number: string,
@@ -50,7 +52,12 @@ type CreateSellerFormDataType = {
   return_address: ReturnAddressType,
   is_gst: boolean,
   gst_number: string,
-  pan_number: string
+  pan_number: string,
+  kyc_details: {
+    gst: undefined | FileType[],
+    pan: undefined | FileType[],
+    cheque: undefined | FileType[],
+  },
 }
 
 export type { BillingAddressType, ReturnAddressType, PickupAddressType, CreateSellerFormDataType }

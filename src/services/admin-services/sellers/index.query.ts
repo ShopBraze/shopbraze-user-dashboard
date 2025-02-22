@@ -9,11 +9,20 @@ export const sellersApi = baseApi.injectEndpoints({
       query: () => ({
         url: `${endpoints.sellers_list}`,
       }),
-      transformResponse: (response) => SellersListTransformer(response)
+      transformResponse: (response) => SellersListTransformer(response),
+      providesTags: ['sellers-list']
+    }),
+    postSellers: builder.mutation<any, any>({
+      query: (body) => ({
+        method: "POST",
+        url: endpoints.sellers,
+        body: body,
+      }),
+      invalidatesTags: ['sellers-list']
     }),
   })
 })
 
 
 
-export const { useGetSellersListQuery } = sellersApi
+export const { useGetSellersListQuery, usePostSellersMutation } = sellersApi

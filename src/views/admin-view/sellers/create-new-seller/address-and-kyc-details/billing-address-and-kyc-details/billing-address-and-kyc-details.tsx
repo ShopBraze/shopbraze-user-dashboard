@@ -6,6 +6,7 @@ import MobileNumberInput from 'common-components/form-components/mobile-number-i
 import NumberInputV2 from 'common-components/form-components/number-input/number-input-v2'
 import Button from 'common-components/button/button'
 import { Toggle } from 'rsuite'
+import UploadKYCDetails from './upload-kyc-details/upload-kyc-details'
 
 type BillingAddressAndKycDetailsProps = {
   control: Control<CreateSellerFormDataType, any>
@@ -98,9 +99,7 @@ const BillingAddressAndKycDetails = ({ control, watch, setValue }: BillingAddres
             placeholder="Ex: KRDEL1243C"
           />
           <div className='pt-5'>
-            <Button variant='primary' className='text-sm'>
-              Upload KYC Details
-            </Button>
+            <UploadKYCDetails watch={watch} setValue={setValue} />
           </div>
 
           <div className="space-y-2">

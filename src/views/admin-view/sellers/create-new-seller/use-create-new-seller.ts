@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { BillingAddressType, CreateSellerFormDataType, PickupAddressType, ReturnAddressType } from "./types/index.type";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { usePostSellersMutation } from "services/admin-services/sellers/index.query";
+import { useRouter } from "next/router";
 
 
 const defaultPickUpAddress = {
@@ -36,6 +38,9 @@ const defaultReturnAddress = {
 }
 
 const useCreateNewSeller = () => {
+  const [postSellers, { isLoading: isCreating }] = usePostSellersMutation()
+  const router = useRouter()
+
   const { control, handleSubmit, watch, setValue, getValues, trigger } = useForm<CreateSellerFormDataType>({
     defaultValues: {
       display_name: "",
@@ -58,11 +63,16 @@ const useCreateNewSeller = () => {
       is_same_return_address: true,
       is_gst: false,
       gst_number: '',
+      kyc_details: {
+        gst: undefined,
+        pan: undefined,
+        cheque: undefined,
+      },
     },
     mode: 'onChange'
   });
 
-  const [activeStep, setActiveStep] = useState(3)
+  const [activeStep, setActiveStep] = useState(1)
 
   const billingAddressRequiredFields = [
     'billing_address.addr_tag_3pl',
@@ -113,8 +123,30 @@ const useCreateNewSeller = () => {
   }
 
   const handleVerifyAndSave = handleSubmit((data) => {
-    console.log(data)
+    const { kyc_details, ...sellerDetails } = data
+    const formData = new FormData();
+
+    formData.append('sellerDetails', JSON.stringify(sellerDetails));
+    if (kyc_details?.gst?.length && kyc_details.gst[0]?.blobFile) {
+      formData.append('gst_file', kyc_details.gst[0].blobFile);
+    }
+    if (kyc_details?.pan?.length && kyc_details.pan[0]?.blobFile) {
+      formData.append('pan_file', kyc_details.pan[0].blobFile);
+    }
+    if (kyc_details?.cheque?.length && kyc_details.cheque[0]?.blobFile) {
+      formData.append('cheque_file', kyc_details.cheque[0].blobFile);
+    }
+
+    postSellers(formData).unwrap()
+      .then(() => {
+        toast.success("Seller Created Successfully")
+        router.push("/sellers/sellers-list")
+      })
+      .catch(() => {
+        toast.error("Couldn't create seller")
+      })
   })
+
 
   return {
     control,
@@ -122,7 +154,8 @@ const useCreateNewSeller = () => {
     setValue,
     activeStep,
     handleActiveStep,
-    handleVerifyAndSave
+    handleVerifyAndSave,
+    isCreating
   }
 }
 

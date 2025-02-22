@@ -9,11 +9,11 @@ import VerifyAndSave from "./verify-and-save/verify-and-save"
 
 
 const CreateNewSellerIndexContainer = () => {
-  const { control, activeStep, handleActiveStep, watch, setValue, handleVerifyAndSave } = useCreateNewSeller()
+  const { control, activeStep, handleActiveStep, watch, setValue, handleVerifyAndSave, isCreating } = useCreateNewSeller()
   return (
     <div className="space-y-5 mx-auto w-full md:w-4/5 lg:w-2/3">
 
-      <Stepper activeStep={3} />
+      <Stepper activeStep={activeStep} />
 
       {activeStep === 1 && <BasicDetails control={control} />}
       {activeStep === 2 && <AddressAndKycDetails control={control} watch={watch} setValue={setValue} />}
@@ -26,7 +26,7 @@ const CreateNewSellerIndexContainer = () => {
         <Button variant="primary" className={`${activeStep < 3 ? '' : 'hidden'}`} onClick={() => { handleActiveStep(activeStep + 1) }} disabled={activeStep === 3}>
           <Image src={RightArrow} alt="next.svg" />
         </Button>
-        <Button variant="primary" className={`${activeStep === 3 ? '' : 'hidden'}`} onClick={handleVerifyAndSave} >
+        <Button variant="primary" className={`${activeStep === 3 ? '' : 'hidden'}`} onClick={handleVerifyAndSave} isLoading={isCreating} disabled={isCreating}>
           Save
         </Button>
       </div>
