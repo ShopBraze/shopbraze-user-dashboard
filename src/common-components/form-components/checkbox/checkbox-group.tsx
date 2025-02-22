@@ -11,6 +11,7 @@ type CheckBoxGroupProps = {
   containerClassName?: string;
   inputClassName?: string;
   options: { label: string; value: string }[];
+  color?: 'red' | 'orange' | 'yellow' | 'green' | 'cyan' | 'blue' | 'violet';
   error?: { message?: string };
   rules?: Rules;
   disabled?: boolean;
@@ -29,6 +30,7 @@ const CheckBoxGroup = ({
   rules,
   disabled,
   onChange,
+  color = 'green',
   ...props
 }: CheckBoxGroupProps) => {
   return (
@@ -52,7 +54,7 @@ const CheckBoxGroup = ({
               {...props}
             >
               {options.map((option) => (
-                <Checkbox key={option.value} value={option.value}>
+                <Checkbox key={option.value} value={option.value} color={color}>
                   {option.label}
                 </Checkbox>
               ))}

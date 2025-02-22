@@ -9,7 +9,7 @@ type TextInputProps = {
   control: Control<any, any>
   name: string
   label?: React.ReactNode | string
-  containerClasName?: string
+  containerClassName?: string
   inputClassName?: string
   placeholder?: string
   required?: boolean
@@ -22,9 +22,9 @@ type TextInputProps = {
   [key: string]: any
 }
 
-const TextInput = ({ control, name, label, containerClasName, inputClassName, placeholder, disabled, rules, onChange, ...props }: TextInputProps) => {
+const TextInput = ({ control, name, label, containerClassName, inputClassName, placeholder, disabled, rules, onChange, ...props }: TextInputProps) => {
   return (
-    <div className={`${containerClasName}`}>
+    <div className={`${containerClassName}`}>
       {label && label}
       <Controller
         name={name}

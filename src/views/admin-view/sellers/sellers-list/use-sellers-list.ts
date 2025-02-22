@@ -15,8 +15,6 @@ const useSellersList = () => {
   const [getUserData] = useLazyGetUserDataQuery()
   const { data: sellersData } = useGetSellersListQuery()
 
-  console.log(sellersData)
-
   const { control } = useForm({
     defaultValues: {
       companyName: '',

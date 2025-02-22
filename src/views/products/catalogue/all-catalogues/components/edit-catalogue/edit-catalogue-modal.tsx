@@ -20,7 +20,7 @@ const EditCatalogueModal = ({ open, handleClose, catalogueData, editStep }: Edit
       <Modal.Header className='border-b border-gray-200'>
         <Stepper activeStep={activeStep} />
       </Modal.Header>
-      <Modal.Body className='scrollbar-hide !max-h-[65vh]'>
+      <Modal.Body className='scrollbar-hide !max-h-[65vh] px-5'>
         {activeStep === 1 && <BasicDetails control={control} watch={watch} setValue={setValue} catalogueData={catalogueData} />}
         {activeStep === 2 && <SkuDetails control={control} watch={watch} setValue={setValue} trigger={trigger} />}
         {activeStep === 3 && <AddCollection control={control} watch={watch} setValue={setValue} />}

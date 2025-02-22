@@ -1,5 +1,4 @@
 import UploadIcon from "assets/icons/upload-cloud-arrow-icon.svg"
-import { useWatch } from "react-hook-form";
 import Image from "next/image";
 import { Uploader } from "rsuite";
 import { UseFormWatch } from "react-hook-form";

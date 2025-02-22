@@ -8,7 +8,7 @@ type SingleSelectProps = {
   control: Control<any, any>
   name: string
   label?: React.ReactNode | string
-  containerClasName?: string
+  containerClassName?: string
   inputClassName?: string
   placeholder?: string
   options: any[]
@@ -22,9 +22,9 @@ type SingleSelectProps = {
   [key: string]: any
 }
 
-const SingleSelect = ({ control, name, label, containerClasName, inputClassName, placeholder, options, error, rules, disabled, onChange, cleanable, ...props }: SingleSelectProps) => {
+const SingleSelect = ({ control, name, label, containerClassName, inputClassName, placeholder, options, error, rules, disabled, onChange, cleanable, ...props }: SingleSelectProps) => {
   return (
-    <div className={`${containerClasName}`}>
+    <div className={`${containerClassName}`}>
       {label && label}
       <Controller
         name={name}

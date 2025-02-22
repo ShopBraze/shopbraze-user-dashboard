@@ -24,7 +24,7 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
             name="catalogue_data.title"
             control={control}
             label={<p className="text-sm font-medium">Name<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             placeholder="Enter unique product name"
             rules={{
               required: 'Please enter product name!',
@@ -42,7 +42,7 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
               { label: "Bryan", value: "Bryan" },
             ]}
             placeholder="Choose one..."
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             inputClassName="w-full"
             searchable={true}
           />
@@ -50,7 +50,7 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
             name="catalogue_data.color"
             control={control}
             label={<p className="text-sm font-medium">Color</p>}
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             placeholder="Enter Color"
           />
           <SingleSelect control={control}
@@ -61,7 +61,7 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
               { label: "Variant", value: "Variant" },
             ]}
             placeholder="Choose one..."
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             inputClassName="w-full"
             searchable={true}
             rules={{
@@ -78,7 +78,7 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
               { label: "Patna , Bihar", value: "2" },
             ]}
             placeholder="Choose one..."
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             inputClassName="w-full"
             searchable={true}
             rules={{
@@ -93,7 +93,7 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
               { label: "Easy 3 day return", value: "2" },
             ]}
             placeholder="Choose one..."
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             inputClassName="w-full"
             searchable={true}
             rules={{
@@ -104,7 +104,7 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
             name="catalogue_data.product_code"
             control={control}
             label={<p className="text-sm font-medium">Product Code <span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             placeholder="Enter product code eg. PK1286"
             rules={{
               required: 'Please enter product code',
@@ -118,7 +118,7 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
               { label: "0", value: "0" },
             ]}
             placeholder="Choose one..."
-            containerClasName="space-y-1"
+            containerClassName="space-y-1"
             inputClassName="w-full"
             searchable={true}
           />
@@ -130,7 +130,7 @@ const BasicDetailsForm = ({ control }: BasicDetailsFormProps) => {
         label={<p className="text-sm font-medium">Description</p>}
         rows={5}
         placeholder="Write description about product"
-        containerClasName="space-y-1"
+        containerClassName="space-y-1"
       />
     </div>
   )

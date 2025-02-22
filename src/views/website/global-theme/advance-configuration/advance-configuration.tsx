@@ -84,7 +84,7 @@ const AdvanceConfiguration = (props: Props) => {
                     label={<p className="text-sm font-semibold text-gray-700">{key}</p>}
                     options={fontFamilyOptions}
                     placeholder="Choose one..."
-                    containerClasName="space-y-1 flex-[0.4]"
+                    containerClassName="space-y-1 flex-[0.4]"
                     inputClassName="w-full"
                     searchable={true}
                     cleanable={false}

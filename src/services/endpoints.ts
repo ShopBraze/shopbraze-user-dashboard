@@ -28,9 +28,8 @@ const endpoints = {
 
 
   // Admin Api
-
+  sellers: 'user/sellers', //POST 
   sellers_list: "user/sellers/list"
-
 
 }
 

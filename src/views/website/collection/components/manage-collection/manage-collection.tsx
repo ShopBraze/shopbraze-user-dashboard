@@ -21,7 +21,7 @@ const ManageCollection = ({ actionType, collectionData }: ManageCollectionProps)
           name="collection_title"
           control={control}
           label={<p className="text-sm font-medium">Collection Title<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
-          containerClasName="space-y-1"
+          containerClassName="space-y-1"
           placeholder="Please Enter Title"
         />
       </div>

@@ -20,7 +20,7 @@ const SkuInventory = ({ catalogueData }: SkuInventoryProps) => {
                 label={<p className="text-sm font-semibold text-gray-800">{item?.size}</p>}
                 scrollable={false}
                 placeholder="0"
-                containerClasName="flex flex-col gap-y-1 items-center"
+                containerClassName="flex flex-col gap-y-1 items-center"
                 inputClassName="max-w-[76px]"
                 min={0}
                 max={1000001}
