@@ -57,7 +57,7 @@ const MobileNumberInput = ({
                 id={field.name}
                 value={field.value}
                 onKeyDown={(e) => {
-                  if (!/[0-9]/.test(e.key)) {
+                  if (!/[0-9]/.test(e.key) && !["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(e.key)) {
                     e.preventDefault();
                   }
                 }}

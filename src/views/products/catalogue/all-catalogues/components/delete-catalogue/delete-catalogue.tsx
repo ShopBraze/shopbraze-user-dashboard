@@ -20,14 +20,14 @@ const DeleteCatalogue = ({ catalogueData }: Props) => {
 
       {
         openDeletePopUp &&
-        <Modal open={openDeletePopUp} onClose={handleToggleDeletePopUp} className='w-[450px] !flex items-center h-[96vh]' >
-          <Modal.Header></Modal.Header>
-          <Modal.Body className='space-y-3'>
+        <Modal open={openDeletePopUp} onClose={handleToggleDeletePopUp} className='w-[480px] !flex items-center h-[96vh]' >
+          {/* <Modal.Header></Modal.Header> */}
+          <Modal.Body className='space-y-3 p-5'>
             <Image src={DeleteCatalogueWarningImage} alt="delete-catalogue-warning.jpg" className='w-full h-full' />
             <h3 className='font-bold'>Are you sure want to delete the catalogue ?</h3>
             <p className="text-sm font-medium text-gray-800">Note : Deleting the catalogue will remove it from the dashboard and website permanently and might affect your marketing performance. Are you sure you want to delete the catalogue?</p>
           </Modal.Body>
-          <Modal.Footer className='flex justify-end gap-3'>
+          <Modal.Footer className='flex justify-end gap-3 p-5'>
             <Button variant='primary-outline' onClick={handleToggleDeletePopUp}>
               Cancel
             </Button>

@@ -20,13 +20,13 @@ import useAllCatalogues from './use-all-catalogues'
 type Props = {}
 
 const AllCatalogues = (props: Props) => {
-  const { isFetching, cataloguesData, totalItems, handlePageClick, pageCount } = useAllCatalogues()
+  const { isLoading, cataloguesData, totalItems, handlePageClick, pageCount } = useAllCatalogues()
   const { Column, HeaderCell, Cell } = Table;
 
   return (
     <>
       {
-        isFetching ?
+        isLoading ?
           <CatalogueLoader />
           :
           (<div className='p-4 bg-[#fff] rounded-md'>

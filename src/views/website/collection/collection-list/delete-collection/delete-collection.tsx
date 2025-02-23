@@ -19,14 +19,14 @@ const DeleteCollection = ({ collectionData }: DeleteCollectionProps) => {
 
       {
         openDeletePopUp &&
-        <Modal open={openDeletePopUp} onClose={handleToggleDeletePopUp} className='w-[450px] !flex items-center h-[96vh]' >
-          <Modal.Header></Modal.Header>
-          <Modal.Body className='space-y-3'>
-            <Image src={DeleteCatalogueWarningImage} alt="delete-catalogue-warning.jpg" className='w-full h-full' />
+        <Modal open={openDeletePopUp} onClose={handleToggleDeletePopUp} className='w-[480px] !flex items-center h-[96vh]' >
+          {/* <Modal.Header></Modal.Header> */}
+          <Modal.Body className='space-y-3 p-5'>
+            <Image src={DeleteCatalogueWarningImage} alt="delete-catalogue-warning.jpg" className='w-full h-full cursor-pointer' />
             <h3 className='font-bold'>Are you sure want to delete the collection ?</h3>
             <p className="text-sm font-medium text-gray-800">Deleting the collection might affect the website banners, widgets and navigation links</p>
           </Modal.Body>
-          <Modal.Footer className='flex justify-end gap-3'>
+          <Modal.Footer className='flex justify-end gap-3 p-5'>
             <Button variant='primary-outline' onClick={handleToggleDeletePopUp}>
               Cancel
             </Button>
