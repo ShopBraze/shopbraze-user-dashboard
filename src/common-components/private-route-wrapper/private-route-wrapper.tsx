@@ -9,19 +9,19 @@ const PrivateRouteWrapper = ({ children }: Props) => {
   const authData = useSelector((state: any) => state.auth?.user);
   const [isChecking, setIsChecking] = useState(true);
 
-  useEffect(() => {
-    if (!authData) {
-      if (router.pathname !== "/login") {
-        router.replace("/login");
-      }
-      setIsChecking(false);
-    } else {
-      setIsChecking(false);
-    }
-  }, [authData, router]);
+  // useEffect(() => {
+  //   if (!authData) {
+  //     if (router.pathname !== "/login") {
+  //       router.replace("/login");
+  //     }
+  //     setIsChecking(false);
+  //   } else {
+  //     setIsChecking(false);
+  //   }
+  // }, [authData, router]);
 
   // ⛔ Prevent rendering protected pages before checking auth
-  if (!authData && router.pathname !== "/login") return null;
+  // if (!authData && router.pathname !== "/login") return null;
 
   return <>{children}</>;
 };

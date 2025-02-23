@@ -8,24 +8,28 @@ type UseSkuInventoryProps = {
 }
 
 const useSkuInventory = ({ catalogueData }: UseSkuInventoryProps) => {
-  const [updateCatalogueSkuData, { isLoading: isUpdatingSkuData }] = useUpdateCatalogueSkuDataMutation()
+  const [updateCatalogueSkuData, { isLoading: isUpdatingSkuData, isSuccess }] = useUpdateCatalogueSkuDataMutation()
   const [showUpdateButton, setShowUpdateButton] = useState(false)
 
-  const { watch, control, register, setValue, formState, formState: { isDirty } } = useForm({
+  const { watch, control, register, setValue, reset, formState: { isDirty, dirtyFields } } = useForm({
     defaultValues: {
       sku_data: catalogueData?.customer_skus
-    }
+    },
   })
 
   useEffect(() => {
     if (catalogueData?.customer_skus) {
-      setValue("sku_data", catalogueData.customer_skus);
+      reset({ sku_data: catalogueData.customer_skus });
     }
-  }, [catalogueData?.customer_skus, setValue]);
+  }, [catalogueData?.customer_skus, reset]);
 
   useEffect(() => {
-    if (isDirty) setShowUpdateButton(true)
-  }, [isDirty])
+    if (isDirty && Object.keys(dirtyFields).length > 0) {
+      setShowUpdateButton(true);
+    } else {
+      setShowUpdateButton(false);
+    }
+  }, [isDirty, dirtyFields]);
 
   const handleUpdateSkuData = () => {
     const body = {
@@ -35,10 +39,9 @@ const useSkuInventory = ({ catalogueData }: UseSkuInventoryProps) => {
       .unwrap()
       .then(() => {
         toast.success("Quantity updated successfully")
+        setShowUpdateButton(false)
       }).catch((error) => {
         toast.error("Something went wrong")
-      }).finally(() => {
-        setShowUpdateButton(false)
       })
   }
 

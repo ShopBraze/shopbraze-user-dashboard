@@ -6,7 +6,7 @@ import { useGetAllCataloguesQuery } from "services/catalogues/index.query";
 
 const useAllCatalogues = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isFetching } = useGetAllCataloguesQuery({ page: currentPage, limit: 10 })
+  const { data, isLoading } = useGetAllCataloguesQuery({ page: currentPage, limit: 10 })
   const { cataloguesData, totalPages, totalItems } = data || {}
 
   const pageCount = totalPages || 0
@@ -15,7 +15,7 @@ const useAllCatalogues = () => {
     setCurrentPage(event.selected + 1)
   };
   return {
-    isFetching,
+    isLoading,
     cataloguesData,
     totalItems,
     handlePageClick,
