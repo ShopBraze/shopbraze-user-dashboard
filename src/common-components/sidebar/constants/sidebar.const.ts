@@ -159,7 +159,7 @@ export const SellerSidebarNavigationConstants = [
       {
         id: 701,
         name: "Website Pages",
-        path: "/website/website-pages"
+        path: "/website/website-pages/home"
       },
       {
         id: 702,

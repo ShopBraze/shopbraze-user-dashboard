@@ -1,0 +1,29 @@
+import InfoIcon from "assets/icons/info-icon-black.svg"
+import Image from "next/image"
+import PreviewButton from "../components/preview-btn/preview-btn"
+import AddTemplate from "../components/add-template/add-template"
+import Button from "common-components/button/button"
+
+type Props = {}
+
+const HomePage = (props: Props) => {
+  return (
+    <div className='space-y-5'>
+      <div className="p-3 bg-[#fff] rounded-md flex justify-between">
+        <div className="px-4 py-2 rounded-md bg-gray-100 flex justify-center items-center gap-4">
+          <Image src={InfoIcon} alt="info.svg" />
+          <p className="text-gray-900 text-sm font-medium">Please note that it may take upto 2 hours for the changes to propagate in the system.</p>
+        </div>
+        <div className="flex gap-3">
+          <PreviewButton url="" />
+          <AddTemplate />
+          <Button variant="primary" disabled className="text-sm">
+            Save Template Order
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default HomePage

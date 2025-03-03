@@ -19,11 +19,11 @@ const endpoints = {
   // Reports
   catalogue_reports: "reports/catalogue",
 
-  // Global Theme
-  theme_constants: "website-page/theme-constants",
-  theme_settings: "website-page/theme-settings",
-  reset_theme_settings: "website-page/reset-theme-settings",
-  website_preset: "website-page/website-preset",
+  // Website Page Config
+  theme_constants: "website-page-config/theme-constants",
+  theme_settings: "website-page-config/theme-settings",
+  reset_theme_settings: "website-page-config/reset-theme-settings",
+  website_preset: "website-page-config/website-preset",
 
 
 

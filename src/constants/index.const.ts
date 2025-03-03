@@ -52,6 +52,28 @@ export const TabNavigationListConstant = {
         name: "advance-configuration",
         path: "website/global-theme/advance-configuration"
       },
+    ],
+    'website-pages': [
+      {
+        title: "Home Page",
+        name: "home",
+        path: "website/website-pages/home"
+      },
+      {
+        title: "Product Page",
+        name: "product",
+        path: "website/website-pages/product"
+      },
+      {
+        title: "Order Status Page",
+        name: "order-status",
+        path: "website/website-pages/order-status"
+      },
+      {
+        title: "Featured Pages",
+        name: "featured",
+        path: "website/website-pages/featured"
+      },
     ]
   }
 }
