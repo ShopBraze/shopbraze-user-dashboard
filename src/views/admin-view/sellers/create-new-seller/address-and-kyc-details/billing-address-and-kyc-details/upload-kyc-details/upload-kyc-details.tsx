@@ -46,7 +46,7 @@ const UploadKYCDetails = ({ watch, setValue }: UploadKYCDetailsProps) => {
               onRemove={(file) => { setValue('kyc_details.gst', undefined) }}
               fileList={watch('kyc_details.gst') ?? undefined}
             >
-              <div>
+              <div style={{ width: 100, height: 100 }}>
                 <Image src={UploadIcon} alt="upload.svg" />
                 <p className="text-sm font-semibold text-gray-800">GST</p>
               </div>
@@ -65,7 +65,7 @@ const UploadKYCDetails = ({ watch, setValue }: UploadKYCDetailsProps) => {
               onRemove={(file) => { setValue('kyc_details.pan', undefined) }}
               fileList={watch('kyc_details.pan') ?? undefined}
             >
-              <div className="gap-y-7">
+              <div className="gap-y-7" style={{ height: 100, width: 100 }}>
                 <Image src={UploadIcon} alt="upload.svg" />
                 <p className="text-sm font-semibold text-gray-800">PAN</p>
               </div>
@@ -84,7 +84,7 @@ const UploadKYCDetails = ({ watch, setValue }: UploadKYCDetailsProps) => {
               onRemove={(file) => { setValue('kyc_details.cheque', undefined) }}
               fileList={watch('kyc_details.cheque') ?? undefined}
             >
-              <div>
+              <div style={{ width: 100, height: 100 }}>
                 <Image src={UploadIcon} alt="upload.svg" />
                 <p className="text-sm font-semibold text-gray-800">CHEQUE</p>
               </div>

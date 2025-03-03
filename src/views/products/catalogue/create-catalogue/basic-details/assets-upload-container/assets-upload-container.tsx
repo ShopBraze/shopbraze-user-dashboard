@@ -48,14 +48,14 @@ const AssetsUploadContainer = ({ setValue, watch }: AssetsUploadContainerProps) 
           onChange={handleImagesChange}
           fileList={watch('files.images')}
         >
-          <div>
+          <div style={{ width: 100, height: 100 }}>
             <Image src={UploadIcon} alt="upload.svg" />
           </div>
         </Uploader>
-      </div>
+      </div >
 
       {/* For Videos */}
-      <div className="space-y-1">
+      < div className="space-y-1" >
         <p className="text-sm font-semibold text-gray-900">Upload Videos</p>
         <Uploader multiple
           listType="picture"
@@ -66,12 +66,12 @@ const AssetsUploadContainer = ({ setValue, watch }: AssetsUploadContainerProps) 
           onChange={handleVideosChange}
           fileList={watch('files.videos')}
         >
-          <div>
+          <div style={{ width: 100, height: 100 }}>
             <Image src={UploadIcon} alt="upload.svg" />
           </div>
         </Uploader>
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }
 
