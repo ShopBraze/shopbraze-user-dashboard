@@ -20,11 +20,11 @@ const TemplateDetailsModal = ({ open, handleClose }: TemplateDetailsModalProps) 
   const templateType = watch('selectedTemplateType')
 
   return (
-    <Modal open={open} onClose={handleClose} className='w-[50vw] !flex items-center h-[96vh]' backdrop="static">
+    <Modal open={open} onClose={handleClose} className='w-[80vw] !flex items-center ' backdrop="static">
       <Modal.Header className="p-5">
         <p className="text-gray-900 font-bold ">Widget Details</p>
       </Modal.Header>
-      <Modal.Body className='w-full space-y-3 p-5'>
+      <Modal.Body className='w-full space-y-3 p-5 !max-h-[70vh]'>
         <SingleSelect
           control={control}
           name="selectedTemplateType"
@@ -35,21 +35,13 @@ const TemplateDetailsModal = ({ open, handleClose }: TemplateDetailsModalProps) 
           inputClassName="w-full"
           searchable={true}
         />
-        {templateType === 'banner' && <BannerTemplate handleCreateTemplate={handleCreateTemplate} />}
+        {templateType === 'banner' && <BannerTemplate handleCloseBannerDetailsModal={handleClose} />}
         {templateType === 'category_group' && <CategoryGroupTemplate />}
         {templateType === 'category_tabbed' && <CategoryTabbedTemplate />}
         {templateType === 'product_group' && <ProductGroupTemplate />}
         {templateType === 'testimonial' && <TestimonialTemplate />}
 
       </Modal.Body>
-      <Modal.Footer className='flex justify-end gap-3 p-5'>
-        <Button variant='secondary' onClick={handleClose}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={handleClose}>
-          Save
-        </Button>
-      </Modal.Footer>
     </Modal>
   )
 }

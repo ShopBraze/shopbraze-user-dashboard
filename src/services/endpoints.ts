@@ -25,6 +25,8 @@ const endpoints = {
   reset_theme_settings: "website-page-config/reset-theme-settings",
   website_preset: "website-page-config/website-preset",
 
+  // Website Page Template
+  page_template: "website-page-template",
 
 
   // Admin Api
