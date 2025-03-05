@@ -4,11 +4,13 @@ import PreviewButton from "../components/preview-btn/preview-btn"
 import AddTemplate from "../components/add-template/add-template"
 import Button from "common-components/button/button"
 import TemplateListContainer from "./template-list-container/template-list-container"
+import { useGetWebsitePageInfoQuery } from "services/website-page-and-template/index.query"
 
 
 type Props = {}
 
 const HomePage = (props: Props) => {
+  const { data: homePageData, isLoading } = useGetWebsitePageInfoQuery('home-page')
   return (
     <div className='space-y-5'>
       <div className="p-3 bg-[#fff] rounded-md flex flex-col md:flex-row gap-y-4 justify-between">
@@ -18,13 +20,13 @@ const HomePage = (props: Props) => {
         </div>
         <div className="flex gap-3">
           <PreviewButton url="" />
-          <AddTemplate />
+          <AddTemplate page_id={homePageData?.short_id} />
           <Button variant="primary" disabled className="text-sm">
             Save Template Order
           </Button>
         </div>
       </div>
-      <TemplateListContainer />
+      <TemplateListContainer page_id={homePageData?.short_id} />
     </div>
   )
 }

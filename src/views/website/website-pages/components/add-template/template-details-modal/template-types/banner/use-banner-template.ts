@@ -2,10 +2,11 @@ import { title } from "process"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { FileType } from "rsuite/esm/Uploader"
-import { useCreateTemplateMutation } from "services/website-template/index.query"
+import { useCreateTemplateMutation } from "services/website-page-and-template/index.query"
 
 type useBannerTemplateProps = {
   handleCloseBannerDetailsModal: () => void
+  page_id?: string
 }
 
 type BannerDataType = {
@@ -13,7 +14,7 @@ type BannerDataType = {
   image: FileType | null
 }
 
-const useBannerTemplate = ({ handleCloseBannerDetailsModal }: useBannerTemplateProps) => {
+const useBannerTemplate = ({ handleCloseBannerDetailsModal, page_id }: useBannerTemplateProps) => {
 
   const [createTemplate, { isLoading: isCreating }] = useCreateTemplateMutation()
 
@@ -57,6 +58,7 @@ const useBannerTemplate = ({ handleCloseBannerDetailsModal }: useBannerTemplateP
     }
 
     const formDataPayload = new FormData();
+    formDataPayload.append("page_id", page_id!)
     formDataPayload.append("templateData", JSON.stringify(bannerDataPayload));
 
     data?.bannerItems?.forEach((item: BannerDataType) => {
@@ -69,6 +71,7 @@ const useBannerTemplate = ({ handleCloseBannerDetailsModal }: useBannerTemplateP
       .unwrap()
       .then(() => {
         toast.success("Template added successfully")
+        handleCloseBannerDetailsModal()
       })
       .catch((error) => {
         toast.error("Something went wrong")

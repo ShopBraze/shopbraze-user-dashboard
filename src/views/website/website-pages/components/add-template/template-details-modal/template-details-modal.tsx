@@ -13,9 +13,10 @@ import TestimonialTemplate from "./template-types/testimonial/testimonial-templa
 type TemplateDetailsModalProps = {
   open: boolean
   handleClose: () => void
+  page_id?: string
 }
 
-const TemplateDetailsModal = ({ open, handleClose }: TemplateDetailsModalProps) => {
+const TemplateDetailsModal = ({ open, handleClose, page_id }: TemplateDetailsModalProps) => {
   const { watch, control, TemplateTypeOptions, handleCreateTemplate } = useTemplateDetailsModal()
   const templateType = watch('selectedTemplateType')
 
@@ -35,7 +36,7 @@ const TemplateDetailsModal = ({ open, handleClose }: TemplateDetailsModalProps) 
           inputClassName="w-full"
           searchable={true}
         />
-        {templateType === 'banner' && <BannerTemplate handleCloseBannerDetailsModal={handleClose} />}
+        {templateType === 'banner' && <BannerTemplate handleCloseBannerDetailsModal={handleClose} page_id={page_id} />}
         {templateType === 'category_group' && <CategoryGroupTemplate />}
         {templateType === 'category_tabbed' && <CategoryTabbedTemplate />}
         {templateType === 'product_group' && <ProductGroupTemplate />}

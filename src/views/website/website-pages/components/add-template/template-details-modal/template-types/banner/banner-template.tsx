@@ -9,10 +9,11 @@ import Button from 'common-components/button/button'
 
 type BannerTemplateProps = {
   handleCloseBannerDetailsModal: () => void
+  page_id?: string
 }
 
-const BannerTemplate = ({ handleCloseBannerDetailsModal }: BannerTemplateProps) => {
-  const { watch, control, handleAddTemplateChild, handleRemoveTemplateChild, handleFileChange, handleSave, isCreating } = useBannerTemplate({ handleCloseBannerDetailsModal })
+const BannerTemplate = ({ handleCloseBannerDetailsModal, page_id }: BannerTemplateProps) => {
+  const { watch, control, handleAddTemplateChild, handleRemoveTemplateChild, handleFileChange, handleSave, isCreating } = useBannerTemplate({ handleCloseBannerDetailsModal, page_id })
   return (
     <div className='space-y-5'>
       <TextInput
@@ -20,7 +21,7 @@ const BannerTemplate = ({ handleCloseBannerDetailsModal }: BannerTemplateProps) 
         control={control}
         label={<p className="text-sm font-medium">Title<span className="text-red-300 h-5 w-1.5 font-bold">*</span></p>}
         containerClassName="space-y-1"
-        placeholder="Ex: 344"
+        placeholder="Enter Title"
         rules={{
           required: 'Please Add Title'
         }}

@@ -4,9 +4,11 @@ import Image from 'next/image'
 import { useState } from 'react'
 import TemplateDetailsModal from './template-details-modal/template-details-modal'
 
-type AddTemplateProps = {}
+type AddTemplateProps = {
+  page_id?: string
+}
 
-const AddTemplate = ({ }: AddTemplateProps) => {
+const AddTemplate = ({ page_id }: AddTemplateProps) => {
   const [openTemplateDetailsModal, setOpenTemplateDetailsModal] = useState(false)
   const handleToggleTemplateDetailsModal = () => {
     setOpenTemplateDetailsModal(!openTemplateDetailsModal)
@@ -18,7 +20,12 @@ const AddTemplate = ({ }: AddTemplateProps) => {
         <p className="text-sm">Add Template</p>
       </Button>
       {
-        openTemplateDetailsModal && <TemplateDetailsModal open={openTemplateDetailsModal} handleClose={handleToggleTemplateDetailsModal} />
+        openTemplateDetailsModal &&
+        <TemplateDetailsModal
+          open={openTemplateDetailsModal}
+          handleClose={handleToggleTemplateDetailsModal}
+          page_id={page_id}
+        />
       }
 
     </>
