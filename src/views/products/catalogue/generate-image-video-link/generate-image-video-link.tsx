@@ -29,7 +29,7 @@ const GenerateImageVideoLink = (props: Props) => {
                   fileList={imagesList}
                   fileListVisible={false}
                 >
-                  <div className="!w-[200px]">
+                  <div style={{ width: 200 }}>
                     <Image src={UploadIcon} alt="upload.svg" />
                   </div>
                 </Uploader>
@@ -49,7 +49,7 @@ const GenerateImageVideoLink = (props: Props) => {
                     fileList={videosList}
                     fileListVisible={false}
                   >
-                    <div>
+                    <div style={{ width: 100, height: 100 }}>
                       <Image src={UploadIcon} alt="upload.svg" />
                     </div>
                   </Uploader>

@@ -28,7 +28,7 @@ const BulkUploadCollections = ({ handleFileUpload, watch }: BulkUploadCollection
           onChange={handleFileUpload}
           fileList={watch('collection_csv_file')}
         >
-          <div>
+          <div style={{ width: 100, height: 100 }}>
             <Image src={UploadIcon} alt="upload.svg" />
           </div>
         </Uploader>

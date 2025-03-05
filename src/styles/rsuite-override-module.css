@@ -1,8 +1,8 @@
 /* For Uploader Component */
 
 .rs-uploader-trigger-btn {
-  height: 100px !important;
-  width: 100px !important;
+  /* height: 100px !important;
+  width: 100px !important; */
   border: 1px dashed #008060 !important;
   cursor: pointer;
   border-radius: 4px;
@@ -105,4 +105,7 @@
 }
 .rs-modal-content {
   padding: 0;
+}
+.rs-modal-dialog {
+  width: 100%;
 }

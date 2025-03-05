@@ -37,7 +37,7 @@ const AssetsUpdateContainer = ({ setValue, watch, catalogueData }: AssetsUpdateC
           onChange={handleImagesChange}
           onRemove={(file) => handleRemoveFile(file, "images")}
         >
-          <div>
+          <div style={{ height: 100, width: 100 }}>
             <Image src={UploadIcon} alt="upload.svg" />
           </div>
         </Uploader>
@@ -65,7 +65,7 @@ const AssetsUpdateContainer = ({ setValue, watch, catalogueData }: AssetsUpdateC
             />
           )}
         >
-          <div>
+          <div style={{ height: 100, width: 100 }}>
             <Image src={UploadIcon} alt="upload.svg" />
           </div>
         </Uploader>
