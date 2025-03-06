@@ -13,22 +13,34 @@ export const websitePageAndTemplateApi = baseApi.injectEndpoints({
       transformResponse: (response) => WebsitePageTransformer(response),
     }),
 
+    getTemplatesInPage: builder.query<WebsitePageTemplate[], { page_type: string, page_id: string }>({
+      query: ({ page_type, page_id }) => ({
+        url: `${endpoints.templates_in_page}/${page_id}?page_type=${page_type}`
+      }),
+      transformResponse: (response) => TemplatesInPageTransformer(response),
+      providesTags: ['templates-in-page']
+    }),
+
     createTemplate: builder.mutation<any, any>({
       query: (body) => ({
         method: "POST",
         url: `${endpoints.template}`,
         body: body,
       }),
+      invalidatesTags: ['templates-in-page']
     }),
-    getTemplatesInPage: builder.query<any, { page_type: string, page_id: string }>({
-      query: ({ page_type, page_id }) => ({
-        url: `${endpoints.templates_in_page}/${page_id}?page_type=${page_type}`
+
+    postReorderTemplatesInPage: builder.mutation<any, { page_id: string, template_ids: string[] }>({
+      query: (body) => ({
+        method: "POST",
+        url: `${endpoints.reorder_templates}`,
+        body: body,
       }),
-      transformResponse: (response) => TemplatesInPageTransformer(response),
+      invalidatesTags: ['templates-in-page']
     }),
   })
 })
 
 
 
-export const { useGetWebsitePageInfoQuery, useCreateTemplateMutation, useGetTemplatesInPageQuery } = websitePageAndTemplateApi
+export const { useGetWebsitePageInfoQuery, useCreateTemplateMutation, useGetTemplatesInPageQuery, usePostReorderTemplatesInPageMutation } = websitePageAndTemplateApi

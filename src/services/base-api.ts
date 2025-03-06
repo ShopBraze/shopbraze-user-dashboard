@@ -22,7 +22,8 @@ const baseApi = createApi({
     'collection_by_id',
     'website_presets',
     'theme_settings',
-    'sellers-list'
+    'sellers-list',
+    'templates-in-page'
   ]
 })
 
