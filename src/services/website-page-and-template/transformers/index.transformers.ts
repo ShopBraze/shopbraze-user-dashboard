@@ -7,6 +7,7 @@ export const TemplatesInPageTransformer = (res: any) => {
       let item = res?.data?.[i]
       let template = {} as WebsitePageTemplate
 
+      template.id = item?._id
       template.type = item?.type
       template.short_id = item?.short_id
       template.title = item?.title

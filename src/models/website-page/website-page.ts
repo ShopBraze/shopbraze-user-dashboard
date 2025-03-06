@@ -1,5 +1,4 @@
 type WebsitePage = {
-
   short_id: string
   type: "home_page" | "product_page" | "order_status_page" | "featured_page"
   internal_display_name: string
@@ -13,6 +12,7 @@ type WebsitePage = {
 
 
 type WebsitePageTemplate = {
+  id: string,
   title: string;
   description?: string;
   short_id: string;

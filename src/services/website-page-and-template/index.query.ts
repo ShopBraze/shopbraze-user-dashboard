@@ -29,6 +29,13 @@ export const websitePageAndTemplateApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['templates-in-page']
     }),
+    deleteTemplate: builder.mutation<any, string>({
+      query: (template_id) => ({
+        method: "DELETE",
+        url: `${endpoints.template}/${template_id}`,
+      }),
+      invalidatesTags: ['templates-in-page']
+    }),
 
     postReorderTemplatesInPage: builder.mutation<any, { page_id: string, template_ids: string[] }>({
       query: (body) => ({
@@ -38,9 +45,25 @@ export const websitePageAndTemplateApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['templates-in-page']
     }),
+
+    putToggleTemplateVisibility: builder.mutation<any, { template_id: string, body: { visibility: boolean } }>({
+      query: ({ template_id, body }) => ({
+        method: "PUT",
+        url: `${endpoints.toggle_template_visibility}/${template_id}`,
+        body: body,
+      }),
+      invalidatesTags: ['templates-in-page']
+    }),
   })
 })
 
 
 
-export const { useGetWebsitePageInfoQuery, useCreateTemplateMutation, useGetTemplatesInPageQuery, usePostReorderTemplatesInPageMutation } = websitePageAndTemplateApi
+export const {
+  useGetWebsitePageInfoQuery,
+  useCreateTemplateMutation,
+  useDeleteTemplateMutation,
+  useGetTemplatesInPageQuery,
+  usePostReorderTemplatesInPageMutation,
+  usePutToggleTemplateVisibilityMutation
+} = websitePageAndTemplateApi

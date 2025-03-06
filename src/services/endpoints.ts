@@ -30,6 +30,10 @@ const endpoints = {
   template: "website-page-template",
   templates_in_page: "website-page-template/templates-in-page",
   reorder_templates: 'website-page-template/reorder-templates',
+  toggle_template_visibility: 'website-page-template/toggle-visibility',
+
+
+
 
 
   // Admin Api

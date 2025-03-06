@@ -14,11 +14,11 @@ const useHomePage = () => {
 
   //  For handling showing the templates in order
   const { data: homePageTemplates, } = useGetTemplatesInPageQuery({ page_type: "home_page", page_id: homePageData?.short_id! }, { skip: !homePageData?.short_id })
-  const [templateListToRender, setTemplateListToRender] = useState(homePageTemplates?.map((t) => ({ ...t, id: t.short_id })) ?? [])
+  const [templateListToRender, setTemplateListToRender] = useState(homePageTemplates ? structuredClone(homePageTemplates) : [])
 
   useEffect(() => {
     if (homePageTemplates) {
-      setTemplateListToRender(homePageTemplates?.map((t) => ({ ...t, id: t.short_id })));
+      setTemplateListToRender(structuredClone(homePageTemplates));
     }
   }, [homePageTemplates]);
 
