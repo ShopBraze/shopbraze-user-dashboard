@@ -109,3 +109,6 @@
 .rs-modal-dialog {
   width: 100%;
 }
+.rs-modal-body {
+  margin-top: 0;
+}

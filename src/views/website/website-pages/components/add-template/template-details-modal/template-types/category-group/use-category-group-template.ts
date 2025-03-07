@@ -55,7 +55,6 @@ const useCategoryGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id }: 
   };
 
   const handleSave = handleSubmit((data: any) => {
-    console.log(data)
     const categoryGroupDataDataPayload = {
       ...data,
       type: "category_group",
