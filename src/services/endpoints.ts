@@ -31,7 +31,7 @@ const endpoints = {
   templates_in_page: "website-page-template/templates-in-page",
   reorder_templates: 'website-page-template/reorder-templates',
   toggle_template_visibility: 'website-page-template/toggle-visibility',
-
+  copy_template: 'website-page-template/copy-template',
 
 
 

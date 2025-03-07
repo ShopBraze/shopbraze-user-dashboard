@@ -40,7 +40,7 @@ const TemplateDetailsModal = ({ open, handleClose, page_id }: TemplateDetailsMod
 
         {templateType === 'banner' && <BannerTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
         {templateType === 'category_group' && <CategoryGroupTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
-        {templateType === 'category_tabbed' && <CategoryTabbedTemplate />}
+        {templateType === 'category_tabbed' && <CategoryTabbedTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
         {templateType === 'product_group' && <ProductGroupTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
         {templateType === 'testimonial' && <TestimonialTemplate />}
 

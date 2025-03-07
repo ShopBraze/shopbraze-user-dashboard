@@ -8,12 +8,13 @@ import Button from "common-components/button/button"
 import useTemplateListItem from "./use-template-list-item"
 
 type TemplateListItemProps = {
-  data?: WebsitePageTemplate
+  data?: WebsitePageTemplate,
+  page_id?: string
 }
 
-const TemplateListItem = ({ data }: TemplateListItemProps) => {
+const TemplateListItem = ({ data, page_id }: TemplateListItemProps) => {
 
-  const { handleChangeVisibility, handleDeleteTemplate } = useTemplateListItem({ templateData: data })
+  const { handleChangeVisibility, handleCopyTemplate, handleDeleteTemplate } = useTemplateListItem({ templateData: data, page_id })
 
   return (
     <div className="p-5 rounded-md bg-[#fff] flex text-sm font-medium cursor-grab">
@@ -44,7 +45,7 @@ const TemplateListItem = ({ data }: TemplateListItemProps) => {
         <Button onClick={handleChangeVisibility} >
           <Image src={data?.is_visible ? LiveEyeIcon : DeliveEyeIcon} alt="live.svg" className="h-5 w-4" />
         </Button>
-        <Button>
+        <Button onClick={handleCopyTemplate}>
           <Image src={CopyIcon} alt="copy.svg" className="h-4 w-4" />
         </Button>
         <Button onClick={handleDeleteTemplate}>

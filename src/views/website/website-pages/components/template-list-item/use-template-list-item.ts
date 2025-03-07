@@ -1,13 +1,14 @@
-import React from 'react'
 import toast from 'react-hot-toast'
-import { useDeleteTemplateMutation, usePutToggleTemplateVisibilityMutation } from 'services/website-page-and-template/index.query'
+import { useDeleteTemplateMutation, usePostCopyTemplateMutation, usePutToggleTemplateVisibilityMutation } from 'services/website-page-and-template/index.query'
 
 type UseTemplateListItemProps = {
   templateData?: WebsitePageTemplate
+  page_id?: string
 }
 
-const useTemplateListItem = ({ templateData }: UseTemplateListItemProps) => {
+const useTemplateListItem = ({ templateData, page_id }: UseTemplateListItemProps) => {
   const [putToggleTemplateVisibility] = usePutToggleTemplateVisibilityMutation()
+  const [postCopyTemplate] = usePostCopyTemplateMutation()
   const [deleteTemplate] = useDeleteTemplateMutation()
 
   const handleChangeVisibility = () => {
@@ -25,6 +26,17 @@ const useTemplateListItem = ({ templateData }: UseTemplateListItemProps) => {
       })
   }
 
+  const handleCopyTemplate = () => {
+    if (templateData?.short_id && page_id) {
+      postCopyTemplate({ template_id: templateData?.short_id, page_id: page_id }).unwrap()
+        .then(() => {
+          toast.success("Template Copied")
+        }).catch(() => {
+          toast.error("Could not copy template")
+        })
+    }
+
+  }
 
   const handleDeleteTemplate = () => {
     if (templateData?.id) {
@@ -39,7 +51,8 @@ const useTemplateListItem = ({ templateData }: UseTemplateListItemProps) => {
 
   return {
     handleChangeVisibility,
-    handleDeleteTemplate
+    handleDeleteTemplate,
+    handleCopyTemplate
   }
 }
 

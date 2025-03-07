@@ -21,7 +21,7 @@ const TemplateListContainer = ({ page_id, handleEnableSaveTemplate, templateList
           className="space-y-2"
         >
           {templateListToRender?.map((template: WebsitePageTemplate) => (
-            <TemplateListItem key={template?.short_id} data-id={template?.short_id} data={template} />
+            <TemplateListItem key={template?.short_id} data-id={template?.short_id} data={template} page_id={page_id} />
           ))}
         </ReactSortable>
       </div>
