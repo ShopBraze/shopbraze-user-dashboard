@@ -51,7 +51,7 @@ type WebsitePageTemplate = {
   category_group_data?: {
     name?: string;
     img_url?: string;
-    link?: string;
+    collection_short_id?: string
   }[];
 
   category_tabbed_data?: {

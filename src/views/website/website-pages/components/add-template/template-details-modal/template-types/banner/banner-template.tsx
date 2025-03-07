@@ -8,12 +8,12 @@ import Image from 'next/image'
 import Button from 'common-components/button/button'
 
 type BannerTemplateProps = {
-  handleCloseBannerDetailsModal: () => void
+  handleCloseTemplateDetailsModal: () => void
   page_id?: string
 }
 
-const BannerTemplate = ({ handleCloseBannerDetailsModal, page_id }: BannerTemplateProps) => {
-  const { watch, control, handleAddTemplateChild, handleRemoveTemplateChild, handleFileChange, handleSave, isCreating } = useBannerTemplate({ handleCloseBannerDetailsModal, page_id })
+const BannerTemplate = ({ handleCloseTemplateDetailsModal, page_id }: BannerTemplateProps) => {
+  const { watch, control, handleAddTemplateChild, handleRemoveTemplateChild, handleFileChange, handleSave, isCreating } = useBannerTemplate({ handleCloseTemplateDetailsModal, page_id })
   return (
     <div className='space-y-5'>
       <TextInput
@@ -77,7 +77,7 @@ const BannerTemplate = ({ handleCloseBannerDetailsModal, page_id }: BannerTempla
         }
       </div>
       <div className='flex justify-end gap-3 p-5'>
-        <Button variant='secondary' onClick={handleCloseBannerDetailsModal}>
+        <Button variant='secondary' onClick={handleCloseTemplateDetailsModal}>
           Cancel
         </Button>
         <Button variant="primary" onClick={handleSave} disabled={isCreating} isLoading={isCreating}>
