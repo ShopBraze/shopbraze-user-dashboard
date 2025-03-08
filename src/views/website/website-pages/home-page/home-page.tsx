@@ -4,13 +4,10 @@ import PreviewButton from "../components/preview-btn/preview-btn"
 import AddTemplate from "../components/add-template/add-template"
 import Button from "common-components/button/button"
 import TemplateListContainer from "./template-list-container/template-list-container"
-import { useGetWebsitePageInfoQuery } from "services/website-page-and-template/index.query"
+import useHomePage from "./use-home-page"
 
-
-type Props = {}
-
-const HomePage = (props: Props) => {
-  const { data: homePageData, isLoading } = useGetWebsitePageInfoQuery('home-page')
+const HomePage = () => {
+  const { homePageData, handleSaveTemplateOrder, enableSaveTemplate, handleEnableSaveTemplate, templateListToRender, setTemplateListToRender, isSavingOrder } = useHomePage()
   return (
     <div className='space-y-5'>
       <div className="p-3 bg-[#fff] rounded-md flex flex-col md:flex-row gap-y-4 justify-between">
@@ -21,12 +18,17 @@ const HomePage = (props: Props) => {
         <div className="flex gap-3">
           <PreviewButton url="" />
           <AddTemplate page_id={homePageData?.short_id} />
-          <Button variant="primary" disabled className="text-sm">
+          <Button variant="primary" disabled={enableSaveTemplate ? false : true} className="text-sm" onClick={handleSaveTemplateOrder} isLoading={isSavingOrder}>
             Save Template Order
           </Button>
         </div>
       </div>
-      <TemplateListContainer page_id={homePageData?.short_id} />
+      <TemplateListContainer
+        page_id={homePageData?.short_id}
+        handleEnableSaveTemplate={handleEnableSaveTemplate}
+        templateListToRender={templateListToRender}
+        setTemplateListToRender={setTemplateListToRender}
+      />
     </div>
   )
 }

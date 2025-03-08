@@ -46,6 +46,7 @@ const SingleSelect = ({ control, name, label, containerClassName, inputClassName
               placeholder={placeholder}
               cleanable={cleanable}
               {...props}
+              ref={(el) => field.ref(el?.root)}
             />
             <div className="pl-1 pt-1">
               <p className="text-error-500 text-xs font-semibold min-h-4">

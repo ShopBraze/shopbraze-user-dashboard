@@ -21,11 +21,11 @@ const TemplateDetailsModal = ({ open, handleClose, page_id }: TemplateDetailsMod
   const templateType = watch('selectedTemplateType')
 
   return (
-    <Modal open={open} onClose={handleClose} className='w-[80vw] !flex items-center ' backdrop="static">
+    <Modal open={open} onClose={handleClose} className='w-[80vw] md:w-[60vw] !flex items-center ' backdrop="static">
       <Modal.Header className="p-5">
         <p className="text-gray-900 font-bold ">Widget Details</p>
       </Modal.Header>
-      <Modal.Body className='w-full space-y-3 p-5 !max-h-[70vh]'>
+      <Modal.Body className='w-full space-y-5 p-5 !max-h-[80vh]'>
         <SingleSelect
           control={control}
           name="selectedTemplateType"
@@ -36,10 +36,12 @@ const TemplateDetailsModal = ({ open, handleClose, page_id }: TemplateDetailsMod
           inputClassName="w-full"
           searchable={true}
         />
-        {templateType === 'banner' && <BannerTemplate handleCloseBannerDetailsModal={handleClose} page_id={page_id} />}
-        {templateType === 'category_group' && <CategoryGroupTemplate />}
-        {templateType === 'category_tabbed' && <CategoryTabbedTemplate />}
-        {templateType === 'product_group' && <ProductGroupTemplate />}
+        <div className="w-full h-[0.8px] bg-gray-200" />
+
+        {templateType === 'banner' && <BannerTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
+        {templateType === 'category_group' && <CategoryGroupTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
+        {templateType === 'category_tabbed' && <CategoryTabbedTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
+        {templateType === 'product_group' && <ProductGroupTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
         {templateType === 'testimonial' && <TestimonialTemplate />}
 
       </Modal.Body>

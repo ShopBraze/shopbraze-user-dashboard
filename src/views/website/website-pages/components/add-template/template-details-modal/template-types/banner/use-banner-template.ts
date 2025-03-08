@@ -5,7 +5,7 @@ import { FileType } from "rsuite/esm/Uploader"
 import { useCreateTemplateMutation } from "services/website-page-and-template/index.query"
 
 type useBannerTemplateProps = {
-  handleCloseBannerDetailsModal: () => void
+  handleCloseTemplateDetailsModal: () => void
   page_id?: string
 }
 
@@ -14,7 +14,7 @@ type BannerDataType = {
   image: FileType | null
 }
 
-const useBannerTemplate = ({ handleCloseBannerDetailsModal, page_id }: useBannerTemplateProps) => {
+const useBannerTemplate = ({ handleCloseTemplateDetailsModal, page_id }: useBannerTemplateProps) => {
 
   const [createTemplate, { isLoading: isCreating }] = useCreateTemplateMutation()
 
@@ -71,7 +71,7 @@ const useBannerTemplate = ({ handleCloseBannerDetailsModal, page_id }: useBanner
       .unwrap()
       .then(() => {
         toast.success("Template added successfully")
-        handleCloseBannerDetailsModal()
+        handleCloseTemplateDetailsModal()
       })
       .catch((error) => {
         toast.error("Something went wrong")
