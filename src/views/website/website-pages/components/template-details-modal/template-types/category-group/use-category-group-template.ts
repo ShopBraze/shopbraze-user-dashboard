@@ -7,6 +7,7 @@ import { useCreateTemplateMutation } from 'services/website-page-and-template/in
 type useCategoryGroupTemplateProps = {
   handleCloseTemplateDetailsModal: () => void
   page_id?: string
+  templateData?: WebsitePageTemplate
 }
 
 type CategoryGroupedDataType = {
@@ -15,7 +16,7 @@ type CategoryGroupedDataType = {
   collection_short_id: string
 }
 
-const useCategoryGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id }: useCategoryGroupTemplateProps) => {
+const useCategoryGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id, templateData }: useCategoryGroupTemplateProps) => {
   const { data: collectionResponse } = useGetAllCollectionsQuery({ page: 1, limit: 50 })
   const [createTemplate, { isLoading: isCreating }] = useCreateTemplateMutation()
 
@@ -23,12 +24,24 @@ const useCategoryGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id }: 
 
   const { watch, control, setValue, handleSubmit } = useForm({
     defaultValues: {
-      title: '',
-      description: '',
-      custom_style: {
+      title: templateData?.title ?? '',
+      description: templateData?.description ?? '',
+      custom_style: templateData?.custom_style ?? {
         title_alignment: 'center'
       },
-      categoryGroupItems: [] as CategoryGroupedDataType[]
+      categoryGroupItems:
+        // templateData?.category_group_data ?
+        //   templateData?.category_group_data?.map((data, index) => {
+        //     return {
+        //       name: data?.name,
+        //       image: {
+        //         name: `Image-${index + 1}`,
+        //         url: data?.img_url
+        //       },
+        //       collection_short_id: data?.collection_short_id
+        //     }
+        //   }):
+        [] as CategoryGroupedDataType[]
     }
   })
 

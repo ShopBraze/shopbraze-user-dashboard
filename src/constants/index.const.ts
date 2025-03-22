@@ -75,6 +75,32 @@ export const TabNavigationListConstant = {
         path: "website/website-pages/featured"
       },
     ]
+  },
+  "offers-and-coupons": {
+    "generic-coupons": [
+      {
+        title: "Generic Coupons List",
+        name: "generic-coupons-list",
+        path: "offers-and-coupons/generic-coupons/generic-coupons-list"
+      },
+      {
+        title: "Add Generic Coupons",
+        name: "add-generic-coupons",
+        path: "offers-and-coupons/generic-coupons/add-generic-coupons"
+      }
+    ],
+    "free-gift": [
+      {
+        title: "Add Free Gift Offer List",
+        name: "free-gift-list",
+        path: "offers-and-coupons/free-gift/free-gift-list"
+      },
+      {
+        title: "Add Free Gift Offer",
+        name: "add-free-gift",
+        path: "offers-and-coupons/free-gift/add-free-gift"
+      }
+    ],
   }
 }
 

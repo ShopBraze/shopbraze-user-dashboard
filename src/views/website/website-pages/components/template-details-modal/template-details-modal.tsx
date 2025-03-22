@@ -14,10 +14,11 @@ type TemplateDetailsModalProps = {
   open: boolean
   handleClose: () => void
   page_id?: string
+  templateData?: WebsitePageTemplate
 }
 
-const TemplateDetailsModal = ({ open, handleClose, page_id }: TemplateDetailsModalProps) => {
-  const { watch, control, TemplateTypeOptions, handleCreateTemplate } = useTemplateDetailsModal()
+const TemplateDetailsModal = ({ open, handleClose, page_id, templateData }: TemplateDetailsModalProps) => {
+  const { watch, control, TemplateTypeOptions } = useTemplateDetailsModal({ templateData })
   const templateType = watch('selectedTemplateType')
 
   return (
@@ -38,10 +39,10 @@ const TemplateDetailsModal = ({ open, handleClose, page_id }: TemplateDetailsMod
         />
         <div className="w-full h-[0.8px] bg-gray-200" />
 
-        {templateType === 'banner' && <BannerTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
-        {templateType === 'category_group' && <CategoryGroupTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
-        {templateType === 'category_tabbed' && <CategoryTabbedTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
-        {templateType === 'product_group' && <ProductGroupTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} />}
+        {templateType === 'banner' && <BannerTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} templateData={templateData} />}
+        {templateType === 'category_group' && <CategoryGroupTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} templateData={templateData} />}
+        {templateType === 'category_tabbed' && <CategoryTabbedTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} templateData={templateData} />}
+        {templateType === 'product_group' && <ProductGroupTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} templateData={templateData} />}
         {templateType === 'testimonial' && <TestimonialTemplate />}
 
       </Modal.Body>

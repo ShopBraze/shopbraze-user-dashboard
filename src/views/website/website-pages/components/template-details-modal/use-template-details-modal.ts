@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 
 
@@ -25,22 +26,17 @@ const TemplateTypeOptions = [
 ]
 
 
-const useTemplateDetailsModal = () => {
+const useTemplateDetailsModal = ({ templateData }: { templateData?: WebsitePageTemplate }) => {
   const { watch, control } = useForm({
     defaultValues: {
-      selectedTemplateType: ''
+      selectedTemplateType: templateData?.type ?? ''
     }
   })
-
-  const handleCreateTemplate = (data: any) => {
-    console.log(data, "create template")
-  }
 
   return {
     watch,
     control,
     TemplateTypeOptions,
-    handleCreateTemplate
   }
 }
 

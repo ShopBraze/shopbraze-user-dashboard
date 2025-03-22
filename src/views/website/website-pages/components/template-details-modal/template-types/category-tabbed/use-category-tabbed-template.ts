@@ -7,6 +7,7 @@ import { useCreateTemplateMutation } from "services/website-page-and-template/in
 type UseCategoryTabbedTemplateProps = {
   handleCloseTemplateDetailsModal: () => void
   page_id?: string
+  templateData?: WebsitePageTemplate
 }
 
 type CategoryTabbedDataType = {
@@ -14,7 +15,7 @@ type CategoryTabbedDataType = {
   collection_short_id: string
 }
 
-const useCategoryTabbedTemplate = ({ handleCloseTemplateDetailsModal, page_id }: UseCategoryTabbedTemplateProps) => {
+const useCategoryTabbedTemplate = ({ handleCloseTemplateDetailsModal, page_id, templateData }: UseCategoryTabbedTemplateProps) => {
   const { data: collectionResponse } = useGetAllCollectionsQuery({ page: 1, limit: 50 })
   const [createTemplate, { isLoading: isCreating }] = useCreateTemplateMutation()
 
@@ -22,12 +23,12 @@ const useCategoryTabbedTemplate = ({ handleCloseTemplateDetailsModal, page_id }:
 
   const { watch, control, setValue, handleSubmit } = useForm({
     defaultValues: {
-      title: '',
-      description: '',
-      custom_style: {
+      title: templateData?.title ?? '',
+      description: templateData?.description ?? '',
+      custom_style: templateData?.custom_style ?? {
         title_alignment: 'center'
       },
-      categoryTabbedItems: [] as CategoryTabbedDataType[]
+      categoryTabbedItems: templateData?.category_tabbed_data ?? [] as CategoryTabbedDataType[]
     }
   })
 

@@ -118,12 +118,12 @@ export const SellerSidebarNavigationConstants = [
       {
         id: 501,
         name: "Generic Coupons",
-        path: "/offers-and-coupons/generic-coupons"
+        path: "/offers-and-coupons/generic-coupons/generic-coupons-list"
       },
       {
         id: 502,
         name: "Free Gift",
-        path: "/offers-and-coupons/free-gift"
+        path: "/offers-and-coupons/free-gift/free-gift-list"
       }
     ]
   },

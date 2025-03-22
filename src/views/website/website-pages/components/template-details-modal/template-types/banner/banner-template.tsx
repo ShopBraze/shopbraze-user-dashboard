@@ -10,9 +10,10 @@ import Button from 'common-components/button/button'
 type BannerTemplateProps = {
   handleCloseTemplateDetailsModal: () => void
   page_id?: string
+  templateData?: WebsitePageTemplate
 }
 
-const BannerTemplate = ({ handleCloseTemplateDetailsModal, page_id }: BannerTemplateProps) => {
+const BannerTemplate = ({ handleCloseTemplateDetailsModal, page_id, templateData }: BannerTemplateProps) => {
   const { watch, control, handleAddTemplateChild, handleRemoveTemplateChild, handleFileChange, handleSave, isCreating } = useBannerTemplate({ handleCloseTemplateDetailsModal, page_id })
   return (
     <div className='space-y-5'>
@@ -80,9 +81,10 @@ const BannerTemplate = ({ handleCloseTemplateDetailsModal, page_id }: BannerTemp
         <Button variant='secondary' onClick={handleCloseTemplateDetailsModal}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={handleSave} disabled={isCreating} isLoading={isCreating}>
+        {!templateData && <Button variant="primary" onClick={handleSave} disabled={isCreating} isLoading={isCreating}>
           Save
         </Button>
+        }
       </div>
     </div>
   )
