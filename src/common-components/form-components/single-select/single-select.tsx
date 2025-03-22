@@ -45,6 +45,7 @@ const SingleSelect = ({ control, name, label, containerClassName, inputClassName
               }}
               placeholder={placeholder}
               cleanable={cleanable}
+              disabled={disabled}
               {...props}
               ref={(el) => field.ref(el?.root)}
             />

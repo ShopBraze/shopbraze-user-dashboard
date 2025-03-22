@@ -23,7 +23,8 @@ const baseApi = createApi({
     'website_presets',
     'theme_settings',
     'sellers-list',
-    'templates-in-page'
+    'templates-in-page',
+    'coupons'
   ]
 })
 
