@@ -6,6 +6,7 @@ import DeliveEyeIcon from 'assets/icons/action-icons/invisible-eye.svg'
 import Image from "next/image"
 import Button from "common-components/button/button"
 import useTemplateListItem from "./use-template-list-item"
+import EditTemplate from "../edit-template/edit-template"
 
 type TemplateListItemProps = {
   data?: WebsitePageTemplate,
@@ -48,6 +49,7 @@ const TemplateListItem = ({ data, page_id }: TemplateListItemProps) => {
         <Button onClick={handleCopyTemplate}>
           <Image src={CopyIcon} alt="copy.svg" className="h-4 w-4" />
         </Button>
+        <EditTemplate page_id={page_id} templateData={data} />
         <Button onClick={handleDeleteTemplate}>
           <Image src={DeleteBinIcon} alt="delete.svg" className="h-4 w-4" />
         </Button>

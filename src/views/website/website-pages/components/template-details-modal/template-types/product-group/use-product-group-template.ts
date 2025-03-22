@@ -30,9 +30,10 @@ const ProductGroupSubTypeOptions = [
 type UseProductGroupTemplateType = {
   handleCloseTemplateDetailsModal: () => void
   page_id?: string
+  templateData?: WebsitePageTemplate
 }
 
-const useProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id }: UseProductGroupTemplateType) => {
+const useProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id, templateData }: UseProductGroupTemplateType) => {
   const { data: collectionResponse } = useGetAllCollectionsQuery({ page: 1, limit: 50 })
   const collectionOptions = collectionResponse?.collectionsData?.map((item) => ({ label: item?.name, value: item?.short_id })) ?? []
 
@@ -40,12 +41,12 @@ const useProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id }: U
 
   const { watch, control, setValue, handleSubmit } = useForm({
     defaultValues: {
-      title: '',
-      description: '',
-      layout: '',
-      sub_type: '',
-      collection_short_id: '',
-      custom_style: {
+      title: templateData?.title ?? '',
+      description: templateData?.description ?? '',
+      layout: templateData?.layout ?? '',
+      sub_type: templateData?.sub_type ?? '',
+      collection_short_id: templateData?.product_group_data?.collection_short_id ?? '',
+      custom_style: templateData?.custom_style ?? {
         title_alignment: 'center'
       },
     }

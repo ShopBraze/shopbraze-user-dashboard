@@ -33,7 +33,8 @@ const endpoints = {
   toggle_template_visibility: 'website-page-template/toggle-visibility',
   copy_template: 'website-page-template/copy-template',
 
-
+  // Coupon
+  coupons: "coupons",
 
 
   // Admin Api

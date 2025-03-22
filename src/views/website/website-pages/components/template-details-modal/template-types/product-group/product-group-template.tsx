@@ -7,10 +7,11 @@ import SingleSelect from "common-components/form-components/single-select/single
 type ProductGroupTemplateProps = {
   handleCloseTemplateDetailsModal: () => void
   page_id?: string
+  templateData?: WebsitePageTemplate
 }
 
-const ProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id }: ProductGroupTemplateProps) => {
-  const { watch, control, setValue, ProductGroupSubTypeOptions, collectionOptions, handleSave, isCreating } = useProductGroupTemplate({ handleCloseTemplateDetailsModal, page_id })
+const ProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id, templateData }: ProductGroupTemplateProps) => {
+  const { watch, control, setValue, ProductGroupSubTypeOptions, collectionOptions, handleSave, isCreating } = useProductGroupTemplate({ handleCloseTemplateDetailsModal, page_id, templateData })
   return (
     <div className="space-y-1">
       <div className="flex gap-10 items-center">
@@ -97,9 +98,10 @@ const ProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id }: Prod
         <Button variant='secondary' onClick={handleCloseTemplateDetailsModal}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={handleSave} isLoading={isCreating}>
+        {!templateData && <Button variant="primary" onClick={handleSave} isLoading={isCreating}>
           Save
         </Button>
+        }
       </div>
     </div>
   )
