@@ -24,7 +24,8 @@ const baseApi = createApi({
     'theme_settings',
     'sellers-list',
     'templates-in-page',
-    'coupons'
+    'coupons',
+    'website-navigation-menu'
   ]
 })
 
