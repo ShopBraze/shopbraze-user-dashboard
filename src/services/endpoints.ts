@@ -25,13 +25,14 @@ const endpoints = {
   reset_theme_settings: "website-page-config/reset-theme-settings",
   website_preset: "website-page-config/website-preset",
 
-  // Website Page and Template
+  // Website Page ( Template , Navigation)
   website_page: 'website-pages',
   template: "website-page-template",
   templates_in_page: "website-page-template/templates-in-page",
   reorder_templates: 'website-page-template/reorder-templates',
   toggle_template_visibility: 'website-page-template/toggle-visibility',
   copy_template: 'website-page-template/copy-template',
+  navigation_menu: 'website-page-navigation-menu',
 
   // Coupon
   coupons: "coupons",
