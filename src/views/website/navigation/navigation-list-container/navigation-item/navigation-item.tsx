@@ -1,15 +1,18 @@
+import { useState } from "react"
+import Image from "next/image"
 import Button from "common-components/button/button"
 import EditNavigation from "../../components/edit-navigation/edit-navigation"
 import CreateNavigation from "../../components/create-navigation/create-navigation"
 import ChevronDownIcon from "assets/icons/chevron-down.svg"
-import Image from "next/image"
-import { useState } from "react"
+import RemoveNavigation from "../../components/remove-navigation/remove-navigation"
+import MarkNavigationVisibility from "../../components/mark-navigation-visibility/mark-navigation-visibility"
 
 type NavigationItemProps = {
   navData?: any
+  level?: number
 }
 
-const NavigationItem = ({ navData }: NavigationItemProps) => {
+const NavigationItem = ({ navData, level = 1 }: NavigationItemProps) => {
   const [showSubNavigationItems, setShowSubNavigationItems] = useState(false)
   const handleShowSubNavigationItems = () => {
     setShowSubNavigationItems(!showSubNavigationItems)
@@ -32,8 +35,8 @@ const NavigationItem = ({ navData }: NavigationItemProps) => {
               <p className="text-sm font-bold">{navData?.title}</p>
             </div>
             <div className="flex items-center gap-3">
-              <EditNavigation />
-              <CreateNavigation parent_short_id={navData?.short_id} />
+              <EditNavigation navigationData={navData} />
+              <CreateNavigation parent_short_id={navData?.short_id} disabled={level === 3} />
             </div>
           </div>
           <div className="flex justify-between items-center">
@@ -42,15 +45,15 @@ const NavigationItem = ({ navData }: NavigationItemProps) => {
               <p className="text-sm font-bold text-blue-gray-500">{navData?.link}</p>
             </div>
             <div className="flex items-center gap-4">
-              <Button className="px-4 text-sm font-semibold text-error-600">Mark Delive</Button>
-              <Button className="px-4 text-sm font-semibold text-error-600">Remove</Button>
+              <MarkNavigationVisibility navigationData={navData} />
+              <RemoveNavigation navigationData={navData} />
             </div>
           </div>
         </div>
         {
           navData?.children?.length > 0 && showSubNavigationItems ? navData?.children?.map((item: any) => {
             return (
-              <NavigationItem navData={item} />
+              <NavigationItem navData={item} key={item?.short_id} level={level + 1} />
             )
           }) : null
         }

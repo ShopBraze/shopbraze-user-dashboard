@@ -1,29 +1,26 @@
-import { useGetWebsiteNavigationMenuQuery } from "services/website-page-navigation-menu/index.query"
 import NavigationItem from "./navigation-item/navigation-item"
 import { ReactSortable } from "react-sortablejs"
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
-type NavigationListContainerProps = {}
+type NavigationListContainerProps = {
+  navigationListToRender: WebsiteNavigationMenuType[]
+  handleEnableSaveNavigationOrder: (val: boolean) => void
+  setNavigationListToRender: Dispatch<SetStateAction<WebsiteNavigationMenuType[]>>
+}
 
-const NavigationListContainer = ({ }: NavigationListContainerProps) => {
-  const { data: websiteNavigationMenuData = [], isSuccess } = useGetWebsiteNavigationMenuQuery()
-  const [navigationListTorender, setNavigationListTorender] = useState<WebsiteNavigationMenuType[]>([])
-
-  useEffect(() => {
-    if (websiteNavigationMenuData?.length) setNavigationListTorender(websiteNavigationMenuData ? structuredClone(websiteNavigationMenuData) : [])
-  }, [websiteNavigationMenuData])
+const NavigationListContainer = ({ handleEnableSaveNavigationOrder, navigationListToRender, setNavigationListToRender }: NavigationListContainerProps) => {
 
   return (
     <div className="space-y-5">
       <ReactSortable
-        list={navigationListTorender || []}
-        setList={setNavigationListTorender}
+        list={navigationListToRender || []}
+        setList={setNavigationListToRender}
         animation={200}
-        // onEnd={() => { handleEnableSaveTemplate(true) }}
+        onEnd={() => { handleEnableSaveNavigationOrder(true) }}
         className="space-y-2"
       >
         {
-          navigationListTorender?.map((item: any) => {
+          navigationListToRender?.map((item: any) => {
             return (
               <NavigationItem navData={item} key={item?.short_id} />
             )

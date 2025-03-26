@@ -5,13 +5,14 @@ import SingleSelect from "common-components/form-components/single-select/single
 import Button from "common-components/button/button"
 
 type NavigationModalProps = {
+  navigationData?: WebsiteNavigationMenuType
   openModal: boolean
   handleToggleModal: () => void
-  parent_short_id: null | string
+  parent_short_id?: null | string
 }
 
-const NavigationModal = ({ openModal, handleToggleModal, parent_short_id }: NavigationModalProps) => {
-  const { control, collectionOptions, handleCreate, isCreating } = useNavigationModal({ parent_short_id, handleToggleModal })
+const NavigationModal = ({ navigationData, openModal, handleToggleModal, parent_short_id }: NavigationModalProps) => {
+  const { control, collectionOptions, handleCreate, isCreating, handleUpdate, isUpdating } = useNavigationModal({ navigationData, parent_short_id, handleToggleModal })
   return (
     <Modal open={openModal} onClose={handleToggleModal} className='w-[90vw] md:w-[50vw]' >
       <Modal.Header className='border-b border-gray-200 p-4'>
@@ -46,13 +47,23 @@ const NavigationModal = ({ openModal, handleToggleModal, parent_short_id }: Navi
             containerClassName="space-y-1"
             inputClassName="w-full"
             searchable={true}
+            rules={{
+              required: 'Please select the collection!',
+            }}
           />
         </div>
       </Modal.Body>
       <Modal.Footer className="flex justify-end pr-5 pb-5">
-        <Button variant="primary" className="" onClick={handleCreate} isLoading={isCreating} disabled={isCreating}>
-          Create
-        </Button>
+        {
+          navigationData ? <Button variant="primary" className="" onClick={handleUpdate} isLoading={isUpdating} disabled={isUpdating}>
+            Update
+          </Button>
+            :
+            <Button variant="primary" className="" onClick={handleCreate} isLoading={isCreating} disabled={isCreating}>
+              Create
+            </Button>
+        }
+
       </Modal.Footer>
     </Modal>
   )

@@ -27,9 +27,39 @@ export const websiteNavigationMenuApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['website-navigation-menu']
     }),
+    updateWebsiteNavigationMenuVisibility: builder.mutation<any, any>({
+      query: ({ navigationMenuItemId, body }) => ({
+        method: "PUT",
+        url: `${endpoints.navigation_menu}/change-visibility/${navigationMenuItemId}`,
+        body: body,
+      }),
+      invalidatesTags: ['website-navigation-menu']
+    }),
+    updateWebsiteNavigationMenuItemById: builder.mutation<any, any>({
+      query: ({ navigationMenuItemId, body }) => ({
+        method: "PUT",
+        url: `${endpoints.navigation_menu}/${navigationMenuItemId}`,
+        body: body,
+      }),
+      invalidatesTags: ['website-navigation-menu']
+    }),
+    deleteWebsiteNavigationMenu: builder.mutation<any, any>({
+      query: (navigationMenuItemId) => ({
+        method: "DELETE",
+        url: `${endpoints.navigation_menu}/${navigationMenuItemId}`,
+      }),
+      invalidatesTags: ['website-navigation-menu']
+    }),
   })
 })
 
 
 
-export const { useGetWebsiteNavigationMenuQuery, usePostCreateNavigationMutation, useUpdateWebsiteNavigationMenuMutation } = websiteNavigationMenuApi
+export const {
+  useGetWebsiteNavigationMenuQuery,
+  usePostCreateNavigationMutation,
+  useUpdateWebsiteNavigationMenuMutation,
+  useUpdateWebsiteNavigationMenuVisibilityMutation,
+  useDeleteWebsiteNavigationMenuMutation,
+  useUpdateWebsiteNavigationMenuItemByIdMutation
+} = websiteNavigationMenuApi

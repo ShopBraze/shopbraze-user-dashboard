@@ -7,9 +7,10 @@ import NavigationModal from "../navigation-modal/navigation-modal"
 type CreateNavigationProps = {
   children?: React.ReactNode | string
   parent_short_id: null | string
+  disabled?: boolean
 }
 
-const CreateNavigation = ({ children, parent_short_id = null }: CreateNavigationProps) => {
+const CreateNavigation = ({ children, disabled, parent_short_id = null }: CreateNavigationProps) => {
   const [openCreateNavigationModal, setOpenCreateNavigationModal] = useState(false)
   const handleToggleCreateNavigationModal = () => {
     setOpenCreateNavigationModal(!openCreateNavigationModal)
@@ -23,7 +24,7 @@ const CreateNavigation = ({ children, parent_short_id = null }: CreateNavigation
             {children}
           </div>
           :
-          <Button variant="primary-outline" className="text-sm gap-2" onClick={handleToggleCreateNavigationModal}>
+          <Button variant="primary-outline" className="text-sm gap-2" onClick={handleToggleCreateNavigationModal} disabled={disabled}>
             <Image src={PlusIcon} alt="plus-icon.svg" className="" />
             Create
           </Button>
