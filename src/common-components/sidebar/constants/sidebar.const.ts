@@ -24,7 +24,7 @@ export const SellerSidebarNavigationConstants = [
       {
         id: 201,
         name: 'Process Orders',
-        path: '/orders/process-orders',
+        path: '/orders/process-orders/pending',
       },
       {
         id: 202,

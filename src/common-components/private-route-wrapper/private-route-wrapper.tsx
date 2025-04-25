@@ -13,8 +13,6 @@ const PrivateRouteWrapper = ({ children }: Props) => {
 
   const [isAuthChecked, setIsAuthChecked] = useState(false);
 
-  console.log(authData, loadingAuth);
-
   useEffect(() => {
     if (loadingAuth) return;
 
