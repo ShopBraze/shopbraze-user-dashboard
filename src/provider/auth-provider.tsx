@@ -1,10 +1,11 @@
+import { useRouter } from 'next/router'
 import React, { createContext, useContext, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader } from 'rsuite'
 import { useGetUserDataQuery, usePostLoginUserMutation } from 'services/auth/index.query'
 import { setAppViewChanging } from 'state/app-data/app-data'
-import { setAuthUser, setCurrentView } from 'state/auth/auth'
+import { setAuthUser, setCurrentView, setLoadingAuth } from 'state/auth/auth'
 import { setUserProfile } from 'state/user-profile/user-profile'
 
 type Props = {
@@ -26,6 +27,8 @@ const AuthContext = createContext(defaultValues)
 export const useAuth = () => useContext(AuthContext)
 
 const AuthProvider = ({ children }: Props) => {
+  const router = useRouter()
+
   const dispatch = useDispatch()
   const { isAppViewChanging } = useSelector((state: any) => state.appData)
 
@@ -41,6 +44,10 @@ const AuthProvider = ({ children }: Props) => {
     }
   }, [data, isSuccess])
 
+  useEffect(() => {
+    if (isSuccess || isError) dispatch(setLoadingAuth(false))
+  }, [isSuccess, isError])
+
   const login = (contactNumber: string) => {
     dispatch(setAppViewChanging(true))
     postLoginUser({ contact_number: contactNumber }).unwrap()
@@ -50,6 +57,7 @@ const AuthProvider = ({ children }: Props) => {
         dispatch(setAuthUser(authData))
         dispatch(setUserProfile(authData))
         dispatch(setAppViewChanging(false))
+        router.push("/products/catalogue/list")
       }).catch((error) => {
         toast.error("Something Went Wrong")
       })

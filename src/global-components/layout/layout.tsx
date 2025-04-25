@@ -9,11 +9,9 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <PrivateRouteWrapper>
-        <DashboardContainer>
-          {children}
-        </DashboardContainer>
-      </PrivateRouteWrapper>
+      <DashboardContainer>
+        {children}
+      </DashboardContainer>
     </>
   )
 }

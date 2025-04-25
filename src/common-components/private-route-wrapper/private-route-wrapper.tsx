@@ -6,22 +6,28 @@ type Props = { children: React.ReactNode };
 
 const PrivateRouteWrapper = ({ children }: Props) => {
   const router = useRouter();
+
+  // Get auth data and loading state from Redux
   const authData = useSelector((state: any) => state.auth?.user);
-  const [isChecking, setIsChecking] = useState(true);
+  const loadingAuth = useSelector((state: any) => state.auth?.loadingAuth);
 
-  // useEffect(() => {
-  //   if (!authData) {
-  //     if (router.pathname !== "/login") {
-  //       router.replace("/login");
-  //     }
-  //     setIsChecking(false);
-  //   } else {
-  //     setIsChecking(false);
-  //   }
-  // }, [authData, router]);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
 
-  // ⛔ Prevent rendering protected pages before checking auth
-  // if (!authData && router.pathname !== "/login") return null;
+  console.log(authData, loadingAuth);
+
+  useEffect(() => {
+    if (loadingAuth) return;
+
+    if (!authData) {
+      router.replace("/login");
+    } else {
+      setIsAuthChecked(true);
+    }
+  }, [authData, loadingAuth, router]);
+
+  if (loadingAuth || !isAuthChecked) {
+    return <div className="p-4 text-center">Checking authentication...</div>;
+  }
 
   return <>{children}</>;
 };
