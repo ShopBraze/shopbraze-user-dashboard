@@ -101,6 +101,26 @@ export const TabNavigationListConstant = {
         path: "offers-and-coupons/free-gift/add-free-gift"
       }
     ],
+  },
+  "orders": {
+    "process-orders": [
+      {
+        title: "Pending Orders",
+        name: "pending",
+        path: "orders/process-orders/pending"
+      },
+      {
+        title: "Ready To Ship",
+        name: "ready-to-ship",
+        path: "orders/process-orders/ready-to-ship"
+      },
+      {
+        title: "Pickup Pending",
+        name: "pickup-pending",
+        path: "orders/process-orders/pickup-pending"
+      }
+    ],
+
   }
 }
 
