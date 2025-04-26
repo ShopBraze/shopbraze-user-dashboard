@@ -37,6 +37,10 @@ const endpoints = {
   // Coupon
   coupons: "coupons",
 
+  // Orders
+
+  pending_orders: "orders/pending",
+
 
   // Admin Api
   sellers: 'user/sellers', //POST 
