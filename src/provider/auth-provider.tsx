@@ -57,7 +57,7 @@ const AuthProvider = ({ children }: Props) => {
         dispatch(setAuthUser(authData))
         dispatch(setUserProfile(authData))
         dispatch(setAppViewChanging(false))
-        router.push("/products/catalogue/list")
+        router.push(authData?.type === "system" ? "/sellers/sellers-list" : "/products/catalogue/list")
       }).catch((error) => {
         toast.error("Something Went Wrong")
       })
