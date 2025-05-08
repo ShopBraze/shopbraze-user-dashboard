@@ -69,7 +69,7 @@ const PendingOrders = () => {
                       }
                     </td>
                     <td className='p-4 space-y-1.5'>
-                      <p>Dead Weight: {calculateOrderTotalDeadWeight(order)} Kg</p>
+                      <p>Dead Weight: {calculateOrderTotalDeadWeight(order).toFixed(1)} Kg</p>
                       <p dangerouslySetInnerHTML={{ __html: getOrderDimensionsText(order) }} />
                       <p>Volumetric Weight: {calculateOrderTotalVolumetricWeight(order)} Kg</p>
                     </td>

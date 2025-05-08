@@ -1,5 +1,5 @@
 export const calculateOrderTotalDeadWeight = (order: CustomerOrderType) => {
-  return order?.products?.reduce((accWt, item) => (accWt + item?.sku_details?.weight), 0)
+  return order?.products?.reduce((accWt, item) => (accWt + item?.sku_details?.weight * item?.quantity_to_buy), 0)
 }
 
 export const getOrderDimensionsText = (order: CustomerOrderType) => {

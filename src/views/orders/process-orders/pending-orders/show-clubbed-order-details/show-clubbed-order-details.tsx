@@ -52,7 +52,7 @@ const ShowClubbedOrderDetails = ({ productsDetails }: ShowClubbedOrderDetailsPro
                     </div>
                   </div>
                   <div className='p-4 space-y-1.5'>
-                    <p>Dead Weight: {product?.sku_details?.weight} Kg</p>
+                    <p>Dead Weight: {(product?.sku_details?.weight * product?.quantity_to_buy).toFixed(1)} Kg</p>
                     <p>{product?.sku_details?.length}⨯{product?.sku_details?.breadth}⨯{product?.sku_details?.height * product?.quantity_to_buy} cm</p>
                     <p>Volumetric Weight: {calculateProductVolumetricWeight(product)} Kg</p>
                   </div>
