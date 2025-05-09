@@ -26,6 +26,11 @@ export const TabNavigationListConstant = {
         name: "seller-media",
         path: "products/catalogue/seller-media"
       },
+      {
+        title: "Size Charts",
+        name: "size-charts",
+        path: "products/catalogue/size-charts"
+      },
     ]
   },
   "website": {

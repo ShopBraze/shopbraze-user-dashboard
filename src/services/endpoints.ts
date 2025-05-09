@@ -8,6 +8,9 @@ const endpoints = {
   // Catalogue
   catalogues: "catalogues",
 
+  // Size Charts
+  size_charts: "size-charts",
+
   // Collections
   collections: "collections",
   collection_toggle_visibility: "collections/toggle-visibility",
