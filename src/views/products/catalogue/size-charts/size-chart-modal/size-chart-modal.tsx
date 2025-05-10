@@ -24,6 +24,8 @@ const SizeChartModal = ({ openModal, handleToggleModal, sizeChartData }: SizeCha
   const { control, watch, register, setValue, handleCreateSizeTable, handleCreateOrUpdate, showTable,
     isFetchingCatalogues, currentPage, cataloguesData, totalItems, totalPages, handlePageClick, handleSelectedProducts, isCreating, isUpdating } = useSizeChartModal({ sizeChartData, handleToggleModal })
 
+  console.log(watch())
+
   return (
     <Modal open={openModal} onClose={handleToggleModal} className='w-[90vw] md:w-[80vw]' >
       <Modal.Header className='border-b border-gray-200 p-4'>

@@ -31,7 +31,7 @@ const useSizeChartModal = ({ sizeChartData, handleToggleModal }: UseSizeChartMod
   const [postCreateSizeChart, { isLoading: isCreating }] = usePostCreateSizeChartMutation()
   const [updateSizeChart, { isLoading: isUpdating }] = useUpdateSizeChartMutation()
 
-  const { data: cataloguesDataFromShortIds, isLoading: isLoadingCataloguesByShortIds } = useGetCataloguesByShortIdsQuery(sizeChartData?.product_short_ids!, { skip: !sizeChartData?.product_short_ids })
+  const { data: cataloguesDataFromShortIds = [], isLoading: isLoadingCataloguesByShortIds } = useGetCataloguesByShortIdsQuery(sizeChartData?.product_short_ids!, { skip: !sizeChartData?.product_short_ids })
 
   const [currentPage, setCurrentPage] = useState(1)
   const { data, isFetching: isFetchingCatalogues } = useGetAllCataloguesQuery({ page: currentPage, limit: 10 })
@@ -43,7 +43,7 @@ const useSizeChartModal = ({ sizeChartData, handleToggleModal }: UseSizeChartMod
 
   const [showTable, setShowTable] = useState(false)
 
-  const { control, watch, register, setValue, getValues, handleSubmit, reset } = useForm<SizeChartFormValues>({
+  const { control, watch, register, setValue, getValues, handleSubmit, } = useForm<SizeChartFormValues>({
     defaultValues: {
       name: "",
       type: "static",
@@ -61,26 +61,23 @@ const useSizeChartModal = ({ sizeChartData, handleToggleModal }: UseSizeChartMod
 
   useEffect(() => {
     if (sizeChartData) {
-      reset({
-        name: sizeChartData.name ?? '',
-        type: sizeChartData.type ?? 'dynamic',
-        static_type_image_url: sizeChartData.static_type_image_url ?? '',
-        static_type_image: [],
-        unit_labels: sizeChartData?.unit_labels ?? [''],
-        unit_labels_conversion_factor: sizeChartData.unit_labels_conversion_factor ?? '',
-        data_by_unit: sizeChartData.data_by_unit ?? {},
-        selected_products: cataloguesDataFromShortIds,
-        selected_product_short_ids: sizeChartData.product_short_ids ?? [],
-        number_of_rows:
-          Object.values(sizeChartData.data_by_unit ?? {})[0]?.length ?? 0,
-        number_of_columns:
-          Object.values(sizeChartData.data_by_unit ?? {})[0]?.[0]?.length ?? 0,
-      });
+      setValue("name", sizeChartData.name ?? '');
+      setValue("type", sizeChartData.type ?? 'dynamic');
+      setValue("static_type_image_url", sizeChartData.static_type_image_url ?? '');
+      setValue("static_type_image", []); // Assuming no image is preselected
+      setValue("unit_labels", sizeChartData.unit_labels ?? ['']);
+      setValue("unit_labels_conversion_factor", sizeChartData.unit_labels_conversion_factor ?? '');
+      setValue("data_by_unit", sizeChartData.data_by_unit ?? {});
+      setValue("selected_products", cataloguesDataFromShortIds);
+      setValue("selected_product_short_ids", sizeChartData.product_short_ids ?? []);
+      setValue("number_of_rows", Object.values(sizeChartData.data_by_unit ?? {})[0]?.length ?? 0);
+      setValue("number_of_columns", Object.values(sizeChartData.data_by_unit ?? {})[0]?.[0]?.length ?? 0);
+
       if (Object.keys(sizeChartData.data_by_unit ?? {}).length > 0) {
         setShowTable(true);
       }
     }
-  }, [sizeChartData, reset, isLoadingCataloguesByShortIds]);
+  }, [sizeChartData, isLoadingCataloguesByShortIds]);
 
   const handleSelectedProducts = (product: Catalogue, action: "Add" | "Remove") => {
     if (action === "Add") {
@@ -93,31 +90,99 @@ const useSizeChartModal = ({ sizeChartData, handleToggleModal }: UseSizeChartMod
     }
   }
 
+  // const handleCreateSizeTable = () => {
+  //   const rowCount = getValues("number_of_rows");
+  //   const colCount = getValues("number_of_columns");
+
+  //   if (rowCount > 0 && colCount > 0) {
+  //     if (rowCount > 10 || colCount > 10) return toast.error(" Column and Row should not more than 10")
+  //     const unitLabels = getValues("unit_labels");
+  //     const initialData: { [key: string]: string[][] } = {};
+
+  //     unitLabels.forEach((unit) => {
+  //       const table: string[][] = Array.from({ length: rowCount }, () =>
+  //         Array.from({ length: colCount }, () => "")
+  //       );
+  //       initialData[unit] = table;
+  //     });
+
+  //     setValue("data_by_unit", initialData);
+  //     setShowTable(true);
+  //   }
+  // };
+
   const handleCreateSizeTable = () => {
     const rowCount = getValues("number_of_rows");
     const colCount = getValues("number_of_columns");
 
-
-
     if (rowCount > 0 && colCount > 0) {
-      if (rowCount > 10 || colCount > 10) return toast.error(" Column and Row should not more than 10")
+      if (rowCount > 10 || colCount > 10) {
+        return toast.error("Column and Row should not be more than 10");
+      }
+
       const unitLabels = getValues("unit_labels");
-      const initialData: { [key: string]: string[][] } = {};
+      const prevData = getValues("data_by_unit") || {};
+
+      const updatedData: { [key: string]: string[][] } = {};
 
       unitLabels.forEach((unit) => {
-        const table: string[][] = Array.from({ length: rowCount }, () =>
-          Array.from({ length: colCount }, () => "")
-        );
-        initialData[unit] = table;
+        const prevTable = prevData[unit] || [];
+        const newTable: string[][] = [];
+
+        for (let i = 0; i < rowCount; i++) {
+          const prevRow = prevTable[i] || [];
+          const newRow: string[] = [];
+          for (let j = 0; j < colCount; j++) {
+            newRow.push(prevRow[j] ?? "");
+          }
+          newTable.push(newRow);
+        }
+        updatedData[unit] = newTable;
       });
 
-      setValue("data_by_unit", initialData);
+      setValue("data_by_unit", updatedData);
       setShowTable(true);
     }
   };
 
+  const buildDataByUnit = (
+    unit_labels: string[],
+    data_by_unit: { [key: string]: string[][] },
+    conversionFactorRaw: string
+  ): { [key: string]: string[][] } => {
+    const originalUnit = unit_labels?.[0]?.trim();
+    const targetUnit = unit_labels?.[1]?.trim();
+    const conversionFactor = parseFloat(conversionFactorRaw);
+    const isValidConversion =
+      originalUnit && targetUnit && !isNaN(conversionFactor);
+
+    const originalValues = data_by_unit?.[originalUnit] ?? [];
+
+    const convertedValues = isValidConversion
+      ? originalValues.map(row =>
+        row.map(value => {
+          const num = parseFloat(value);
+          return !isNaN(num) ? (num * conversionFactor).toString() : value;
+        })
+      )
+      : undefined;
+
+    const result: { [key: string]: string[][] } = {};
+
+    if (originalUnit) {
+      result[originalUnit] = originalValues;
+    }
+
+    if (isValidConversion && targetUnit && convertedValues) {
+      result[targetUnit] = convertedValues;
+    }
+
+    return result;
+  };
+
 
   const handleCreateOrUpdate = handleSubmit((data: SizeChartFormValues) => {
+
     if (!data?.selected_product_short_ids?.length) return toast.error("Please add some products")
     if (data?.type === "static" && !data?.static_type_image?.[0]) return toast.error("Please add Size Chart Image")
 
@@ -127,10 +192,10 @@ const useSizeChartModal = ({ sizeChartData, handleToggleModal }: UseSizeChartMod
       name: data?.name,
       type: data?.type,
       unit_labels: data?.unit_labels,
-      data_by_unit: Object.fromEntries(
-        Object.entries(data.data_by_unit).filter(
-          ([unit]) => unit && unit !== "undefined" && unit.trim() !== ""
-        )
+      data_by_unit: buildDataByUnit(
+        data.unit_labels,
+        data.data_by_unit,
+        data.unit_labels_conversion_factor
       ),
       unit_labels_conversion_factor: data?.unit_labels_conversion_factor,
       product_short_ids: data?.selected_product_short_ids

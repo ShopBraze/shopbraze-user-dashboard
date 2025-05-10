@@ -28,9 +28,16 @@ export const sizeChartsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['size-charts']
     }),
+    deleteSizeChart: builder.mutation<any, any>({
+      query: ({ size_chart_id }) => ({
+        method: "DELETE",
+        url: `${endpoints.size_charts}/${size_chart_id}`,
+      }),
+      invalidatesTags: ['size-charts']
+    }),
   })
 })
 
 
 
-export const { useGetSizeChartsQuery, usePostCreateSizeChartMutation, useUpdateSizeChartMutation } = sizeChartsApi
+export const { useGetSizeChartsQuery, usePostCreateSizeChartMutation, useUpdateSizeChartMutation, useDeleteSizeChartMutation } = sizeChartsApi
