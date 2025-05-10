@@ -4,6 +4,7 @@ import GroupCatalogue from "./group-catalogue/group-catalogue";
 import CreateCatalogue from "./create-catalogue/create-catalogue";
 import BulkUpload from "./bulk-upload/bulk-upload";
 import GenerateImageVideoLink from "./generate-image-video-link/generate-image-video-link";
+import SizeCharts from "./size-charts/size-charts";
 
 type Props = {}
 
@@ -19,7 +20,7 @@ const CatalogueIndexContainer = (props: Props) => {
       {tabName === "create" && <CreateCatalogue />}
       {tabName === "upload" && <BulkUpload />}
       {tabName === "seller-media" && <GenerateImageVideoLink />}
-
+      {tabName === "size-charts" && <SizeCharts />}
     </div>
   )
 }

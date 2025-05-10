@@ -17,6 +17,7 @@ const baseApi = createApi({
   endpoints: () => ({}),
   tagTypes: [
     'catalogues',
+    'size-charts',
     'collections',
     'reports',
     'collection_by_id',

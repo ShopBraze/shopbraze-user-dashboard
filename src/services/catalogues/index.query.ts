@@ -1,6 +1,6 @@
 import baseApi from "services/base-api";
 import endpoints from "services/endpoints";
-import { CatalogueTransformer } from "./transformers/index.transformer";
+import { CataloguesDataByShortIdsTransformer, CatalogueTransformer } from "./transformers/index.transformer";
 
 export const catalogueApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -42,10 +42,19 @@ export const catalogueApi = baseApi.injectEndpoints({
         body: body,
       }),
       invalidatesTags: ['catalogues']
-    })
+    }),
+    getCataloguesByShortIds: builder.query<Catalogue[], string[]>({
+      query: (product_short_ids) => ({
+        url: `${endpoints.catalogues}/get-by-ids`,
+        params: {
+          product_short_ids
+        }
+      }),
+      transformResponse: (response) => CataloguesDataByShortIdsTransformer(response),
+    }),
   })
 })
 
 
 
-export const { useGetAllCataloguesQuery, usePostCatalogueMutation, useDeleteCatalogueMutation, useUpdateCatalogueMutation, useUpdateCatalogueSkuDataMutation } = catalogueApi
+export const { useGetAllCataloguesQuery, usePostCatalogueMutation, useDeleteCatalogueMutation, useUpdateCatalogueMutation, useUpdateCatalogueSkuDataMutation, useGetCataloguesByShortIdsQuery } = catalogueApi
