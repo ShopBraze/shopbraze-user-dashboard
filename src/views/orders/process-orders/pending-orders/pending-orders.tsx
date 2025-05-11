@@ -5,6 +5,7 @@ import { useGetPendingOrdersQuery } from 'services/orders/index.query'
 import moment from 'moment'
 import ComponentLoader from 'common-components/loaders/component-loader'
 import { calculateOrderTotalDeadWeight, calculateOrderTotalVolumetricWeight, getOrderDimensionsText } from 'utils/orders-dimension-calculator'
+import ShipNowStepOne from './ship-now-step-one/ship-now-step-one'
 
 const PendingOrders = () => {
 
@@ -92,7 +93,7 @@ const PendingOrders = () => {
                     </td>
                     <td className='p-4'>
                       <div className="flex flex-col items-center gap-y-3">
-                        <Button variant='primary'> Ship Now</Button>
+                        <ShipNowStepOne />
                         <Button variant='tertiary'> Cancel</Button>
                       </div>
                     </td>
