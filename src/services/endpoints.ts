@@ -41,8 +41,11 @@ const endpoints = {
   coupons: "coupons",
 
   // Orders
-
   pending_orders: "orders/pending",
+
+  // Orders Processing 
+  courier_serviceability: "process-orders/courier-serviceability",
+
 
 
   // Admin Api
