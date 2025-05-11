@@ -1,6 +1,8 @@
-type OrderDetailsProps = {}
+type OrderDetailsProps = {
+  order: CustomerOrderType
+}
 
-const OrderDetails = ({ }: OrderDetailsProps) => {
+const OrderDetails = ({ order }: OrderDetailsProps) => {
   return (
     <div className="h-full flex-[0.17] py-5 px-8 bg-[#f0f0f0]">
       <h3 className='text-lg font-semibold mb-6'>Order Details</h3>
@@ -23,14 +25,14 @@ const OrderDetails = ({ }: OrderDetailsProps) => {
         <div className="space-y-1.5 text-xs">
           <p className="text-gray-600 font-semibold">Order Value</p>
           <p className="">
-            <strong>₹ 2499.00</strong>
+            <strong>₹ {order?.bill_details?.total_amount}</strong>
           </p>
         </div>
 
         <div className="space-y-1.5 text-xs">
           <p className="text-gray-600 font-semibold">Payment Mode</p>
           <p className="">
-            <strong>COD</strong>
+            <strong>{order?.payment_mode}</strong>
           </p>
         </div>
 
