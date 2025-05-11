@@ -2,7 +2,7 @@ import Button from "common-components/button/button"
 import CrossIcon from "assets/icons/cross-icon.svg"
 import Image from "next/image"
 import useSelectCourierPartner from "./use-select-courier-partner"
-import { Table } from "rsuite"
+import { Dropdown, Table } from "rsuite"
 import { Cell, Column, HeaderCell } from "rsuite-table"
 
 import 'react-circular-progressbar/dist/styles.css';
@@ -10,11 +10,12 @@ import ComponentLoader from "common-components/loaders/component-loader"
 import AnimatedRatingProgress from "./animated-rating-progress/animated-rating-progress"
 
 type SelectCourierPartnerProps = {
+  order: CustomerOrderType
   handleToggleOpenDetails: () => void
 }
 
-const SelectCourierPartner = ({ handleToggleOpenDetails }: SelectCourierPartnerProps) => {
-  const { selectedCourierType, setSelectedCourierType, isFetchingCourierData, courierServiceabilityData, courierDataToShow } = useSelectCourierPartner({})
+const SelectCourierPartner = ({ order, handleToggleOpenDetails }: SelectCourierPartnerProps) => {
+  const { selectedCourierType, setSelectedCourierType, isFetchingCourierData, recommended_by, available_courier_companies, courierDataToShow } = useSelectCourierPartner({ order })
 
   return (
     <div className="h-full flex-[0.83] bg-[#f8f8f8] p-5">
@@ -41,16 +42,24 @@ const SelectCourierPartner = ({ handleToggleOpenDetails }: SelectCourierPartnerP
               })
             }
           </div>
+          <Dropdown title={"hello"} placement="leftStart" noCaret className="">
+            <Dropdown.Item>New File</Dropdown.Item>
+            <Dropdown.Item>New File with Current Profile</Dropdown.Item>
+            <Dropdown.Item>Download As...</Dropdown.Item>
+            <Dropdown.Item>Export PDF</Dropdown.Item>
+            <Dropdown.Item>Export HTML</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item>About</Dropdown.Item>
+          </Dropdown>
         </div>
         <div className="bg-[#dbdbdb] h-[1px] my-4 w-full" />
         {
           isFetchingCourierData ?
             <ComponentLoader containerClassName="h-[60vh]" />
-            : courierServiceabilityData?.available_courier_companies?.length === 0 ?
+            : available_courier_companies?.length === 0 ?
               <p className="">No Courier partner available</p> :
               <div className="space-y-4 pt-6">
-                <p className="text-xs font-semibold text-gray-500">3 Couriers Found</p>
-
+                <p className="text-xs font-semibold text-gray-500">{available_courier_companies?.length} Couriers Found</p>
                 <Table
                   autoHeight
                   data={courierDataToShow}
@@ -68,7 +77,6 @@ const SelectCourierPartner = ({ handleToggleOpenDetails }: SelectCourierPartnerP
                           <p className="text-xs text-gray-600 font-medium">RTO Charges: <span className="font-semibold">₹{item?.rto_charges}</span></p>
                         </div>
                       </div>}
-
                     </Cell>
                   </Column>
                   <Column width={140} verticalAlign='center' >

@@ -93,7 +93,7 @@ const PendingOrders = () => {
                     </td>
                     <td className='p-4'>
                       <div className="flex flex-col items-center gap-y-3">
-                        <ShipNowStepOne />
+                        <ShipNowStepOne order={order} />
                         <Button variant='tertiary'> Cancel</Button>
                       </div>
                     </td>

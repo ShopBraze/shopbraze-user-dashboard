@@ -4,19 +4,20 @@ import { Drawer } from 'rsuite'
 import OrderDetails from './order-details/order-details'
 import SelectCourierPartner from './select-courier-partner/select-courier-partner'
 
-type ShipNowStepOneProps = {}
+type ShipNowStepOneProps = {
+  order: CustomerOrderType
+}
 
-const ShipNowStepOne = ({ }: ShipNowStepOneProps) => {
-  const { openDetails, handleToggleOpenDetails } = useShipNowStepOne({})
+const ShipNowStepOne = ({ order }: ShipNowStepOneProps) => {
+  const { openDetails, handleToggleOpenDetails } = useShipNowStepOne({ order })
   return (
     <>
       <Button variant='primary' onClick={handleToggleOpenDetails}> Ship Now</Button>
 
-
       <Drawer open={openDetails} onClose={handleToggleOpenDetails} className='!w-[90vw]' closeButton={false}>
         <Drawer.Body className="!p-0 flex">
-          <OrderDetails />
-          <SelectCourierPartner handleToggleOpenDetails={handleToggleOpenDetails} />
+          <OrderDetails order={order} />
+          <SelectCourierPartner order={order} handleToggleOpenDetails={handleToggleOpenDetails} />
         </Drawer.Body>
       </Drawer>
     </>
