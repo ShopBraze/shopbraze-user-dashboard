@@ -4,10 +4,12 @@ import Image from "next/image"
 import useSelectCourierPartner from "./use-select-courier-partner"
 import { Dropdown, Table } from "rsuite"
 import { Cell, Column, HeaderCell } from "rsuite-table"
+import ShopBrazeRecommendationIcon from "assets/icons/shopbraze-recommendation.svg"
 
 import 'react-circular-progressbar/dist/styles.css';
 import ComponentLoader from "common-components/loaders/component-loader"
 import AnimatedRatingProgress from "./animated-rating-progress/animated-rating-progress"
+import CustomImage from "common-components/custom-image/custom-image"
 
 type SelectCourierPartnerProps = {
   order: CustomerOrderType
@@ -15,7 +17,7 @@ type SelectCourierPartnerProps = {
 }
 
 const SelectCourierPartner = ({ order, handleToggleOpenDetails }: SelectCourierPartnerProps) => {
-  const { selectedCourierType, setSelectedCourierType, isFetchingCourierData, recommended_by, available_courier_companies, courierDataToShow } = useSelectCourierPartner({ order })
+  const { selectedCourierType, setSelectedCourierType, isFetchingCourierData, recommended_by, available_courier_companies, courierDataToShow, shiprocket_recommended_courier_id } = useSelectCourierPartner({ order })
 
   return (
     <div className="h-full flex-[0.83] bg-[#f8f8f8] p-5">
@@ -42,14 +44,14 @@ const SelectCourierPartner = ({ order, handleToggleOpenDetails }: SelectCourierP
               })
             }
           </div>
-          <Dropdown title={"hello"} placement="leftStart" noCaret className="">
-            <Dropdown.Item>New File</Dropdown.Item>
-            <Dropdown.Item>New File with Current Profile</Dropdown.Item>
-            <Dropdown.Item>Download As...</Dropdown.Item>
-            <Dropdown.Item>Export PDF</Dropdown.Item>
-            <Dropdown.Item>Export HTML</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
-            <Dropdown.Item>About</Dropdown.Item>
+          <Dropdown title={`Sort By: ${recommended_by?.title}`} placement="leftStart" noCaret >
+            {
+              [{ title: 'Cheapest', val: 1 }, { title: 'Fastest', val: 2 }, { title: 'Best Rated', val: 3 }, { title: 'Custom', val: 4 }, { title: 'Shopbraze Recommendatio', val: 6 }]?.map((item) => {
+                return (
+                  <Dropdown.Item key={item?.val}>Sort By: {item?.title}</Dropdown.Item>
+                )
+              })
+            }
           </Dropdown>
         </div>
         <div className="bg-[#dbdbdb] h-[1px] my-4 w-full" />
@@ -64,18 +66,19 @@ const SelectCourierPartner = ({ order, handleToggleOpenDetails }: SelectCourierP
                   autoHeight
                   data={courierDataToShow}
                   headerHeight={60}
-                  rowHeight={100}
+                  rowHeight={110}
                 >
                   <Column width={260} verticalAlign='center'>
                     <HeaderCell className='text-xs font-semibold text-gray-900 px-4'>Courier Partner</HeaderCell>
                     <Cell>
-                      {(item) => <div className='flex !gap-3 items-center'>
-                        <Image src={'https://app.shiprocket.in/seller/assets/images/couriers/Dtdc.png'} height={40} width={40} alt=".png" className="rounded-full" />
+                      {(item) => <div className='flex !gap-3 items-center relative'>
+                        <CustomImage src={''} height={40} width={40} alt={`${item?.courier_name}.png`} className="rounded-full" />
                         <div className="spacey-1.5">
                           <p className="text-xs text-gray-800 font-semibold">{item?.courier_name}</p>
                           <p className="text-xs text-gray-600 font-medium"> {item?.is_surface ? "Surface" : "Air"} | Min-weight: <span className="font-semibold">{item?.min_weight} Kg</span></p>
                           <p className="text-xs text-gray-600 font-medium">RTO Charges: <span className="font-semibold">₹{item?.rto_charges}</span></p>
                         </div>
+                        {shiprocket_recommended_courier_id == item?.courier_company_id && <Image src={ShopBrazeRecommendationIcon} alt="shopbraze-recommended" className="absolute top-[-30px]" />}
                       </div>}
                     </Cell>
                   </Column>
