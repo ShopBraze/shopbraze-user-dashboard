@@ -38,6 +38,7 @@ const useSelectCourierPartner = ({ order }: UseSelectCourierPartnerProps) => {
     courierDataToShow,
 
     recommended_by,
+    shiprocket_recommended_courier_id,
     available_courier_companies
   }
 }
