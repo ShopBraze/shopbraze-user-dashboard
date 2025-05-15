@@ -5,7 +5,7 @@ import { useGetPendingOrdersQuery } from 'services/orders/index.query'
 import moment from 'moment'
 import ComponentLoader from 'common-components/loaders/component-loader'
 import { calculateOrderTotalDeadWeight, calculateOrderTotalVolumetricWeight, getOrderDimensionsText } from 'utils/orders-dimension-calculator'
-import ShipNowStepOne from './ship-now-step-one/ship-now-step-one'
+import ShipNowStepOne from '../components/ship-now-step-one/ship-now-step-one'
 
 const PendingOrders = () => {
 
