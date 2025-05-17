@@ -48,7 +48,7 @@ const useSizeChartModal = ({ sizeChartData, handleToggleModal }: UseSizeChartMod
       name: "",
       type: "static",
       static_type_image_url: "",
-      static_type_image: [] as FileType[],
+      static_type_image: [] as FileType[] | { name: string, url: string }[],
       number_of_rows: 0,
       number_of_columns: 0,
       unit_labels: [''],
@@ -64,7 +64,7 @@ const useSizeChartModal = ({ sizeChartData, handleToggleModal }: UseSizeChartMod
       setValue("name", sizeChartData.name ?? '');
       setValue("type", sizeChartData.type ?? 'dynamic');
       setValue("static_type_image_url", sizeChartData.static_type_image_url ?? '');
-      setValue("static_type_image", []); // Assuming no image is preselected
+      setValue("static_type_image", sizeChartData.static_type_image_url ? [{ name: "Size Chart Image", url: sizeChartData.static_type_image_url }] : []);
       setValue("unit_labels", sizeChartData.unit_labels ?? ['']);
       setValue("unit_labels_conversion_factor", sizeChartData.unit_labels_conversion_factor ?? '');
       setValue("data_by_unit", sizeChartData.data_by_unit ?? {});
@@ -90,26 +90,6 @@ const useSizeChartModal = ({ sizeChartData, handleToggleModal }: UseSizeChartMod
     }
   }
 
-  // const handleCreateSizeTable = () => {
-  //   const rowCount = getValues("number_of_rows");
-  //   const colCount = getValues("number_of_columns");
-
-  //   if (rowCount > 0 && colCount > 0) {
-  //     if (rowCount > 10 || colCount > 10) return toast.error(" Column and Row should not more than 10")
-  //     const unitLabels = getValues("unit_labels");
-  //     const initialData: { [key: string]: string[][] } = {};
-
-  //     unitLabels.forEach((unit) => {
-  //       const table: string[][] = Array.from({ length: rowCount }, () =>
-  //         Array.from({ length: colCount }, () => "")
-  //       );
-  //       initialData[unit] = table;
-  //     });
-
-  //     setValue("data_by_unit", initialData);
-  //     setShowTable(true);
-  //   }
-  // };
 
   const handleCreateSizeTable = () => {
     const rowCount = getValues("number_of_rows");
@@ -211,7 +191,7 @@ const useSizeChartModal = ({ sizeChartData, handleToggleModal }: UseSizeChartMod
     if (sizeChartData) {
       updateSizeChart({ body: formDataPayload, size_chart_id: sizeChartData?.id }).unwrap()
         .then(() => {
-          toast.success("Size Chart Created")
+          toast.success("Size Chart Updated")
           handleToggleModal()
         })
         .catch((error) => {
