@@ -46,6 +46,9 @@ const endpoints = {
   // Orders Processing 
   courier_serviceability: "process-orders/courier-serviceability",
 
+  // Testimonials
+  testimonials: "testimonials",
+  update_testimonial_visibility: "testimonials/update-visibility",
 
 
   // Admin Api

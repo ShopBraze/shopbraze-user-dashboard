@@ -46,6 +46,18 @@ export const TabNavigationListConstant = {
         path: "website/collection/create-collection"
       }
     ],
+    "testimonials": [
+      {
+        title: "Testimonial List",
+        name: "testimonial-list",
+        path: "website/testimonials/testimonial-list"
+      },
+      {
+        title: "Create Testimonial",
+        name: "create-testimonial",
+        path: "website/testimonials/create-testimonial"
+      }
+    ],
     globalTheme: [
       {
         title: "Website Presets",

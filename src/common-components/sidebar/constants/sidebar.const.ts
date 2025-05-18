@@ -194,7 +194,7 @@ export const SellerSidebarNavigationConstants = [
       {
         id: 708,
         name: "Testimonials",
-        path: "/website/testimonials"
+        path: "/website/testimonials/testimonial-list"
       },
       {
         id: 709,
