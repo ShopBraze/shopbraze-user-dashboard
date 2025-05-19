@@ -13,7 +13,7 @@ type TestimonialTemplateProps = {
 }
 
 const TestimonialTemplate = ({ handleCloseTemplateDetailsModal, page_id, templateData }: TestimonialTemplateProps) => {
-  const { control, setValue, watch, handleSave, isCreating } = useTestimonialTemplate({ handleCloseTemplateDetailsModal, page_id, templateData })
+  const { control, setValue, watch, handleSave, isCreating, isUpdating } = useTestimonialTemplate({ handleCloseTemplateDetailsModal, page_id, templateData })
   return (
     <div className="space-y-1">
 
@@ -80,10 +80,9 @@ const TestimonialTemplate = ({ handleCloseTemplateDetailsModal, page_id, templat
         <Button variant='secondary' onClick={handleCloseTemplateDetailsModal}>
           Cancel
         </Button>
-        {!templateData && <Button variant="primary" onClick={handleSave} isLoading={isCreating}>
+        <Button variant="primary" onClick={handleSave} isLoading={isCreating || isUpdating}>
           Save
         </Button>
-        }
       </div>
 
     </div>

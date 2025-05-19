@@ -54,6 +54,16 @@ export const websitePageAndTemplateApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['templates-in-page']
     }),
+
+    updateTemplateData: builder.mutation<any, { template_id: string, body: any }>({
+      query: ({ template_id, body }) => ({
+        method: "PUT",
+        url: `${endpoints.template}/${template_id}`,
+        body: body,
+      }),
+      invalidatesTags: ['templates-in-page']
+    }),
+
     postCopyTemplate: builder.mutation<any, { template_id: string, page_id: string }>({
       query: ({ template_id, page_id }) => ({
         method: "POST",
@@ -73,5 +83,6 @@ export const {
   useGetTemplatesInPageQuery,
   usePostReorderTemplatesInPageMutation,
   usePutToggleTemplateVisibilityMutation,
-  usePostCopyTemplateMutation
+  usePostCopyTemplateMutation,
+  useUpdateTemplateDataMutation
 } = websitePageAndTemplateApi

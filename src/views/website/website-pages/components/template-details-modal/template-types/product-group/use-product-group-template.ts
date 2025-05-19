@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useGetAllCollectionsQuery } from 'services/collections/index.query'
-import { useCreateTemplateMutation } from 'services/website-page-and-template/index.query'
+import { useCreateTemplateMutation, useUpdateTemplateDataMutation } from 'services/website-page-and-template/index.query'
 
 
 const ProductGroupSubTypeOptions = [
@@ -38,6 +38,7 @@ const useProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id, tem
   const collectionOptions = collectionResponse?.collectionsData?.map((item) => ({ label: item?.name, value: item?.short_id })) ?? []
 
   const [createTemplate, { isLoading: isCreating }] = useCreateTemplateMutation()
+  const [updateTemplateData, { isLoading: isUpdating }] = useUpdateTemplateDataMutation()
 
   const { watch, control, setValue, handleSubmit } = useForm({
     defaultValues: {
@@ -61,15 +62,30 @@ const useProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id, tem
     formDataPayload.append("page_id", page_id!)
     formDataPayload.append("templateData", JSON.stringify(productGroupDataPayload));
 
-    createTemplate(formDataPayload)
-      .unwrap()
-      .then(() => {
-        toast.success("Template added successfully")
-        handleCloseTemplateDetailsModal()
-      })
-      .catch((error) => {
-        toast.error("Something went wrong")
-      })
+    if (templateData) {
+      updateTemplateData({ body: formDataPayload, template_id: templateData?.short_id })
+        .unwrap()
+        .then(() => {
+          toast.success("Template updated successfully")
+          if (handleCloseTemplateDetailsModal) handleCloseTemplateDetailsModal()
+        })
+        .catch((error) => {
+          toast.error("Something went wrong")
+        })
+    }
+    else {
+      createTemplate(formDataPayload)
+        .unwrap()
+        .then(() => {
+          toast.success("Template added successfully")
+          handleCloseTemplateDetailsModal()
+        })
+        .catch((error) => {
+          toast.error("Something went wrong")
+        })
+    }
+
+
   })
 
   return {
@@ -79,7 +95,8 @@ const useProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id, tem
     ProductGroupSubTypeOptions,
     collectionOptions,
     handleSave,
-    isCreating
+    isCreating,
+    isUpdating
   }
 }
 
