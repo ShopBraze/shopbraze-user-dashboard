@@ -15,7 +15,7 @@ type CategoryTabbedTemplateProps = {
 }
 
 const CategoryTabbedTemplate = ({ handleCloseTemplateDetailsModal, page_id, templateData }: CategoryTabbedTemplateProps) => {
-  const { watch, control, setValue, handleSave, isCreating, collectionOptions, handleAddNewTab, handleRemoveTab } = useCategoryTabbedTemplate({ handleCloseTemplateDetailsModal, page_id, templateData })
+  const { watch, control, setValue, handleSave, isCreating, isUpdating, collectionOptions, handleAddNewTab, handleRemoveTab } = useCategoryTabbedTemplate({ handleCloseTemplateDetailsModal, page_id, templateData })
 
   return (
     <div className="space-y-1">
@@ -112,10 +112,9 @@ const CategoryTabbedTemplate = ({ handleCloseTemplateDetailsModal, page_id, temp
         <Button variant='secondary' onClick={handleCloseTemplateDetailsModal}>
           Cancel
         </Button>
-        {!templateData && <Button variant="primary" onClick={handleSave} isLoading={isCreating}>
+        <Button variant="primary" onClick={handleSave} isLoading={isCreating || isUpdating}>
           Save
         </Button>
-        }
       </div>
     </div>
   )

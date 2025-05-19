@@ -11,7 +11,7 @@ type ProductGroupTemplateProps = {
 }
 
 const ProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id, templateData }: ProductGroupTemplateProps) => {
-  const { watch, control, setValue, ProductGroupSubTypeOptions, collectionOptions, handleSave, isCreating } = useProductGroupTemplate({ handleCloseTemplateDetailsModal, page_id, templateData })
+  const { watch, control, setValue, ProductGroupSubTypeOptions, collectionOptions, handleSave, isCreating, isUpdating } = useProductGroupTemplate({ handleCloseTemplateDetailsModal, page_id, templateData })
   return (
     <div className="space-y-1">
       <div className="flex gap-10 items-center">
@@ -98,10 +98,9 @@ const ProductGroupTemplate = ({ handleCloseTemplateDetailsModal, page_id, templa
         <Button variant='secondary' onClick={handleCloseTemplateDetailsModal}>
           Cancel
         </Button>
-        {!templateData && <Button variant="primary" onClick={handleSave} isLoading={isCreating}>
+        <Button variant="primary" onClick={handleSave} isLoading={isCreating || isUpdating}>
           Save
         </Button>
-        }
       </div>
     </div>
   )

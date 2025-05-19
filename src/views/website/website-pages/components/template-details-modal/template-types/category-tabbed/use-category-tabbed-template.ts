@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { useGetAllCollectionsQuery } from "services/collections/index.query"
-import { useCreateTemplateMutation } from "services/website-page-and-template/index.query"
+import { useCreateTemplateMutation, useUpdateTemplateDataMutation } from "services/website-page-and-template/index.query"
 
 
 type UseCategoryTabbedTemplateProps = {
@@ -18,6 +18,7 @@ type CategoryTabbedDataType = {
 const useCategoryTabbedTemplate = ({ handleCloseTemplateDetailsModal, page_id, templateData }: UseCategoryTabbedTemplateProps) => {
   const { data: collectionResponse } = useGetAllCollectionsQuery({ page: 1, limit: 50 })
   const [createTemplate, { isLoading: isCreating }] = useCreateTemplateMutation()
+  const [updateTemplateData, { isLoading: isUpdating }] = useUpdateTemplateDataMutation()
 
   const collectionOptions = collectionResponse?.collectionsData?.map((item) => ({ label: item?.name, value: item?.short_id })) ?? []
 
@@ -57,15 +58,28 @@ const useCategoryTabbedTemplate = ({ handleCloseTemplateDetailsModal, page_id, t
     formDataPayload.append("page_id", page_id!)
     formDataPayload.append("templateData", JSON.stringify(categoryTabbedDataPayload));
 
-    createTemplate(formDataPayload)
-      .unwrap()
-      .then(() => {
-        toast.success("Template added successfully")
-        handleCloseTemplateDetailsModal()
-      })
-      .catch((error) => {
-        toast.error("Something went wrong")
-      })
+    if (templateData) {
+      updateTemplateData({ body: formDataPayload, template_id: templateData?.short_id })
+        .unwrap()
+        .then(() => {
+          toast.success("Template updated successfully")
+          if (handleCloseTemplateDetailsModal) handleCloseTemplateDetailsModal()
+        })
+        .catch((error) => {
+          toast.error("Something went wrong")
+        })
+    }
+    else {
+      createTemplate(formDataPayload)
+        .unwrap()
+        .then(() => {
+          toast.success("Template added successfully")
+          handleCloseTemplateDetailsModal()
+        })
+        .catch((error) => {
+          toast.error("Something went wrong")
+        })
+    }
   })
 
   return {
@@ -74,6 +88,7 @@ const useCategoryTabbedTemplate = ({ handleCloseTemplateDetailsModal, page_id, t
     setValue,
     handleSave,
     isCreating,
+    isUpdating,
     collectionOptions,
     handleAddNewTab,
     handleRemoveTab
