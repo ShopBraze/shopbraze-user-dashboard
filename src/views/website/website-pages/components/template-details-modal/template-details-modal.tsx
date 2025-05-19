@@ -43,7 +43,7 @@ const TemplateDetailsModal = ({ open, handleClose, page_id, templateData }: Temp
         {templateType === 'category_group' && <CategoryGroupTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} templateData={templateData} />}
         {templateType === 'category_tabbed' && <CategoryTabbedTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} templateData={templateData} />}
         {templateType === 'product_group' && <ProductGroupTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} templateData={templateData} />}
-        {templateType === 'testimonial' && <TestimonialTemplate />}
+        {templateType === 'testimonial' && <TestimonialTemplate handleCloseTemplateDetailsModal={handleClose} page_id={page_id} templateData={templateData} />}
 
       </Modal.Body>
     </Modal>
