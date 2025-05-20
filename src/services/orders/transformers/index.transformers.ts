@@ -8,6 +8,7 @@ export const OrdersTransformer = (res?: any): CustomerOrderType[] => {
 
       const order: CustomerOrderType = {
         _id: item?._id || "",
+        order_id: item?.order_id || '',
         payment_mode: item?.payment_mode || "",
         customer_details: {
           name: item?.customer_details?.name || "",
@@ -41,6 +42,7 @@ export const OrdersTransformer = (res?: any): CustomerOrderType[] => {
         },
         createdAt: item?.createdAt || "",
         products: [],
+        order_confirmation: item?.order_confirmation || false
       };
 
       if (item?.products?.length > 0) {
