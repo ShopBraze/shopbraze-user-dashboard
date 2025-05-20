@@ -6,6 +6,7 @@ import moment from 'moment'
 import ComponentLoader from 'common-components/loaders/component-loader'
 import { calculateOrderTotalDeadWeight, calculateOrderTotalVolumetricWeight, getOrderDimensionsText } from 'utils/orders-dimension-calculator'
 import ShipNowStepOne from '../components/ship-now-step-one/ship-now-step-one'
+import ConfirmOrder from '../components/confirm-order/confirm-order'
 
 const PendingOrders = () => {
 
@@ -36,7 +37,7 @@ const PendingOrders = () => {
                     <td className='space-y-2 p-4'>
                       {order?.products?.length > 1 && <div className="py-1 px-1.5 rounded flex justify-center items-center bg-indigo-500 text-[#fff] font-semibold text-xs w-fit">Clubbed</div>}
                       <p >{moment(order?.createdAt)?.utcOffset("+05:30").format("DD MMM YYYY | hh:mm A")}</p>
-                      {order?.products?.length === 1 && <p className="text-indigo-500">{order?.products?.[0]?.order_item_id}</p>}
+                      {order?.products?.length === 1 && <p className="text-indigo-500">{order?.order_id}</p>}
                     </td>
                     <td className='space-y-1.5 p-4'>
                       {
@@ -93,6 +94,7 @@ const PendingOrders = () => {
                     </td>
                     <td className='p-4'>
                       <div className="flex flex-col items-center gap-y-3">
+                        {!order?.order_confirmation && <ConfirmOrder order_id={order?.order_id} />}
                         <ShipNowStepOne order={order} />
                         <Button variant='tertiary'> Cancel</Button>
                       </div>

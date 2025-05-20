@@ -12,7 +12,7 @@ const ShipNowStepOne = ({ order }: ShipNowStepOneProps) => {
   const { openDetails, handleToggleOpenDetails } = useShipNowStepOne({ order })
   return (
     <>
-      <Button variant='primary' onClick={handleToggleOpenDetails}> Ship Now</Button>
+      <Button variant='primary' disabled={!order?.order_confirmation} onClick={handleToggleOpenDetails}> Ship Now</Button>
 
       <Drawer open={openDetails} onClose={handleToggleOpenDetails} className='!w-[90vw]' closeButton={false}>
         <Drawer.Body className="!p-0 flex">

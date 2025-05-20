@@ -44,7 +44,9 @@ const endpoints = {
   pending_orders: "orders/pending",
 
   // Orders Processing 
+  order_confirmation: "process-orders/confirm-order",
   courier_serviceability: "process-orders/courier-serviceability",
+  generate_awb: "/process-orders/generate-awb",
 
   // Testimonials
   testimonials: "testimonials",

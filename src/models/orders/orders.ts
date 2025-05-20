@@ -64,11 +64,13 @@ type OrderPickupAddressType = {
 
 type CustomerOrderType = {
   _id: string;
+  order_id: string
   payment_mode: string;
   customer_details: CustomerDetails;
   bill_details: CustomerOrderBillDetailsType;
   createdAt: string;
   products: CustomereOrderProductType[];
   pickup_address: OrderPickupAddressType
+  order_confirmation: boolean
 }
 

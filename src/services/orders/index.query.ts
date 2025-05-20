@@ -8,6 +8,7 @@ export const reportsApi = baseApi.injectEndpoints({
       query: () => ({
         url: endpoints.pending_orders
       }),
+      providesTags: ['pending-orders'],
       transformResponse: (response) => OrdersTransformer(response),
     }),
   })

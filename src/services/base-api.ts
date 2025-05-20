@@ -27,7 +27,8 @@ const baseApi = createApi({
     'templates-in-page',
     'coupons',
     'website-navigation-menu',
-    'testimonials'
+    'testimonials',
+    'pending-orders'
   ]
 })
 
