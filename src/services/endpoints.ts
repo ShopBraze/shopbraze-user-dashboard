@@ -48,6 +48,9 @@ const endpoints = {
   order_confirmation: "process-orders/confirm-order",
   courier_serviceability: "process-orders/courier-serviceability",
   generate_awb: "/process-orders/generate-awb",
+  future_pickup_dates: "/process-orders/pickup-dates",
+  generate_label: "/process-orders/generate-label",
+  generate_invoice: "/process-orders/generate-invoice",
 
   // Testimonials
   testimonials: "testimonials",

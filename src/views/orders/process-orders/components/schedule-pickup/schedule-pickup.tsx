@@ -4,22 +4,29 @@ import LocationIcon from "assets/icons/location.svg"
 import CalendarIcon from "assets/icons/calendar.svg"
 import Image from "next/image"
 import Button from "common-components/button/button"
+import { useGetShipmentFuturePickupDatesQuery } from "services/orders-processing/index.query"
 
 type SchedulePickupProps = {
   open: boolean
-  handleClose: () => void
+  handleClose: Function
+  shipment_id: string,
+  shipment_awb_code: string,
+  shipping_courier_name: string
 }
 
-const SchedulePickup = ({ open, handleClose }: SchedulePickupProps) => {
+const SchedulePickup = ({ open, handleClose, shipment_id, shipment_awb_code, shipping_courier_name }: SchedulePickupProps) => {
+
+  const { data: pickupDates } = useGetShipmentFuturePickupDatesQuery({ awb_code: shipment_awb_code }, { skip: !shipment_awb_code })
+
   return (
-    <Modal open={open} onClose={handleClose} className='w-auto'>
+    <Modal open={open} onClose={() => { handleClose() }} className='w-auto'>
       <Modal.Header className='border-b border-gray-200 p-5'>
         <h3 className="text-2xl font-bold">Schedule Your Pickup</h3>
       </Modal.Header>
       <Modal.Body className='scrollbar-hide !max-h-[65vh] p-5 space-y-5'>
         <div className="w-full py-2.5 px-3 bg-[#E5FFE3] flex gap-2 rounded-md">
           <Image src={SuccessTickIcon} alt="success.svg" className="h-5 w-5" />
-          <p className="text-sm font-medium">Your Package has been assigned to <b>DTDC Surface</b> successfully. The AWBnumber of the same is <span className="font-semibold text-blue-gray-500">7352669258</span></p>
+          <p className="text-sm font-medium">Your Package has been assigned to <b>{shipping_courier_name}</b> successfully. The AWB number of the same is <span className="font-semibold text-blue-gray-500">{shipment_awb_code}</span></p>
         </div>
 
         <div className="w-full py-2.5 px-3 rounded-md bg-gray-100 flex gap-4 items-center">
@@ -55,7 +62,7 @@ const SchedulePickup = ({ open, handleClose }: SchedulePickupProps) => {
           </p>
 
           <div className="flex gap-5 items-center justify-center">
-            <Button>I'll do it later</Button>
+            <Button onClick={() => { handleClose() }}>I'll do it later</Button>
             <Button variant="primary" className="px-12 !font-bold">Schedule Pick Up</Button>
           </div>
         </div>
