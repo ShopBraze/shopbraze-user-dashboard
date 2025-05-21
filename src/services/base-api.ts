@@ -28,7 +28,8 @@ const baseApi = createApi({
     'coupons',
     'website-navigation-menu',
     'testimonials',
-    'pending-orders'
+    'pending-orders',
+    'ready-to-ship-orders'
   ]
 })
 

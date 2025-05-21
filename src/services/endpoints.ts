@@ -42,6 +42,7 @@ const endpoints = {
 
   // Orders
   pending_orders: "orders/pending",
+  ready_to_ship_orders: 'orders/ready-to-ship',
 
   // Orders Processing 
   order_confirmation: "process-orders/confirm-order",

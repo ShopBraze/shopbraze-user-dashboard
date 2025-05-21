@@ -71,6 +71,9 @@ type CustomerOrderType = {
   createdAt: string;
   products: CustomereOrderProductType[];
   pickup_address: OrderPickupAddressType
-  order_confirmation: boolean
+  order_confirmation: boolean,
+  shiprocket_shipment_id: string,
+  shiprocket_shipment_awb_code: string,
+  shiprocket_shipping_courier_name: string
 }
 

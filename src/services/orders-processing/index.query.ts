@@ -13,7 +13,6 @@ export const ordersProcessingAPi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['pending-orders']
     }),
-
     getCourierServiceability: builder.query<any, any>({
       query: ({ pickup_postcode, delivery_postcode, cod, weight, declared_value, recommended_val }) => ({
         url: endpoints.courier_serviceability,
@@ -27,9 +26,20 @@ export const ordersProcessingAPi = baseApi.injectEndpoints({
         }
       }),
     }),
+    postGenerateAwb: builder.mutation<any, { order_id: string, courier_id: number }>({
+      query: ({ order_id, courier_id }) => ({
+        url: endpoints.generate_awb,
+        method: "POST",
+        body: {
+          order_id,
+          courier_id
+        }
+      }),
+      invalidatesTags: ['pending-orders', 'ready-to-ship-orders']
+    }),
   })
 })
 
 
 
-export const { useGetCourierServiceabilityQuery, usePostConfirmOrderMutation } = ordersProcessingAPi
+export const { useGetCourierServiceabilityQuery, usePostConfirmOrderMutation, usePostGenerateAwbMutation } = ordersProcessingAPi
