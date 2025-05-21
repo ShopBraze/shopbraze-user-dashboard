@@ -9,10 +9,12 @@ import useMoreActions from "./use-more-actions";
 type MoreActionsProps = {
   shipment_id: string
   order_id: string
+  awb_code: string
+  handleToggleCancelOrderPopUp: Function
 }
 
-const MoreActions = ({ shipment_id, order_id }: MoreActionsProps) => {
-  const { handleDownloadLabel, handleDownloadInvoice } = useMoreActions({ shipment_id, order_id })
+const MoreActions = ({ shipment_id, order_id, awb_code, handleToggleCancelOrderPopUp }: MoreActionsProps) => {
+  const { handleDownloadLabel, handleDownloadInvoice } = useMoreActions({ shipment_id, order_id, awb_code })
   return (
     <>
       <Menu>
@@ -37,13 +39,9 @@ const MoreActions = ({ shipment_id, order_id }: MoreActionsProps) => {
           </MenuItem>
           <div className="w-full h-[1.5px] bg-gray-200" />
           <MenuItem>
-            <Button className="text-sm font-semibold text-gray-600 hover:text-gray-800">
-              Reassign Courier
-            </Button>
-          </MenuItem>
-          <div className="w-full h-[1.5px] bg-gray-200" />
-          <MenuItem>
-            <Button className="text-sm font-semibold text-error-500">
+            <Button className="text-sm font-semibold text-error-500"
+              onClick={() => { handleToggleCancelOrderPopUp() }}
+            >
               Cancel Order
             </Button>
           </MenuItem>

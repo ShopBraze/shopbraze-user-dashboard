@@ -10,19 +10,29 @@ import ConfirmOrder from '../components/confirm-order/confirm-order'
 import { useState } from 'react'
 import SchedulePickup from '../components/schedule-pickup/schedule-pickup'
 import MoreActions from './more-actions/more-actions'
+import CancelOrderShipment from '../components/cancel-order-shipment/cancel-order-shipment'
 
 const ReadyToShipOrders = () => {
 
   const { data: readyToShipOrdersData, isLoading } = useGetReadyToShipOrdersQuery()
 
   const [openSchedulePickupPopUp, setOpenSchedulePickupPopUp] = useState(false)
+  const [openCancelOrderPopUp, setOpenCancelOrderPopUp] = useState(false)
+
   const [selectedOrder, setSelctedOrder] = useState<CustomerOrderType | null>(null)
 
-  const handleToggleSchedulePickupPopUp = (order: CustomerOrderType) => {
+  const handleToggleSchedulePickupPopUp = (order?: CustomerOrderType) => {
     if (openSchedulePickupPopUp) setSelctedOrder(null)
-    else setSelctedOrder(order)
+    else if (order) setSelctedOrder(order)
     setOpenSchedulePickupPopUp(!openSchedulePickupPopUp)
   }
+
+  const handleToggleCancelOrderPopUp = (order?: CustomerOrderType) => {
+    if (openCancelOrderPopUp) setSelctedOrder(null)
+    else if (order) setSelctedOrder(order)
+    setOpenCancelOrderPopUp(!openCancelOrderPopUp)
+  }
+
 
   return (
     <>
@@ -122,7 +132,12 @@ const ReadyToShipOrders = () => {
                             >
                               Schedule Pickup
                             </Button>
-                            <MoreActions shipment_id={order?.shiprocket_shipment_id} order_id={order?.shiprocket_order_id} />
+                            <MoreActions
+                              shipment_id={order?.shiprocket_shipment_id}
+                              order_id={order?.shiprocket_order_id}
+                              awb_code={order?.shiprocket_shipment_awb_code}
+                              handleToggleCancelOrderPopUp={() => { handleToggleCancelOrderPopUp(order) }}
+                            />
                           </div>
                         </td>
                       }
@@ -143,6 +158,20 @@ const ReadyToShipOrders = () => {
           shipment_id={selectedOrder?.shiprocket_shipment_id}
           shipment_awb_code={selectedOrder?.shiprocket_shipment_awb_code}
           shipping_courier_name={selectedOrder?.shiprocket_shipping_courier_name}
+        />
+      }
+
+      {
+        openCancelOrderPopUp && selectedOrder &&
+        <CancelOrderShipment
+          open={openCancelOrderPopUp}
+          handleClose={handleToggleCancelOrderPopUp}
+          handleSuccess={() => {
+            handleToggleCancelOrderPopUp();
+            handleToggleSchedulePickupPopUp()
+          }}
+          shipment_awb_code={selectedOrder?.shiprocket_shipment_awb_code}
+          shipment_order_id={selectedOrder?.shiprocket_order_id}
         />
       }
     </>

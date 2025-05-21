@@ -79,7 +79,7 @@ const PendingOrders = () => {
                       {order?.payment_mode === "online" && <div className="bg-gray-100 w-fit text-xs font-semibold text-success-500 py-[2px] px-1.5 rounded-md">Prepaid</div>}
                       <p>Total Bill Amount: <span className="text-[#000]">₹{order?.bill_details?.total_amount + order?.bill_details?.coupon_discount}</span> </p>
                       <p>Total Discount: <span className="text-[#000]">₹{order?.bill_details?.coupon_discount}</span></p>
-                      <p>Total Amount To Collect: <span className="text-[#000]">₹{order?.bill_details?.total_amount}</span></p>
+                      <p>Final Amount: <span className="text-[#000]">₹{order?.bill_details?.total_amount}</span></p>
                     </td>
                     <td className='p-4 space-y-1.5'>
                       <p className='ma-w-[120px] truncate'>{order?.customer_details?.name}</p>

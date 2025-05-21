@@ -63,7 +63,27 @@ export const ordersProcessingAPi = baseApi.injectEndpoints({
         }
       }),
     }),
-  })
+    postCancelShipment: builder.mutation<any, { awb_codes: string[] }>({
+      query: ({ awb_codes }) => ({
+        url: endpoints.cancel_shipment,
+        method: "POST",
+        body: {
+          awb_codes,
+        }
+      }),
+      invalidatesTags: ['pending-orders', 'ready-to-ship-orders']
+    }),
+    postCancelOrder: builder.mutation<any, { order_ids: string[] }>({
+      query: ({ order_ids }) => ({
+        url: endpoints.cancel_order,
+        method: "POST",
+        body: {
+          order_ids,
+        }
+      }),
+      invalidatesTags: ['pending-orders', 'ready-to-ship-orders']
+    }),
+  }),
 })
 
 
@@ -74,5 +94,7 @@ export const {
   usePostGenerateAwbMutation,
   useGetShipmentFuturePickupDatesQuery,
   usePostGenerateLabelMutation,
-  usePostGenerateInvoiceMutation
+  usePostGenerateInvoiceMutation,
+  usePostCancelShipmentMutation,
+  usePostCancelOrderMutation
 } = ordersProcessingAPi

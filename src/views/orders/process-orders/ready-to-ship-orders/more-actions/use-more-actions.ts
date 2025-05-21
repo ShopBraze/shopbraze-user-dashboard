@@ -1,16 +1,17 @@
 
+import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { usePostGenerateInvoiceMutation, usePostGenerateLabelMutation } from 'services/orders-processing/index.query'
 
 type UseMoreActionsProps = {
   shipment_id: string
   order_id: string
+  awb_code: string
 }
 
-const useMoreActions = ({ shipment_id, order_id }: UseMoreActionsProps) => {
+const useMoreActions = ({ shipment_id, order_id, awb_code }: UseMoreActionsProps) => {
   const [postGenerateLabel] = usePostGenerateLabelMutation()
   const [postGenerateInvoice] = usePostGenerateInvoiceMutation()
-
 
   const handleDownloadLabel = () => {
     postGenerateLabel({ shipment_ids: [shipment_id] })

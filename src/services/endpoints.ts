@@ -51,6 +51,8 @@ const endpoints = {
   future_pickup_dates: "/process-orders/pickup-dates",
   generate_label: "/process-orders/generate-label",
   generate_invoice: "/process-orders/generate-invoice",
+  cancel_shipment: "/process-orders/cancel-shipment",
+  cancel_order: "/process-orders/cancel-order",
 
   // Testimonials
   testimonials: "testimonials",
