@@ -10,6 +10,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import ComponentLoader from "common-components/loaders/component-loader"
 import AnimatedRatingProgress from "./animated-rating-progress/animated-rating-progress"
 import CustomImage from "common-components/custom-image/custom-image"
+import GenerateAwbShipNow from "./generate-awb-ship-now/generate-awb-ship-noe"
 
 type SelectCourierPartnerProps = {
   order: CustomerOrderType
@@ -17,7 +18,7 @@ type SelectCourierPartnerProps = {
 }
 
 const SelectCourierPartner = ({ order, handleToggleOpenDetails }: SelectCourierPartnerProps) => {
-  const { selectedCourierType, setSelectedCourierType, isFetchingCourierData, recommended_by, available_courier_companies, courierDataToShow, shiprocket_recommended_courier_id } = useSelectCourierPartner({ order })
+  const { selectedCourierType, setSelectedCourierType, isFetchingCourierData, recommended_by, available_courier_companies, courierDataToShow, shiprocket_recommended_courier_id, } = useSelectCourierPartner({ order })
 
   return (
     <div className="h-full flex-[0.83] bg-[#f8f8f8] p-5">
@@ -111,15 +112,13 @@ const SelectCourierPartner = ({ order, handleToggleOpenDetails }: SelectCourierP
                   <Column width={120} verticalAlign='center' >
                     <HeaderCell className='text-xs font-semibold text-gray-900 px-4'>Charges</HeaderCell>
                     <Cell >
-                      {(item) => <p className="text-gray-600 font-semibold">₹{item?.freight_charge}</p>}
+                      {(item) => <p className="text-gray-600 font-semibold">₹{item?.rate}</p>}
                     </Cell>
                   </Column>
                   <Column width={120} verticalAlign='center' >
                     <HeaderCell className='text-xs font-semibold text-gray-900 px-4'>Action</HeaderCell>
                     <Cell>
-                      <Button variant="primary" className="text-xs">
-                        Ship Now
-                      </Button>
+                      {(item) => <GenerateAwbShipNow order_id={order?.order_id} courier_id={item?.courier_company_id} />}
                     </Cell>
                   </Column>
                 </Table>
@@ -130,5 +129,6 @@ const SelectCourierPartner = ({ order, handleToggleOpenDetails }: SelectCourierP
     </div>
   )
 }
+
 
 export default SelectCourierPartner

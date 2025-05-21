@@ -11,9 +11,16 @@ export const reportsApi = baseApi.injectEndpoints({
       providesTags: ['pending-orders'],
       transformResponse: (response) => OrdersTransformer(response),
     }),
+    getReadyToShipOrders: builder.query<CustomerOrderType[], void>({
+      query: () => ({
+        url: endpoints.ready_to_ship_orders
+      }),
+      providesTags: ['ready-to-ship-orders'],
+      transformResponse: (response) => OrdersTransformer(response),
+    }),
   })
 })
 
 
 
-export const { useGetPendingOrdersQuery } = reportsApi
+export const { useGetPendingOrdersQuery, useGetReadyToShipOrdersQuery } = reportsApi

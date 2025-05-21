@@ -11,7 +11,6 @@ import ConfirmOrder from '../components/confirm-order/confirm-order'
 const PendingOrders = () => {
 
   const { data: ordersData, isLoading } = useGetPendingOrdersQuery()
-  console.log(ordersData)
 
   return (
     isLoading ? <ComponentLoader />

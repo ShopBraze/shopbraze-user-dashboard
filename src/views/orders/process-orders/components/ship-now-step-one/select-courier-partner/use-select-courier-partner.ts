@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useGetCourierServiceabilityQuery } from "services/orders-processing/index.query"
+import { useGetCourierServiceabilityQuery, usePostGenerateAwbMutation } from "services/orders-processing/index.query"
 
 type UseSelectCourierPartnerProps = {
   order: CustomerOrderType
@@ -15,8 +15,6 @@ const useSelectCourierPartner = ({ order }: UseSelectCourierPartnerProps) => {
   const { data: courierServiceabilityData = {}, isLoading: isFetchingCourierData } = useGetCourierServiceabilityQuery({ pickup_postcode, delivery_postcode, cod: is_cod ? 1 : 0, weight: "0.5", recommended_val: "4", declared_value })
 
   const { currency, recommended_by, available_courier_companies, shiprocket_recommended_courier_id, } = courierServiceabilityData
-
-  console.log(courierServiceabilityData, "courierServiceabilityData")
 
   const [selectedCourierType, setSelectedCourierType] = useState('All')
   const [courierDataToShow, setCourierDataToShow] = useState([])
@@ -39,7 +37,7 @@ const useSelectCourierPartner = ({ order }: UseSelectCourierPartnerProps) => {
 
     recommended_by,
     shiprocket_recommended_courier_id,
-    available_courier_companies
+    available_courier_companies,
   }
 }
 

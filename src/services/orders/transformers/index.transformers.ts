@@ -42,7 +42,10 @@ export const OrdersTransformer = (res?: any): CustomerOrderType[] => {
         },
         createdAt: item?.createdAt || "",
         products: [],
-        order_confirmation: item?.order_confirmation || false
+        order_confirmation: item?.order_confirmation || false,
+        shiprocket_shipment_awb_code: item?.shiprocket_shipment_awb_code || '',
+        shiprocket_shipment_id: item?.shiprocket_shipment_id || '',
+        shiprocket_shipping_courier_name: item?.shiprocket_shipping_courier_name || ''
       };
 
       if (item?.products?.length > 0) {
