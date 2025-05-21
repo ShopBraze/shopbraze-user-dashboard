@@ -20,7 +20,7 @@ const ConfirmOrder = ({ order_id }: ConfirmOrderProps) => {
   }
   return (
     <Button
-      className='text-sm font-semibold text-success-700'
+      className='text-sm font-semibold text-success-700 whitespace-nowrap'
       disabled={isLoading}
       onClick={handleConfirmOrder}
       isLoading={isLoading}

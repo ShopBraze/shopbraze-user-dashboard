@@ -70,10 +70,11 @@ type CustomerOrderType = {
   bill_details: CustomerOrderBillDetailsType;
   createdAt: string;
   products: CustomereOrderProductType[];
-  pickup_address: OrderPickupAddressType
-  order_confirmation: boolean,
-  shiprocket_shipment_id: string,
-  shiprocket_shipment_awb_code: string,
-  shiprocket_shipping_courier_name: string
+  pickup_address: OrderPickupAddressType;
+  order_confirmation: boolean;
+  shiprocket_order_id: string;
+  shiprocket_shipment_id: string;
+  shiprocket_shipment_awb_code: string;
+  shiprocket_shipping_courier_name: string;
 }
 

@@ -37,9 +37,64 @@ export const ordersProcessingAPi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['pending-orders', 'ready-to-ship-orders']
     }),
-  })
+    getShipmentFuturePickupDates: builder.query<any, { awb_code: string }>({
+      query: ({ awb_code }) => ({
+        url: endpoints.future_pickup_dates,
+        params: {
+          awb_code
+        }
+      }),
+    }),
+    postGenerateLabel: builder.mutation<any, { shipment_ids: string[] }>({
+      query: ({ shipment_ids }) => ({
+        url: endpoints.generate_label,
+        method: "POST",
+        body: {
+          shipment_ids,
+        }
+      }),
+    }),
+    postGenerateInvoice: builder.mutation<any, { order_ids: string[] }>({
+      query: ({ order_ids }) => ({
+        url: endpoints.generate_invoice,
+        method: "POST",
+        body: {
+          order_ids,
+        }
+      }),
+    }),
+    postCancelShipment: builder.mutation<any, { awb_codes: string[] }>({
+      query: ({ awb_codes }) => ({
+        url: endpoints.cancel_shipment,
+        method: "POST",
+        body: {
+          awb_codes,
+        }
+      }),
+      invalidatesTags: ['pending-orders', 'ready-to-ship-orders']
+    }),
+    postCancelOrder: builder.mutation<any, { order_ids: string[] }>({
+      query: ({ order_ids }) => ({
+        url: endpoints.cancel_order,
+        method: "POST",
+        body: {
+          order_ids,
+        }
+      }),
+      invalidatesTags: ['pending-orders', 'ready-to-ship-orders']
+    }),
+  }),
 })
 
 
 
-export const { useGetCourierServiceabilityQuery, usePostConfirmOrderMutation, usePostGenerateAwbMutation } = ordersProcessingAPi
+export const {
+  useGetCourierServiceabilityQuery,
+  usePostConfirmOrderMutation,
+  usePostGenerateAwbMutation,
+  useGetShipmentFuturePickupDatesQuery,
+  usePostGenerateLabelMutation,
+  usePostGenerateInvoiceMutation,
+  usePostCancelShipmentMutation,
+  usePostCancelOrderMutation
+} = ordersProcessingAPi

@@ -1,6 +1,6 @@
 import Button from 'common-components/button/button'
 import Image from 'next/image'
-import ShowClubbedOrderDetails from './show-clubbed-order-details/show-clubbed-order-details'
+import ShowClubbedOrderDetails from '../components/show-clubbed-order-details/show-clubbed-order-details'
 import { useGetPendingOrdersQuery } from 'services/orders/index.query'
 import moment from 'moment'
 import ComponentLoader from 'common-components/loaders/component-loader'
@@ -75,9 +75,11 @@ const PendingOrders = () => {
                       <p>Volumetric Weight: {calculateOrderTotalVolumetricWeight(order)} Kg</p>
                     </td>
                     <td className='p-4 space-y-1.5'>
+                      {order?.payment_mode === "cod" && <div className="bg-gray-100 w-fit text-xs font-semibold text-error-500 py-[2px] px-1.5 rounded-md">COD</div>}
+                      {order?.payment_mode === "online" && <div className="bg-gray-100 w-fit text-xs font-semibold text-success-500 py-[2px] px-1.5 rounded-md">Prepaid</div>}
                       <p>Total Bill Amount: <span className="text-[#000]">₹{order?.bill_details?.total_amount + order?.bill_details?.coupon_discount}</span> </p>
                       <p>Total Discount: <span className="text-[#000]">₹{order?.bill_details?.coupon_discount}</span></p>
-                      <p>Total Amount To Collect: <span className="text-[#000]">₹{order?.bill_details?.total_amount}</span></p>
+                      <p>Final Amount: <span className="text-[#000]">₹{order?.bill_details?.total_amount}</span></p>
                     </td>
                     <td className='p-4 space-y-1.5'>
                       <p className='ma-w-[120px] truncate'>{order?.customer_details?.name}</p>
