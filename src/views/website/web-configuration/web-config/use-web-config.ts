@@ -97,7 +97,6 @@ const useWebConfig = ({ websiteConfigData }: UseWebConfigProps) => {
   }, [websiteConfigData, setValue]);
 
   const handleSaveWebConfiguration = handleSubmit((data: any) => {
-    console.log(data)
     const formDataPayload = new FormData();
 
     const payload = {

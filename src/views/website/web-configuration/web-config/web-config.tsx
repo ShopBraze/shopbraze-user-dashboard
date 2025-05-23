@@ -71,6 +71,7 @@ const WebConfig = (props: Props) => {
         <p className="text-sm font-medium">Category Tags</p>
         <TagInput
           className="w-full"
+          value={watch('category_tags')}
           onChange={(value: readonly string[]) => {
             setValue('category_tags', [...value]);
           }}
