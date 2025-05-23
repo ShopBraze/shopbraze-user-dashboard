@@ -164,7 +164,7 @@ export const SellerSidebarNavigationConstants = [
       {
         id: 702,
         name: "Web Configuration",
-        path: "/website/web-configuration"
+        path: "/website/web-configuration/web-configuration"
       },
       {
         id: 703,

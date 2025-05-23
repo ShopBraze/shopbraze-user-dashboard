@@ -23,6 +23,7 @@ const endpoints = {
   catalogue_reports: "reports/catalogue",
 
   // Website Page Config
+  website_config: "website-page-config",
   theme_constants: "website-page-config/theme-constants",
   theme_settings: "website-page-config/theme-settings",
   reset_theme_settings: "website-page-config/reset-theme-settings",
