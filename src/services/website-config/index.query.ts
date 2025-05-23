@@ -1,16 +1,34 @@
 import baseApi from "services/base-api";
 import endpoints from "services/endpoints";
-import { ThemeConstantTransformer, ThemeSettingsTransformer, WebsitePresetTransformer } from "./transformer/index.transformer";
+import { ThemeConstantTransformer, ThemeSettingsTransformer, WebsiteConfigTransformer, WebsitePresetTransformer } from "./transformer/index.transformer";
 
 
 export const websiteConfigApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getWebsiteConfig: builder.query<WebsiteConfig, void>({
+      query: () => ({
+        url: `${endpoints.website_config}`
+      }),
+      transformResponse: (response) => WebsiteConfigTransformer(response),
+      providesTags: ['website-config']
+    }),
+
+    updateWebsiteConfig: builder.mutation<any, any>({
+      query: (body) => ({
+        method: "PUT",
+        url: `${endpoints.website_config}`,
+        body: body,
+      }),
+      invalidatesTags: ['website-config']
+    }),
+
     getThemeConstants: builder.query<ThemeConstants, void>({
       query: () => ({
         url: `${endpoints.theme_constants}`
       }),
       transformResponse: (response) => ThemeConstantTransformer(response),
     }),
+
     getThemeSettings: builder.query<ThemeSettings, void>({
       query: () => ({
         url: `${endpoints.theme_settings}`
@@ -18,6 +36,7 @@ export const websiteConfigApi = baseApi.injectEndpoints({
       transformResponse: (response) => ThemeSettingsTransformer(response),
       providesTags: ['theme_settings']
     }),
+
     updateThemeSettings: builder.mutation<any, any>({
       query: (body) => ({
         method: "PUT",
@@ -26,6 +45,7 @@ export const websiteConfigApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['theme_settings']
     }),
+
     resetThemeSettings: builder.mutation<any, any>({
       query: () => ({
         method: "POST",
@@ -33,6 +53,7 @@ export const websiteConfigApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['theme_settings']
     }),
+
     getWebsitePresets: builder.query<WebsitePreset, void>({
       query: () => ({
         url: `${endpoints.website_preset}`
@@ -40,6 +61,7 @@ export const websiteConfigApi = baseApi.injectEndpoints({
       transformResponse: (response) => WebsitePresetTransformer(response),
       providesTags: ['website_presets']
     }),
+
     updateWebsitePresets: builder.mutation<any, any>({
       query: (body) => ({
         method: "PUT",
@@ -53,4 +75,4 @@ export const websiteConfigApi = baseApi.injectEndpoints({
 
 
 
-export const { useGetThemeConstantsQuery, useGetThemeSettingsQuery, useUpdateThemeSettingsMutation, useResetThemeSettingsMutation, useGetWebsitePresetsQuery, useUpdateWebsitePresetsMutation } = websiteConfigApi
+export const { useGetWebsiteConfigQuery, useUpdateWebsiteConfigMutation, useGetThemeConstantsQuery, useGetThemeSettingsQuery, useUpdateThemeSettingsMutation, useResetThemeSettingsMutation, useGetWebsitePresetsQuery, useUpdateWebsitePresetsMutation } = websiteConfigApi

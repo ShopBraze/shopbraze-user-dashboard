@@ -91,7 +91,14 @@ export const TabNavigationListConstant = {
         name: "featured",
         path: "website/website-pages/featured"
       },
-    ]
+    ],
+    'web-configuration': [
+      {
+        title: "Web Configuration",
+        name: "web-configuration",
+        path: "website/web-configuration/web-configuration"
+      },
+    ],
   },
   "offers-and-coupons": {
     "generic-coupons": [

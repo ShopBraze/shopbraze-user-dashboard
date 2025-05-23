@@ -21,6 +21,7 @@ const baseApi = createApi({
     'collections',
     'reports',
     'collection_by_id',
+    'website-config',
     'website_presets',
     'theme_settings',
     'sellers-list',

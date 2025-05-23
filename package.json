@@ -21,6 +21,7 @@
     "react-hot-toast": "^2.5.1",
     "react-loading-skeleton": "^3.5.0",
     "react-paginate": "^8.3.0",
+    "react-quill-new": "^3.4.6",
     "react-redux": "^9.2.0",
     "react-sortablejs": "^6.1.4",
     "react-topbar-progress-indicator": "^4.1.1",
